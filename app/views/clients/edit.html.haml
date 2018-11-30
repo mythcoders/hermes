@@ -1,0 +1,12 @@
+- page_title 'Edit', 'Client'
+
+= form_for @client, url: client_path(@client), method: :patch  do |f|
+  .card
+    %h5.card-header.bg-primary.text-white
+      Edit Client
+    .card-body
+      = error_messages_for 'client'
+      = render :partial => 'clients/form', locals: { f: f }
+    .card-footer
+      = link_to 'Cancel', client_path(@client), class: 'btn btn-outline-primary'
+      = f.submit 'Save changes', class: 'btn btn-success'

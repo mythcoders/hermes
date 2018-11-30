@@ -79,6 +79,37 @@
   padding-bottom: 3rem;
 }
 
+[data-clickable-row] {
+  cursor: pointer;
+}
+
+.action-column {
+  width: 10%;
+}
+
+.table-border-fix {
+  margin-bottom: 0;
+  border-bottom-style: none;
+}
+
+.form-group > label {
+  font-weight: bold;
+}
+
+@include media-breakpoint-only(xs) {
+  .row > .card {
+    margin-bottom: 1em;
+  }
+}
+
+.btn-group.justified {
+  display: flex;
+}
+
+.justified .btn {
+  flex: 1;
+}
+
 #pageLoading {
   display: none;
   position: fixed;

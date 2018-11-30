@@ -1,0 +1,27 @@
+- page_title 'Client Search'
+
+.card
+  %h5.card-header.bg-primary.text-white
+    = fa_regular 'users'
+    Clients
+  %table.table.table-bordered.table-striped.table-border-fix
+    %thead
+      %tr
+        %th Name
+        %th Owner
+        %th Is Active?
+        %th Is Sent?
+    %tbody
+      - @clients.each do |c|
+        %tr{data: { 'clickable-row': '', 'href': client_path(c) }}
+          %td= c.name
+          %td= c.owner
+          %td= c.is_active
+          %td= c.are_emails_sent
+  .card-footer
+    = paginate @clients
+    = page_entries_info @clients
+
+%br
+
+= link_to 'New Client', new_client_path, class: 'btn btn-outline-primary'

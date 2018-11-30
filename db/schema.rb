@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_001936) do
     t.string "api_secret", null: false
     t.string "api_key", null: false
     t.boolean "is_active", default: false, null: false
-    t.boolean "is_allowed_to_send", default: false, null: false
+    t.boolean "are_emails_sent", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["api_key"], name: "index_clients_on_api_key", unique: true

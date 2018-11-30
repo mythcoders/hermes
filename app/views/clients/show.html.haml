@@ -1,0 +1,23 @@
+- page_title @client.name, 'Client'
+
+= form_for @client, url: clients_path do |f|
+  .card
+    %h5.card-header.bg-primary.text-white
+      = @client.name
+    .card-body
+      %dl
+        %dt Owner
+        %dd= @client.owner
+        %dt Reroute Email
+        %dd= @client.reroute_email
+        %dt API Secret
+        %dd= @client.api_secret
+        %dt API Key
+        %dd= @client.api_key
+        %dt Is Active?
+        %dd= @client.is_active
+        %dt Is Sending?
+        %dd= @client.are_emails_sent
+    .card-footer
+      = link_to 'Cancel', clients_path, class: 'btn btn-outline-primary'
+      = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'

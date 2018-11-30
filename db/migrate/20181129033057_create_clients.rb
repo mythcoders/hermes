@@ -9,7 +9,7 @@ class CreateClients < ActiveRecord::Migration[5.2]
       t.string :api_secret, null: false, length: { maximum: 128 }, index: { unique: true }
       t.string :api_key, null: false, length: { maximum: 128 }, index: { unique: true }
       t.boolean :is_active, null: false, default: false
-      t.boolean :is_allowed_to_send, null: false, default: false
+      t.boolean :are_emails_sent, null: false, default: false
       t.timestamps
     end
   end

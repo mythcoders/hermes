@@ -11,8 +11,13 @@ module Hermes
       { class: ('active' if active_if), href: link }
     end
 
+    def clients_controller?
+      controller.class == ClientsController
+    end
+
     def home_action?(action)
-      controller.class == HomeController
+      controller.class == HomeController &&
+        controller.action_name == action
     end
 
     private
