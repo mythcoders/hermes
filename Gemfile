@@ -22,7 +22,7 @@ gem 'sentry-raven' # Exceptions
 gem 'skylight'
 
 # UI
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '>= 4.1.2'
 gem 'haml'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
