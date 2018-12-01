@@ -15,6 +15,10 @@ module Hermes
       controller.class == ClientsController
     end
 
+    def mail_logs_controller?
+      controller.class == MailLogsController
+    end
+
     def home_action?(action)
       controller.class == HomeController &&
         controller.action_name == action

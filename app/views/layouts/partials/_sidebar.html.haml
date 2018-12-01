@@ -8,10 +8,10 @@
       %a.nav-link{sidebar_link(clients_path, clients_controller?)}
         = fa_regular 'users fa-fw'
         Clients
-    -# %li.nav-item
-    -#   %a.nav-link{sidebar_link(home_path, home_action?('index'))}
-    -#     = fa_regular 'database fa-fw'
-    -#     Mail Logs
+    %li.nav-item
+      %a.nav-link{sidebar_link(mail_logs_path, mail_logs_controller?)}
+        = fa_regular 'database fa-fw'
+        Mail Logs
     %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
       %span Administration
     %li.nav-item.mt-1

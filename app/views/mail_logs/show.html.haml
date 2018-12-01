@@ -1,0 +1,57 @@
+- page_title 'View', 'Mail Logs'
+
+.row
+  .col-4
+    .card
+      %h5.card-header.bg-primary.text-white
+        = fa_regular 'database'
+        = "Log ##{@mail_log.id}"
+      .card-body
+        %dl
+          %dt Client
+          %dd= @mail_log.client.name
+          %dt From
+          %dd= @mail_log.from
+          %dt Sent at
+          %dd= @mail_log.created_at
+          %dt Content Type
+          %dd= @mail_log.content_type
+          %dt Rerouted?
+          %dd= @mail_log.was_rerouted
+      .card-footer
+        = link_to 'Go Back', mail_logs_path, class: 'btn btn-outline-primary'
+  .col-8
+    .card
+      %h5.card-header.bg-primary.text-white
+        Header
+      .card-body
+        .row
+          %strong.col-2 Subject
+          .col-10= @mail_log.subject
+        .row
+          %strong.col-2 To
+          .col-10
+            %ul.list-inline
+              - @mail_log.formatted_to.each do |item|
+                %li.list-inline-item= item
+        - if @mail_log.cc.present?
+          .row
+            %strong.col-2 CC
+            .col-10
+              %ul.list-inline
+                - @mail_log.formatted_cc.each do |item|
+                  %li.list-inline-item= item
+        - if @mail_log.bcc.present?
+          .row
+            %strong.col-2 BCC
+            .col-10
+              %ul.list-inline
+                - @mail_log.formatted_bcc.each do |item|
+                  %li.list-inline-item= item
+    %br
+    .card
+      .card-body
+        - if @mail_log.content_type == 'html'
+          = @mail_log.body.html_safe
+        - else
+          %samp= simple_format(@mail_log.body)

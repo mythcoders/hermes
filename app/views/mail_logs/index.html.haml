@@ -1,0 +1,23 @@
+- page_title 'Mail Log Search'
+
+.card
+  %h5.card-header.bg-primary.text-white
+    = fa_regular 'database'
+    Mail Logs
+  %table.table.table-bordered.table-striped.table-border-fix
+    %thead
+      %tr
+        %th Client
+        %th Subject
+        %th To
+        %th Date Sent
+    %tbody
+      - @mail_logs.each do |c|
+        %tr{data: { 'clickable-row': '', 'href': mail_log_path(c) }}
+          %td= c.client.name
+          %td= c.subject
+          %td= c.to
+          %td= c.created_at
+  .card-footer
+    = paginate @mail_logs
+    = page_entries_info @mail_logs
