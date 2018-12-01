@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_025912) do
+ActiveRecord::Schema.define(version: 2018_12_01_025601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_025912) do
     t.string "api_secret", null: false
     t.string "api_key", null: false
     t.boolean "is_active", default: false, null: false
-    t.boolean "is_allowed_to_send", default: false, null: false
+    t.boolean "are_emails_sent", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["api_key"], name: "index_clients_on_api_key", unique: true
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_025912) do
     t.string "bcc"
     t.string "subject", null: false
     t.string "body"
-    t.string "type"
+    t.string "content_type"
     t.boolean "was_rerouted", null: false
     t.bigint "client_id", null: false
     t.datetime "created_at", null: false
