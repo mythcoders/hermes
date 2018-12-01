@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
 
   resources :clients
+  resources :mail_logs
 end
