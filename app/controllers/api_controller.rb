@@ -1,39 +1,35 @@
-class ApiController < ApplicationController
-  InvalidApiClientError = Class.new(StandardError)
+# frozen_string_literal: true
 
+class ApiController < ActionController::Base
+  skip_before_action :verify_authenticity_token
   before_action :validate_api_credentials
+  before_action :set_mail
 
-  rescue_from InvalidApiClientError, with: :invalid_api_credentials
+  def send_mail
+    return head :bad_request unless @mail.valid?
 
-  def send
-    head :ok
+    if @mail.save
+      head :created
+    else
+      head :error
+    end
   end
 
   private
 
+  def set_mail
+    @mail = MailLog.new(mail_params.merge(client: @current_user))
+    @mail.was_rerouted = !@mail.client.are_emails_sent
+  end
+
   def mail_params
-    params.require(:mail).permit(
-      :api_secret,
-      :api_key,
-      :cc,
-      :bcc,
-      :type,
-      :subject,
-      :body,
-      :to,
-      :from,
-      cc: [],
-      bcc: []
-    )
+    params.permit(:content_type, :subject, :body, :to, :from, cc: [], bcc: [])
   end
 
   def validate_api_credentials
-    return if Client.valid?(mail_params[:api_key], mail_params[:api_secret])
+    @current_user = authenticate_with_http_basic { |u, p| Client.authenticate(u, p) }
+    return head :unauthorized unless @current_user
 
-    raise InvalidApiClientError
-  end
-
-  def invalid_api_credentials
-
+    head :forbidden unless @current_user.is_active
   end
 end

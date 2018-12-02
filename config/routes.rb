@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   resources :clients
   resources :mail_logs
+
+  post 'api/send_mail'
 end

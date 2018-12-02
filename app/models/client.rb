@@ -9,7 +9,7 @@ class Client < ApplicationRecord
   validates_uniqueness_of :name, :api_secret, :api_key
   validates_presence_of :name, :owner, :reroute_email, :api_secret, :api_key
 
-  def self.valid?(key, secret)
-    Client.any?('api_key = ? AND api_secret = ?', key, secret)
+  def self.authenticate(secret, key)
+    Client.where('api_secret = ? AND api_key = ?', secret, key).limit(1).first
   end
 end
