@@ -2,32 +2,32 @@
 
 require 'rails_helper'
 
-RSpec.describe 'SendMailAPI', type: :request do
+RSpec.describe 'Mail API', type: :request do
   shared_examples 'responds with forbidden' do
     it 'responds with forbidden' do
-      post '/api/send_mail', params: request, headers: api_basic_auth(client)
+      post '/api/mail', params: request, headers: api_basic_auth(client)
       expect(response.status).to eq(403)
     end
   end
 
   shared_examples 'responds with bad request' do
     it 'responds with bad request' do
-      post '/api/send_mail', params: request, headers: api_basic_auth(client)
+      post '/api/mail', params: request, headers: api_basic_auth(client)
       expect(response.status).to eq(400)
     end
   end
 
   shared_examples 'responds with created' do
     it 'responds with created' do
-      post '/api/send_mail', params: request, headers: api_basic_auth(client)
+      post '/api/mail', params: request, headers: api_basic_auth(client)
       expect(response.status).to eq(201)
     end
   end
 
-  describe 'POST send_mail' do
+  describe 'POST mail' do
     context 'when no client is supplied' do
       it 'responds with unauthorized' do
-        post '/api/send_mail'
+        post '/api/mail'
         expect(response.status).to eq(401)
       end
     end

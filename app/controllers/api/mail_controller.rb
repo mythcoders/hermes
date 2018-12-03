@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class ApiController < ActionController::Base
+class Api::MailController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :validate_api_credentials
   before_action :validate_params
 
-  def send_mail
+  def new
     if ApiMailer.send_message(mail_params, @current_user).deliver_now
       head :created
     else

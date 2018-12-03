@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :mail_logs
 
-  post 'api/send_mail'
+  namespace :api do
+    post 'mail', to: 'mail#new'
+  end
 end
