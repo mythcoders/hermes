@@ -11,8 +11,8 @@ class ApiMailer < ApplicationMailer
                   cc: mail_params[:cc],
                   bcc: mail_params[:bcc],
                   subject: mail_params[:subject]) do |format|
-                    format.html { render mail_params[:template] } if mail_params[:content_type] == 'html'
-                    format.text { render mail_params[:template] } if mail_params[:content_type] == 'text'
+                    format.html { render layout: mail_params[:layout] } if @message.html?
+                    format.text { render layout: mail_params[:layout] } if @message.text?
                   end
     log_mail mailer, mail_params
   end
@@ -29,15 +29,15 @@ class ApiMailer < ApplicationMailer
     mail_params = params.merge(client: client)
     if client.are_emails_sent
       mail_params[:was_rerouted] = false
-      mail_params[:template] = 'regular'
+      mail_params[:layout] = 'mailer'
     else
+      mail_params[:layout] = 'reroute_mailer'
       mail_params[:to] = [client.reroute_email]
       mail_params[:from] = ApplicationMailer::DEFAULT_FROM
       mail_params[:cc] = []
       mail_params[:bcc] = []
-      mail_params[:subject] = "[Rerouted email] #{params[:subject]}"
+      mail_params[:subject] = "[REROUTED] #{params[:subject]}"
       mail_params[:was_rerouted] = true
-      mail_params[:template] = 'reroute'
     end
     mail_params
   end

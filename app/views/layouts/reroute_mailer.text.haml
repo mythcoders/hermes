@@ -1,0 +1,10 @@
+= t('rerouted')
+
+= "\n-----------"
+= "SUBJECT: #{@message.subject}"
+= "TO: #{@message.to}"
+= "CC: #{@message.cc}"
+= "BCC: #{@message.bcc}"
+= "-----------\n"
+
+= yield
