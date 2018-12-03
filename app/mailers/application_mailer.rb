@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'Hermes <hermes@mythcoders.com>'
+  DEFAULT_FROM = 'Hermes <hermes@mythcoders.com>'
+  default from: DEFAULT_FROM
   layout 'mailer'
 end

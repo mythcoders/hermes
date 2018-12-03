@@ -3,18 +3,10 @@
 class ApiController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :validate_api_credentials
-  before_action :set_mail
+  before_action :validate_params
 
   def send_mail
-    return head :bad_request unless @mail.valid?
-
-    if @mail.was_rerouted
-      ApiMailer.with(mail: @mail).reroute.deliver_now
-    else
-      ApiMailer.with(mail: @mail).regular.deliver_now
-    end
-
-    if @mail.save
+    if ApiMailer.send_message(mail_params, @current_user).deliver_now
       head :created
     else
       head :error
@@ -23,13 +15,8 @@ class ApiController < ActionController::Base
 
   private
 
-  def set_mail
-    @mail = MailLog.new(mail_params.merge(client: @current_user))
-    @mail.was_rerouted = !@mail.client.are_emails_sent
-  end
-
   def mail_params
-    params.permit(:content_type, :subject, :body, :to, :from, cc: [], bcc: [])
+    params.permit(:content_type, :subject, :body, :from, to: [], cc: [], bcc: [])
   end
 
   def validate_api_credentials
@@ -37,5 +24,10 @@ class ApiController < ActionController::Base
     return head :unauthorized unless @current_user
 
     head :forbidden unless @current_user.is_active
+  end
+
+  def validate_params
+    return head :bad_request unless mail_params[:to].present?
+    return head :bad_request unless mail_params[:subject].present?
   end
 end
