@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MailLog < ApplicationRecord
   belongs_to :client
 
@@ -13,5 +15,13 @@ class MailLog < ApplicationRecord
 
   def formatted_bcc
     bcc.split(',')
+  end
+
+  def html?
+    content_type == 'html'
+  end
+
+  def text?
+    content_type == 'text'
   end
 end

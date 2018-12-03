@@ -1,0 +1,11 @@
+Hermes has rerouted the following email and prevented it from being sent out. Had it actually been sent, here is what it would have included.
+If you intended for this email to be sent, please get a Hermes Administrator to approve for sending emails.
+
+= "-----------\n"
+= "SUBJECT: #{@mail.subject}\n"
+= "TO: #{@mail.to}\n"
+= "CC: #{@mail.cc}\n"
+= "BCC: #{@mail.bcc}\n"
+= "-----------\n"
+
+= @mail.body

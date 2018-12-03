@@ -8,6 +8,12 @@ class ApiController < ActionController::Base
   def send_mail
     return head :bad_request unless @mail.valid?
 
+    if @mail.was_rerouted
+      ApiMailer.with(mail: @mail).reroute.deliver_now
+    else
+      ApiMailer.with(mail: @mail).regular.deliver_now
+    end
+
     if @mail.save
       head :created
     else
