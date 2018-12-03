@@ -46,17 +46,17 @@ RSpec.describe 'SendMailAPI', type: :request do
       end
 
       context 'request has bare minimum' do
-        let(:request) { attributes_for(:mail_log) }
+        let(:request) { { to: [Faker::Internet.email], subject: Faker::Cannabis.buzzword } }
         it_behaves_like 'responds with created'
       end
 
       context 'request does not include sender' do
-        let(:request) { attributes_for(:mail_log, to: '') }
+        let(:request) { { to: '', subject: Faker::Cannabis.buzzword } }
         it_behaves_like 'responds with bad request'
       end
 
       context 'request does not include subject' do
-        let(:request) { attributes_for(:mail_log, subject: '') }
+        let(:request) { { to: [Faker::Internet.email], subject: '' } }
         it_behaves_like 'responds with bad request'
       end
     end
