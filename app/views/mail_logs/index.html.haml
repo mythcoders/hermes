@@ -14,10 +14,10 @@
     %tbody
       - @mail_logs.each do |c|
         %tr{data: { 'clickable-row': '', 'href': mail_log_path(c) }}
-          %td= c.client.name
+          %td= "#{c.client.name} - #{c.environment}"
           %td= c.subject
-          %td= c.to
-          %td= c.created_at
+          %td= truncate(c.to, length: 30)
+          %td= l(c.created_at)
   .card-footer
     = paginate @mail_logs
     = page_entries_info @mail_logs

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_01_025601) do
+ActiveRecord::Schema.define(version: 2018_12_03_045905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clients", force: :cascade do |t|
+  create_table "clients", id: :bigint, default: -> { "nextval('applications_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "owner", null: false
     t.string "reroute_email", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_12_01_025601) do
     t.bigint "client_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "environment", null: false
     t.index ["client_id"], name: "index_mail_logs_on_client_id"
   end
 

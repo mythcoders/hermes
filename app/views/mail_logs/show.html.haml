@@ -13,7 +13,9 @@
           %dt From
           %dd= @mail_log.from
           %dt Sent at
-          %dd= @mail_log.created_at
+          %dd= l(@mail_log.created_at)
+          %dt Environment
+          %dd= @mail_log.environment
           %dt Content Type
           %dd= @mail_log.content_type
           %dt Rerouted?

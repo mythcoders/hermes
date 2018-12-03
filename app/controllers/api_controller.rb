@@ -16,7 +16,7 @@ class ApiController < ActionController::Base
   private
 
   def mail_params
-    params.permit(:content_type, :subject, :body, :from, to: [], cc: [], bcc: [])
+    params.permit(:environment, :content_type, :subject, :body, :from, to: [], cc: [], bcc: [])
   end
 
   def validate_api_credentials
@@ -29,5 +29,6 @@ class ApiController < ActionController::Base
   def validate_params
     return head :bad_request unless mail_params[:to].present?
     return head :bad_request unless mail_params[:subject].present?
+    return head :bad_request unless mail_params[:environment].present?
   end
 end
