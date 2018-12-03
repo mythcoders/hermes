@@ -2,7 +2,7 @@
 
 class MailLog < ApplicationRecord
   belongs_to :client
-  validates_presence_of :to, :subject, :client
+  validates_presence_of :to, :subject, :client, :environment
 
   def self.build(params)
     mail_log = MailLog.new(
@@ -12,6 +12,7 @@ class MailLog < ApplicationRecord
       body: params[:body],
       content_type: params[:content_type],
       was_rerouted: params[:was_rerouted],
+      environment: params[:environment],
       client: params[:client]
     )
 

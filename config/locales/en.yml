@@ -1,6 +1,10 @@
 en:
   created: Yes!
   updated: Yes!
+  rerouted:
+    Hermes has rerouted the following email and prevented it from being sent out.
+    Had it actually been sent, here is what it would have included.
+    If you intended for this email to be sent, please get a Hermes Administrator to approve for sending emails.
   helpers:
     select:
       prompt: "Please select"
