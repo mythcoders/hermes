@@ -11,12 +11,7 @@
         .input-group-prepend
           %span.input-group-text
             = fa_regular 'user'
-        = f.text_field :first_name, class: 'form-control', placeholder: 'First Name', autofocus: true, autocomplete: 'off'
-        = f.text_field :last_name, class: 'form-control', autocomplete: 'off', placeholder: 'Last Name'
-
-    .form-group
-      = f.label :phone_number
-      = f.text_field :phone_number, class: 'form-control', autocomplete: 'off', type: 'phone'
+        = f.text_field :name, class: 'form-control', autofocus: true, autocomplete: 'off'
 
     .form-group
       = f.label :email
