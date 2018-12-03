@@ -31,23 +31,17 @@
         .row
           %strong.col-2 To
           .col-10
-            %ul.list-inline
-              - @mail_log.formatted_to.each do |item|
-                %li.list-inline-item= item
+            = @mail_log.to
         - if @mail_log.cc.present?
           .row
             %strong.col-2 CC
             .col-10
-              %ul.list-inline
-                - @mail_log.formatted_cc.each do |item|
-                  %li.list-inline-item= item
+              = @mail_log.cc
         - if @mail_log.bcc.present?
           .row
             %strong.col-2 BCC
             .col-10
-              %ul.list-inline
-                - @mail_log.formatted_bcc.each do |item|
-                  %li.list-inline-item= item
+              = @mail_log.bcc
     %br
     .card
       .card-body

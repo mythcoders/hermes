@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MailLogsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_mail_log, only: %i[show]

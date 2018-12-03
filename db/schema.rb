@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2018_12_01_025601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clients", id: :bigint, default: -> { "nextval('applications_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "clients", force: :cascade do |t|
     t.string "name", null: false
     t.string "owner", null: false
     t.string "reroute_email", null: false
