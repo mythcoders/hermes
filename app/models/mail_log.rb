@@ -13,6 +13,7 @@ class MailLog < ApplicationRecord
       content_type: params[:content_type],
       was_rerouted: params[:was_rerouted],
       environment: params[:environment],
+      tracking_id: params[:tracking_id],
       client: params[:client]
     )
 

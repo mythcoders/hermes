@@ -27,6 +27,7 @@ class ApiMailer < ApplicationMailer
 
   def convert_requested_params(params, client)
     mail_params = params.merge(client: client)
+    mail_params[:tracking_id] = SecureRandom.uuid
     if client.are_emails_sent
       mail_params[:was_rerouted] = false
       mail_params[:layout] = 'mailer'

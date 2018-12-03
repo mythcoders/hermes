@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_045905) do
+ActiveRecord::Schema.define(version: 2018_12_03_192943) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "clients", id: :bigint, default: -> { "nextval('applications_id_seq'::regclass)" }, force: :cascade do |t|
@@ -43,7 +44,27 @@ ActiveRecord::Schema.define(version: 2018_12_03_045905) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "environment", null: false
+    t.string "tracking_id", default: "", null: false
     t.index ["client_id"], name: "index_mail_logs_on_client_id"
+  end
+
+  create_table "read_receipts", force: :cascade do |t|
+    t.bigint "mail_log_id", null: false
+    t.string "remote_ip"
+    t.string "user_agent"
+    t.string "filename"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mail_log_id"], name: "index_read_receipts_on_mail_log_id"
+  end
+
+  create_table "read_receipts_queries", force: :cascade do |t|
+    t.bigint "read_receipt_id", null: false
+    t.string "field"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["read_receipt_id"], name: "index_read_receipts_queries_on_read_receipt_id"
   end
 
   create_table "users", force: :cascade do |t|
