@@ -2,6 +2,7 @@
 
 class MailLog < ApplicationRecord
   belongs_to :client
+  has_many :read_receipts
   validates_presence_of :to, :subject, :client, :environment
 
   def self.build(params)

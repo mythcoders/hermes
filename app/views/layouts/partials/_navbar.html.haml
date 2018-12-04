@@ -13,12 +13,12 @@
       %ul.navbar-nav
         %li.nav-item{class: ('active' if clients_controller?)}
           = link_to clients_path, class: 'nav-link text-white' do
-            = fa_regular 'users fa-fw'
+            = fa_light 'users fa-fw'
             Clients
         %li.nav-item{class: ('active' if mail_logs_controller?)}
           = link_to mail_logs_path, class: 'nav-link text-white' do
-            = fa_regular 'database fa-fw'
-            Mail Logs        
+            = fa_light 'database fa-fw'
+            Mail Logs
       %ul.navbar-nav.ml-auto
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle.text-white{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#", role: "button"}
@@ -28,5 +28,5 @@
             %a.dropdown-item{:href => edit_user_registration_path} Security
             .dropdown-divider
             = link_to destroy_user_session_path, method: 'delete', title: 'Sign out', class: 'dropdown-item', data: { confirm: 'Are you sure you want to sign out? Any unsaved changes will be lost.' } do
-              = fa_regular 'sign-out-alt'
+              = fa_light 'sign-out-alt'
               Sign Out
