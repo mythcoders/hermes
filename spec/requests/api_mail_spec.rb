@@ -46,22 +46,22 @@ RSpec.describe 'Mail API', type: :request do
       end
 
       context 'request has bare minimum' do
-        let(:request) { { to: [Faker::Internet.email], subject: Faker::Cannabis.buzzword, environment: 'test' } }
+        let(:request) { { mail: { to: [Faker::Internet.email], subject: Faker::Cannabis.buzzword, environment: 'test' } } }
         it_behaves_like 'responds with created'
       end
 
       context 'request does not include sender' do
-        let(:request) { { to: '', subject: Faker::Cannabis.buzzword, environment: 'test' } }
+        let(:request) { { mail: { to: '', subject: Faker::Cannabis.buzzword, environment: 'test' } } }
         it_behaves_like 'responds with bad request'
       end
 
       context 'request does not include subject' do
-        let(:request) { { to: [Faker::Internet.email], subject: '', environment: 'test' } }
+        let(:request) { { mail: { to: [Faker::Internet.email], subject: '', environment: 'test' } } }
         it_behaves_like 'responds with bad request'
       end
 
       context 'request does not include environment' do
-        let(:request) { { to: [Faker::Internet.email], subject: Faker::Cannabis.buzzword, environment: '' } }
+        let(:request) { { mail: { to: [Faker::Internet.email], subject: Faker::Cannabis.buzzword, environment: '' } } }
         it_behaves_like 'responds with bad request'
       end
     end

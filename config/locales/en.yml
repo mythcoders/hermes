@@ -4,7 +4,7 @@ en:
   rerouted:
     Hermes has rerouted the following email and prevented it from being sent.
     The contents of the actually email are included below.
-    If you didn't expect this email to be rerouted, please contact a Hermes Administrator.
+    If you did not expect this email to be rerouted, please contact a Hermes Administrator.
   helpers:
     select:
       prompt: "Please select"
