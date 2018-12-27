@@ -3,25 +3,26 @@ services:
   app:
     build: .
     image: hermes-app
+    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
     ports:
-      - "3000:3000"
+      - "3000"
+    labels:
+      traefik.frontend.rule: "Host:hermes.docker.localhost"
     volumes:
       - "./:/app"
-    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
     environment:
       LANG: "en_US.UTF-8"
       RAILS_SERVE_STATIC_FILES: enabled
       RAILS_LOG_TO_STDOUT: enabled
     depends_on:
-      - db
-  db:
-    image: postgres:10.6
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - net
+  net:
+    image: traefik:latest
+    command: --api --docker
     ports:
-      - "5432:5432"
+      - "80:80"
+      - "8080:8080"
     volumes:
-      - "pgdata:/var/lib/postgresql/data"
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
   pgdata:
