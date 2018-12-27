@@ -1,0 +1,9 @@
+name: hermes
+domain: hermes.mythcoders.io
+plan:
+  size: small
+  pods: 1
+dependencies:
+services:
+  - db
+

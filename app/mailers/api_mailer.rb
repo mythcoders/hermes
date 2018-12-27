@@ -15,7 +15,7 @@ class ApiMailer < ApplicationMailer
   private
 
   def log_mail(mail_params)
-    MailLog.build(mail_params),save!
+    MailLog.build(mail_params).save!
   end
 
   def mail_headers(mail_params)
