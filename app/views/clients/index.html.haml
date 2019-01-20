@@ -9,15 +9,23 @@
       %tr
         %th Name
         %th Owner
-        %th Is Active?
-        %th Is Sent?
+        %th.action-column Is Active?
+        %th.action-column Are Sent?
     %tbody
       - @clients.each do |c|
         %tr{data: { 'clickable-row': '', 'href': client_path(c) }}
           %td= c.name
           %td= c.owner
-          %td= c.is_active
-          %td= c.are_emails_sent
+          %td
+            - if c.is_active
+              = fa_light 'check', 'text-success'
+            - else
+              = fa_light 'times', 'text-warning'
+          %td
+            - if c.are_emails_sent
+              = fa_light 'check', 'text-success'
+            - else
+              = fa_light 'times', 'text-warning'
   .card-footer
     = paginate @clients
     = page_entries_info @clients
