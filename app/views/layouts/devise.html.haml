@@ -11,8 +11,13 @@
         .col-sm-8.offset-sm-2
           .card
             .card-header.bg-primary.text-white
-              %strong Hermes
+              %strong
+                Hermes
+                - if Rails.env.development?
+                  DEV
+                - if Rails.env.test?
+                  TEST
               |
               = yield :header
             .card-body
-              = yield  
+              = yield
