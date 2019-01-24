@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class ApiController < ActionController::Base
+class Api::MailController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :validate_api_credentials
   before_action :validate_params
 
-  def send_mail
-    if ApiMailer.send_message(mail_params, @current_user).deliver_now
+  def new
+    if ApiMailer.send_message(mail_params.merge(client: @current_user)).deliver_now
       head :created
     else
       head :error
@@ -16,13 +16,13 @@ class ApiController < ActionController::Base
   private
 
   def mail_params
-    params.permit(:environment, :content_type, :subject, :body, :from, to: [], cc: [], bcc: [])
+    params.require(:mail).permit(:environment, :content_type, :subject, :body, :from, to: [], cc: [], bcc: [])
   end
 
   def validate_api_credentials
     @current_user = authenticate_with_http_basic { |u, p| Client.authenticate(u, p) }
     return head :unauthorized unless @current_user
-
+    # TODO: Add rate limiting
     head :forbidden unless @current_user.is_active
   end
 

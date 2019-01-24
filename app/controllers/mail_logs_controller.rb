@@ -11,6 +11,6 @@ class MailLogsController < ApplicationController
   private
 
   def set_mail_log
-    @mail_log = MailLog.find(params[:id])
+    @mail_log = MailLog.includes(:read_receipts).find(params[:id])
   end
 end

@@ -6,11 +6,17 @@
     %p= t('rerouted')
     %hr
     %p
+      %strong CLIENT:
+      = @message.client.name
+      %br
       %strong SUBJECT:
       = @message.subject
       %br
       %strong TO:
       = @message.to
+      %br
+      %strong FROM:
+      = @message.from
       %br
       %strong CC:
       = @message.cc

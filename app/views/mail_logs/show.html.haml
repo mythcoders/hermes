@@ -4,16 +4,14 @@
   .col-4
     .card
       %h5.card-header.bg-primary.text-white
-        = fa_regular 'database'
+        = fa_light 'database'
         = "Log ##{@mail_log.id}"
       .card-body
         %dl
           %dt Client
           %dd= @mail_log.client.name
-          %dt From
-          %dd= @mail_log.from
-          %dt Sent at
-          %dd= l(@mail_log.created_at)
+          %dt Tracking ID
+          %dd= @mail_log.tracking_id
           %dt Environment
           %dd= @mail_log.environment
           %dt Content Type
@@ -30,6 +28,9 @@
         .row
           %strong.col-2 Subject
           .col-10= @mail_log.subject
+        .row
+          %strong.col-2 From
+          .col-10= @mail_log.from        
         .row
           %strong.col-2 To
           .col-10
@@ -51,3 +52,24 @@
           = @mail_log.body.html_safe
         - else
           %samp= simple_format(@mail_log.body)
+
+    %br
+    .card
+      %h5.card-header.bg-primary.text-white
+        = fa_light 'history'
+        History
+      %table.table.table-bordered.table-striped.table-border-fix
+        %tbody
+          %tr
+            %td{width: '20%'}
+              = fa_regular 'paper-plane'
+              Sent
+            %td
+              = @mail_log.created_at
+          - @mail_log.read_receipts.each do |r|
+            %tr
+              %td{width: '20%'}
+                = fa_regular 'envelope-open'
+                Read
+              %td
+                = r.created_at

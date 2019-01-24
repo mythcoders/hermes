@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Client.create(name: 'Demo Application',
+              owner: 'Justin Adkins',
+              reroute_email: 'justin.adkins@mythcoders.com',
+              is_active: true,
+              are_emails_sent: false,
+              api_key: 'speak',
+              api_secret: 'friend')

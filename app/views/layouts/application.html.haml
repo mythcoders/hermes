@@ -10,18 +10,14 @@
   %body
     %a#top
     = render partial: 'layouts/partials/navbar'
-    .container-fluid
-      .row
-        %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
-          = render partial: 'layouts/partials/sidebar'
-        %main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4{:role => "main"}
-          #pageLoading
-            #pageLoadingContent
-              %p#pageLoadingSpinner
-                = fa_spin 'spinner', 'fa-5x'
-                %br
-                %span.text-primary Loading ... Please wait...
-          = render partial: 'layouts/partials/alerts'
-          =# render partial: 'layouts/partials/screen_size'
-          = yield
-  = yield :scripts
+    .container.padded-container
+      #pageLoading
+        #pageLoadingContent
+          %p#pageLoadingSpinner
+            = fa_spin 'spinner', 'fa-5x'
+            %br
+            %span.text-primary Loading ... Please wait...
+      = render partial: 'layouts/partials/alerts'
+      = yield :breadcrumbs
+      = yield    
+    = yield :scripts
