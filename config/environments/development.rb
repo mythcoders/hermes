@@ -21,9 +21,7 @@ Rails.application.configure do
   end
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: '127.0.0.1', port: 3000 }
-  config.action_mailer.asset_host = 'http://example.com'
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'hermes.docker.localhost' }
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailer_previews"
 
   config.active_support.deprecation = :log
