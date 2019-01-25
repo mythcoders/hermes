@@ -12,6 +12,13 @@ class User < ApplicationRecord
   private
 
   def email_domain_is_mythcoders
-    errors.add(:email, 'Invalid domain') if email_domain != 'mythcoders.com'
+    if email_domain != 'mythcoders.com'.freeze
+      Raven.capture_message(
+        "Signup for non-mythcoders account",
+        level: 'warning',
+        extra: { 'email': email }
+      )
+      errors.add(:email, 'Invalid domain!')
+    end
   end
 end
