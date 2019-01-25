@@ -1,4 +1,4 @@
-workflow "Deploy to Test" {
+workflow "Deploy to Heroku" {
   on = "push"
   resolves = [
     "verify-test",

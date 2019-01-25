@@ -3,7 +3,6 @@ services:
   app:
     build: .
     image: hermes-app
-    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
     ports:
       - "3000"
     labels:
@@ -15,7 +14,17 @@ services:
       RAILS_SERVE_STATIC_FILES: enabled
       RAILS_LOG_TO_STDOUT: enabled
     depends_on:
+      - db
       - net
+  db:
+    image: postgres:10.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - pgdata
   net:
     image: traefik:latest
     command: --api --docker
