@@ -1,0 +1,6 @@
+apiVersion: v1
+appVersion: "1906.9"
+description: A Helm chart for the mythcoders public website
+name: mythcoders
+version: 0.5.0
+home: https://www.mythcoders.com
