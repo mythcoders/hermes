@@ -4,24 +4,37 @@
     %meta{'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8'}
   %body
     %p= t('rerouted')
-    %hr
-    %p
-      %strong CLIENT:
-      = @message.client.name
-      %br
-      %strong SUBJECT:
-      = @message.subject
-      %br
-      %strong TO:
-      = @message.to
-      %br
-      %strong FROM:
-      = @message.from
-      %br
-      %strong CC:
-      = @message.cc
-      %br
-      %strong BCC:
-      = @message.bcc
-    %hr
+    %table
+      %tr
+        %td
+          %strong CLIENT:
+        %td= "#{@message.client.name} - #{@message.environment}"
+      %tr
+        %td
+          %strong SUBJECT:
+        %td
+          = @message.subject
+      %tr
+        %td
+          %strong FROM:
+        %td
+          = @message.from
+      %tr
+        %td
+          %strong TO:
+        %td
+          = @message.to
+      - if @message.cc.present?
+        %tr
+          %td
+            %strong CC:
+          %td
+            = @message.cc
+      - if @message.bcc.present?
+        %tr
+          %td
+            %strong BCC:
+          %td
+            = @message.bcc
+    %br
     = yield

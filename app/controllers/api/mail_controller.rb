@@ -5,6 +5,10 @@ class Api::MailController < ActionController::Base
   before_action :validate_api_credentials
   before_action :validate_params
 
+  rescue_from ActionController::ParameterMissing do
+    head :bad_request
+  end
+
   def new
     if ApiMailer.send_message(mail_params.merge(client: @current_user)).deliver_now
       head :created

@@ -17,7 +17,5 @@
 !/tmp/.keep
 /spec/examples.txt
 
-*env.*
-!env.development
 *.key
 *.pdf

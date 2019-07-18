@@ -2,9 +2,8 @@ en:
   created: Yes!
   updated: Yes!
   rerouted:
-    Hermes has rerouted the following email and prevented it from being sent.
-    The contents of the actually email are included below.
-    If you did not expect this email to be rerouted, please contact a Hermes Administrator.
+    Hermes intercepted the following email and prevented it from being delivered to its intended recipients.
+    If you believe this is an error, please contact your Hermes Administrator.
   helpers:
     select:
       prompt: "Please select"
@@ -14,8 +13,12 @@ en:
       update: "Save changes"
     label:
       client:
+        api_key: "API Key"
+        api_secret: "API Secret"
         is_active: "Is client allowed to call the Hermes API?"
-        are_emails_sent: "Are emails allowed to be sent rather than rerouted?"
+        are_emails_sent: "Should emails be routed to the owner rather than delivered to recipients?"
+      mail_log:
+        to: "Recipient"
   activerecord:
     errors:
       messages:

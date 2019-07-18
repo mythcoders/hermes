@@ -15,6 +15,21 @@ module Hermes
     config.autoload_paths += %W[#{config.root}/lib]
     config.require_master_key = true
 
+    #Logging
+    config.lograge.enabled = true
+    config.lograge.custom_payload do |controller|
+      {
+        host: controller.request.host,
+        user_id: controller.current_user.try(:id)
+      }
+    end
+    config.lograge.custom_options = lambda do |event|
+      exceptions = %w(controller action format id)
+      {
+        params: event.payload[:params].except(*exceptions)
+      }
+    end
+
     # Email
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true

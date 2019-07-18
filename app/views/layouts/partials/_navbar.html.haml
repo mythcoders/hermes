@@ -1,7 +1,7 @@
 %nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
   .container-fluid
     = link_to home_path, class: 'navbar-brand text-white' do
-      = fa_light 'mail-bulk'
+      = fa_solid 'mail-bulk'
       Hermes
       - if Rails.env.development?
         %strong.text-info DEV
@@ -13,20 +13,20 @@
       %ul.navbar-nav
         %li.nav-item{class: ('active' if clients_controller?)}
           = link_to clients_path, class: 'nav-link text-white' do
-            = fa_light 'users fa-fw'
+            = fa_solid 'users fa-fw'
             Clients
         %li.nav-item{class: ('active' if mail_logs_controller?)}
           = link_to mail_logs_path, class: 'nav-link text-white' do
-            = fa_light 'database fa-fw'
+            = fa_solid 'envelope-open-text fa-fw'
             Mail Logs
       %ul.navbar-nav.ml-auto
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle.text-white{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#", role: "button"}
-            = fa_light 'user-circle'
+            = fa_solid 'user-circle'
             My Account
           .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
             %a.dropdown-item{:href => edit_user_registration_path} Security
             .dropdown-divider
             = link_to destroy_user_session_path, method: 'delete', title: 'Sign out', class: 'dropdown-item', data: { confirm: 'Are you sure you want to sign out? Any unsaved changes will be lost.' } do
-              = fa_light 'sign-out-alt'
+              = fa_solid 'sign-out-alt'
               Sign Out

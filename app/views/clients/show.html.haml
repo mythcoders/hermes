@@ -3,6 +3,7 @@
 = form_for @client, url: clients_path do |f|
   .card
     %h5.card-header.bg-primary.text-white
+      = fa_solid 'users'
       = @client.name
     .card-body
       %dl
@@ -10,13 +11,13 @@
         %dd= @client.owner
         %dt Reroute Email
         %dd= @client.reroute_email
-        %dt API Secret
-        %dd= @client.api_secret
         %dt API Key
         %dd= @client.api_key
-        %dt Is Active?
+        %dt API Secret
+        %dd= @client.api_secret
+        %dt= t('helpers.label.client.is_active')
         %dd= @client.is_active
-        %dt Is Sending?
+        %dt= t('helpers.label.client.are_emails_sent')
         %dd= @client.are_emails_sent
     .card-footer
       = link_to 'Cancel', clients_path, class: 'btn btn-outline-primary'

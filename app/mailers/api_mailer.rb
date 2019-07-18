@@ -37,12 +37,17 @@ class ApiMailer < ApplicationMailer
     else
       mail_params[:was_rerouted] = true
       mail_params[:layout] = 'reroute_mailer'
-      mail_params[:to] = [mail_params[:client].reroute_email]
+      mail_params[:to] = [owner_email(mail_params[:client])]
       mail_params[:from] = DEFAULT_FROM
+      mail_params[:environment] = mail_params[:environment]
       mail_params[:cc] = []
       mail_params[:bcc] = []
       mail_params[:subject] = "[REROUTED] #{params[:subject]}"
     end
     mail_params
+  end
+
+  def owner_email(client)
+    "#{client.owner} <#{client.reroute_email}>"
   end
 end
