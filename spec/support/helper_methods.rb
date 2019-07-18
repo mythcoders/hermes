@@ -27,6 +27,6 @@ end
 def api_basic_auth(client)
   {
     'HTTP_AUTHORIZATION':
-      ActionController::HttpAuthentication::Basic.encode_credentials(client.api_secret, client.api_key)
+      ActionController::HttpAuthentication::Basic.encode_credentials(client.api_key, client.api_secret)
   }
 end

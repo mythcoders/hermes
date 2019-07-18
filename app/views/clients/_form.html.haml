@@ -2,19 +2,19 @@
 .form-group
   = f.label :name, class: 'col-form-label'
   = f.text_field :name, class: 'form-control'
-.form-group
-  = f.label :owner, class: 'col-form-label'
-  = f.text_field :owner, class: 'form-control'
-.form-group
-  = f.label :reroute_email, class: 'col-form-label'
-  = f.text_field :reroute_email, class: 'form-control'
 .form-row
-  .form-group.col-6
-    = f.label :api_secret, class: 'col-form-label'
-    = f.text_field :api_secret, class: 'form-control'
-  .form-group.col-6
-    = f.label :api_key, class: 'col-form-label'
-    = f.text_field :api_key, class: 'form-control'
+  .form-group.col-12.col-lg-6
+    = f.label :owner, class: 'col-form-label'
+    = f.text_field :owner, class: 'form-control'
+  .form-group.col-12.col-lg-6
+    = f.label :reroute_email, class: 'col-form-label'
+    = f.text_field :reroute_email, class: 'form-control'
+.form-group
+  = f.label :api_secret, class: 'col-form-label'
+  = f.text_field :api_secret, class: 'form-control'
+.form-group
+  = f.label :api_key, class: 'col-form-label'
+  = f.text_field :api_key, class: 'form-control'
 .form-group.custom-check.custom-control
   = f.check_box :is_active, class: 'custom-control-input'
   = f.label :is_active, class: 'custom-control-label'

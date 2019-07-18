@@ -4,5 +4,6 @@ FactoryBot.define do
     subject { Faker::Cannabis.buzzword }
     was_rerouted { false }
     client { create(:client) }
+    environment { 'rspec' }
   end
 end

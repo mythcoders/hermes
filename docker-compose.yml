@@ -1,28 +1,45 @@
-version: '3'
+version: '3.7'
 services:
+
   app:
-    build: .
-    image: hermes-app
-    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
-    ports:
-      - "3000"
+    build:
+      context: .
+      target: base
+    container_name: hermes-app
+    command: "bundle exec rails s -b 0.0.0.0 -p 5000"
     labels:
-      traefik.frontend.rule: "Host:hermes.docker.localhost"
+      traefik.frontend.rule: "Host:hermes.localhost"
     volumes:
       - "./:/app"
     environment:
-      LANG: "en_US.UTF-8"
-      RAILS_SERVE_STATIC_FILES: enabled
-      RAILS_LOG_TO_STDOUT: enabled
+      RAILS_ENV: development
+      DATABASE_URL: "postgres://postgres:postgres@db:5432/hermes_dev"
     depends_on:
+      - db
       - net
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:11.4
+    container_name: hermes-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - pgdata
+
   net:
     image: traefik:latest
+    container_name: hermes-net
     command: --api --docker
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
 volumes:
   pgdata:

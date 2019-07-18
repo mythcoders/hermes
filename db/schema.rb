@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_192943) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "clients", id: :bigint, default: -> { "nextval('applications_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "clients", force: :cascade do |t|
     t.string "name", null: false
     t.string "owner", null: false
     t.string "reroute_email", null: false

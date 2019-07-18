@@ -3,19 +3,22 @@
 .row
   .col-4
     .card
-      %h5.card-header.bg-primary.text-white
-        = fa_light 'database'
+      %h4.card-header.bg-primary.text-white
+        = fa_solid 'envelope-open-text'
         = "Log ##{@mail_log.id}"
       .card-body
         %dl
           %dt Client
-          %dd= @mail_log.client.name
+          %dd= link_to @mail_log.client.name, client_path(@mail_log.client)
           %dt Tracking ID
-          %dd= @mail_log.tracking_id
+          %dd
+            %code= @mail_log.tracking_id
           %dt Environment
-          %dd= @mail_log.environment
+          %dd
+            %code= @mail_log.environment
           %dt Content Type
-          %dd= @mail_log.content_type
+          %dd
+            %code= @mail_log.content_type
           %dt Rerouted?
           %dd= @mail_log.was_rerouted
       .card-footer
@@ -23,53 +26,45 @@
   .col-8
     .card
       %h5.card-header.bg-primary.text-white
-        Header
+        Mail
       .card-body
         .row
-          %strong.col-2 Subject
-          .col-10= @mail_log.subject
-        .row
-          %strong.col-2 From
-          .col-10= @mail_log.from        
-        .row
-          %strong.col-2 To
-          .col-10
-            = @mail_log.to
+          %strong.col-12.col-lg-2.text-uppercase Subject
+          .col-12.col-lg-10= @mail_log.subject
+        .row.mt-2
+          %strong.col-12.col-lg-2.text-uppercase From
+          .col-12.col-lg-10= @mail_log.from
+        .row.mt-2
+          %strong.col-12.col-lg-2.text-uppercase To
+          .col-12.col-lg-10= @mail_log.to
         - if @mail_log.cc.present?
-          .row
-            %strong.col-2 CC
-            .col-10
-              = @mail_log.cc
+          .row.mt-2
+            %strong.col-12.col-lg-2.text-uppercase CC
+            .col-12.col-lg-10= @mail_log.cc
         - if @mail_log.bcc.present?
-          .row
-            %strong.col-2 BCC
-            .col-10
-              = @mail_log.bcc
-    %br
-    .card
-      .card-body
-        - if @mail_log.content_type == 'html'
-          = @mail_log.body.html_safe
-        - else
-          %samp= simple_format(@mail_log.body)
-
-    %br
-    .card
+          .row.mt-2
+            %strong.col-12.col-lg-2.text-uppercase BCC
+            .col-12.col-lg-10= @mail_log.bcc
+        .row.mt-2
+          %strong.col-12.col-lg-2.text-uppercase Body
+          .col-12.col-lg-10
+            - if @mail_log.html?
+              = @mail_log.body.html_safe
+            - else
+              %samp= simple_format(@mail_log.body)
+    .card.mt-2
       %h5.card-header.bg-primary.text-white
-        = fa_light 'history'
-        History
-      %table.table.table-bordered.table-striped.table-border-fix
-        %tbody
-          %tr
-            %td{width: '20%'}
-              = fa_regular 'paper-plane'
-              Sent
-            %td
-              = @mail_log.created_at
-          - @mail_log.read_receipts.each do |r|
-            %tr
-              %td{width: '20%'}
-                = fa_regular 'envelope-open'
-                Read
-              %td
-                = r.created_at
+        = fa_solid 'stream'
+        Activity Log
+      %ul.list-group
+        %li.list-group-item.p-3
+          %badge.badge-pill.badge-success.mr-2.p-2
+            = fa_solid 'paper-plane', 'ml-1'
+            %span.h6.text-uppercase.ml-1 Sent
+          %samp= @mail_log.created_at
+        - @mail_log.read_receipts.each do |r|
+          %li.list-group-item.p-3
+            %badge.badge-pill.badge-success.mr-2.p-2
+              = fa_solid 'envelope-open', 'ml-1'
+              %span.h6.text-uppercase.ml-1 Read
+            %samp= r.created_at
