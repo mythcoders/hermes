@@ -3,28 +3,28 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
-
-gem 'rails'
+ruby '2.6.3'
 
 gem 'audited' # data audits
+gem 'aws-sdk', '~> 3'
 gem 'bootsnap', require: false
 gem 'devise' # security
+gem 'elastic-apm'
+gem 'haml'
 gem 'jbuilder', '~> 2.5' # JSON APIs https://github.com/rails/jbuilder
+gem 'jquery-turbolinks'
 gem 'kaminari' # Pagination
 gem 'lograge'
+gem 'lograge-sql'
 gem 'pg' # database for Active Record
 gem 'pinglish' # app status checking
 gem 'puma' # app server
-gem 'sentry-raven' # Exceptions
-gem 'skylight'
-
-# UI
-gem 'bootstrap'
-gem 'haml'
-gem 'jquery-rails'
-gem 'jquery-turbolinks'
+gem 'rails'
+gem 'redis-namespace'
 gem 'sass-rails'
+gem 'sentry-raven' # Exceptions
+gem 'sidekiq', '~> 5.2.7'
+gem 'sidekiq-ent', '~> 1.8.1'
 gem 'sprockets-rails'
 gem 'turbolinks', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'

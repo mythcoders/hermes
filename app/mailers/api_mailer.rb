@@ -3,19 +3,26 @@
 class ApiMailer < ApplicationMailer
   def send_message(request_params)
     mail_params = convert_request_params request_params
-    @message = MailLog.build(request_params)
+    @message = Message.build(request_params)
 
+    append_headers mail_params
     mailer = mail(mail_headers(mail_params)) do |format|
-                    format.html { render layout: mail_params[:layout] } if @message.html?
-                    format.text { render layout: mail_params[:layout] } if @message.text?
-                  end
+      format.html { render layout: mail_params[:layout] } if @message.html?
+      format.text { render layout: mail_params[:layout] } if @message.text?
+    end
     log_mail mail_params.merge(body: mailer.body.decoded)
   end
 
   private
 
+  def append_headers(mail_params)
+    headers 'X-Hermes-ID': mail_params[:tracking_id]
+    headers 'X-Priority': '1', 'Importance': 'high' if mail_params[:priority].present?
+    headers 'X-SES-CONFIGURATION-SET': 'Hermes'
+  end
+
   def log_mail(mail_params)
-    MailLog.build(mail_params).save!
+    Message.build(mail_params).save!
   end
 
   def mail_headers(mail_params)
@@ -37,7 +44,7 @@ class ApiMailer < ApplicationMailer
     else
       mail_params[:was_rerouted] = true
       mail_params[:layout] = 'reroute_mailer'
-      mail_params[:to] = [owner_email(mail_params[:client])]
+      mail_params[:to] = to_owner_array(mail_params[:client])
       mail_params[:from] = DEFAULT_FROM
       mail_params[:environment] = mail_params[:environment]
       mail_params[:cc] = []
@@ -47,7 +54,7 @@ class ApiMailer < ApplicationMailer
     mail_params
   end
 
-  def owner_email(client)
-    "#{client.owner} <#{client.reroute_email}>"
+  def to_owner_array(client)
+    ["#{client.owner} <#{client.reroute_email}>"]
   end
 end

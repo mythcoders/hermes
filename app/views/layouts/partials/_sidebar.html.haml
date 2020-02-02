@@ -1,0 +1,27 @@
+%nav#sidebar.navbar.navbar-vertical.fixed-left.navbar-expand-md.navbar-light
+  .container-fluid
+    %button.navbar-toggler{"aria-controls" => "navbarVertical", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarVertical", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    = link_to home_path, class: 'navbar-brand' do
+      = fa_light 'mail-bulk'
+      Hermes
+      - if Rails.env.development?
+        %strong.text-info DEV
+      - if Rails.env.test?
+        %strong.text-danger TEST
+    #navbarVertical.collapse.navbar-collapse
+      %ul.navbar-nav
+        %li.nav-item{class: ('active' if clients_controller?)}
+          = link_to clients_path, class: 'nav-link' do
+            = fa_solid 'users', 'fa-lg sidebar-icon'
+            Clients
+        %li.nav-item{class: ('active' if messages_controller?)}
+          = link_to messages_path, class: 'nav-link' do
+            = fa_solid 'archive', 'fa-lg sidebar-icon'
+            Messages
+      %h6.navbar-heading.mb-n1 IT Operations
+      %ul.navbar-nav.mb-md-3
+        %li.nav-item
+          = link_to sidekiq_web_path, class: 'nav-link', target: '_blank' do
+            = fa_solid 'server', 'fa-lg sidebar-icon'
+            Sidekiq

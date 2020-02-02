@@ -2,22 +2,21 @@
 %html
   %head
     = render partial: 'layouts/partials/header'
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload', id: 'maincss'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    .container.padded-container
+  %body.d-flex.align-items-center.bg-auth.border-top.border-top-2.border-primary
+    .container
       = render partial: 'layouts/partials/alerts'
       .row
         .col-sm-8.offset-sm-2
           .card
-            .card-header.bg-primary.text-white
-              %strong
-                Hermes
-                - if Rails.env.development?
-                  DEV
-                - if Rails.env.test?
-                  TEST
-              |
-              = yield :header
+            .card-header
+              %h4.card-header-title
+                %strong
+                  Hermes
+                  - if Rails.env.development?
+                    DEV
+                  - if Rails.env.test?
+                    TEST
+                |
+                = yield :header
             .card-body
               = yield

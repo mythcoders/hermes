@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  include Hermes::IconHelpers
-  include Hermes::SidebarHelpers
+  include IconHelpers
+  include SidebarHelpers
 
   # Handles HTML title element
   def page_title(*titles)

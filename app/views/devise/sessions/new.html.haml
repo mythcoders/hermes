@@ -1,5 +1,5 @@
 - content_for :header do
-  Login
+  Sign in
 
 = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
   = devise_error_messages!
@@ -7,14 +7,14 @@
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_light 'lock-alt'
+          = fa_solid 'lock-alt'
       = f.email_field :email, autofocus: true, class: 'form-control', :placeholder => 'Email Address', autocomplete: false
   .form-group
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_light 'key'
+          = fa_solid 'key'
       = f.password_field :password, autocomplete: 'off', class: 'form-control', :placeholder => 'Password'
   .form-group
-    = f.submit 'Log in', class: 'btn btn-outline-primary btn-block btn-login'
+    = f.submit 'Sign in', class: 'btn btn-primary btn-block btn-login'
   = render 'devise/shared/links'

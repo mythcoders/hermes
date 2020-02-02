@@ -7,7 +7,7 @@
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_regular 'lock-alt'
+          = fa_solid 'lock-alt'
       = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control', :placeholder => 'Email Address'
 
   .form-group

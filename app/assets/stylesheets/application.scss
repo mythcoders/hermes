@@ -1,82 +1,64 @@
-@import "variables";
-@import "bootstrap";
-@import "bootswatch";
-
-/*
- * Sidebar
+/**
+ * Dashkit v1.4.2
+ *
+ * Custom variables followed by Dashkit variables followed by Bootstrap variables
+ * to ensure cascade of styles.
  */
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
+// Bootstrap functions
+@import "bootstrap/scss/functions";
 
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
+// Dashkit variables
+@import "dashkit/variables";
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
+// Bootstrap core
+@import "bootstrap/scss/bootstrap";
+
+// Dashkit core
+@import "dashkit/dashkit";
+
+// Custom core
+@import "select2/src/scss/core.scss";
+@import "tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4.scss";
+
+.bootstrap-datetimepicker-widget {
+  &.dropdown-menu {
+    width: unset;
   }
 }
 
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
+.sidebar-icon {
+  min-width: $navbar-icon-min-width;
+  padding-bottom: 0.125em;
+  line-height: ($font-size-base * $line-height-base);
+  margin-left: -5px;
+  margin-right: 5px;
 }
 
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
+.btn-teal {
+  @include button-variant(teal, teal);
 }
 
-.sidebar .nav-link.active {
-  color: #007bff;
+.link-teal {
+  color: teal;
 }
 
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
+.link-teal:hover {
+  color: #003434;
 }
 
-.sidebar-heading {
-  text-transform: uppercase;
+.padded-body {
+  padding-top: 5rem;
 }
 
-@include media-breakpoint-only(xs) {
-  .row > .card {
-    margin-bottom: 1em;
-  }
+.alert:empty {
+  display: none;
 }
 
-.bd-footer-links {
-  padding-left: 0;
-  margin-bottom: 1rem;
-
-  li {
-    display: inline-block;
-
-    + li {
-      margin-left: 1rem;
-    }
-  }
-}
-
-.padded-container {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
+.thead-gray {
+  color: $table-dark-color;
+  background-color: $gray-700;
+  border-color: $table-dark-border-color;
 }
 
 [data-clickable-row] {
@@ -90,10 +72,6 @@
 .table-border-fix {
   margin-bottom: 0;
   border-bottom-style: none;
-}
-
-.form-group > label {
-  font-weight: bold;
 }
 
 @include media-breakpoint-only(xs) {
@@ -135,4 +113,44 @@
   text-align: center;
   font-size: larger;
   padding-top: 80px;
+}
+
+.img-pointer {
+  cursor: pointer;
+}
+
+.img-system-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padded-container {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+[data-clickable-row] {
+  cursor: pointer;
+}
+
+.action-column {
+  width: 10%;
+}
+
+.table-border-fix {
+  margin-bottom: 0;
+  border-bottom-style: none;
+}
+
+.form-group > label {
+  font-weight: bold;
+}
+
+.btn-group.justified {
+  display: flex;
+}
+
+.justified .btn {
+  flex: 1;
 }

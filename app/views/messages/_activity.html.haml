@@ -1,0 +1,109 @@
+.card.mt-2
+  .card-body
+    .list-group.list-group-flush.list-group-activity.my-n3
+      - @message.activities.each do |r|
+        .list-group-item
+          .row
+            .col-auto
+              .avatar.avatar-sm
+                .avatar-title.font-size-lg.bg-primary-soft.rounded-circle.text-primary
+                  = fa_solid 'satellite-dish', 'ml-1'
+            .col.ml-n2
+              %h5.text-uppercase.mb-1= r.activity_type
+              %small.text-muted{title: r.notification_timestamp}
+                #{time_ago_in_words r.notification_timestamp} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-primary-soft.rounded-circle.text-primary
+                = fa_solid 'satellite-dish', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Request recieved
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-primary-soft.rounded-circle.text-primary
+                = fa_solid 'server', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Scheduled
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-warning-soft.rounded-circle.text-warning
+                = fa_solid 'traffic-light', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Rerouted to client owner
+            %p.small.text-gray-700.mb-0
+              Hermes modified the message to prevent it from going to its intended recipients
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-success-soft.rounded-circle.text-success
+                = fa_solid 'paper-plane', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Sent to host
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-primary-soft.rounded-circle.text-primary
+                = fa_solid 'redo', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Resent
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-danger-soft.rounded-circle.text-danger
+                = fa_solid 'shield', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Blocked
+            %p.small.text-gray-700.mb-0 justin.adkins@mythcoders.com
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-danger-soft.rounded-circle.text-danger
+                = fa_solid 'minus-octagon', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Delivery Failed
+            %p.small.text-gray-700.mb-0 justin.adkins@mythcoders.com
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-warning-soft.rounded-circle.text-warning
+                = fa_solid 'exclamation-triangle', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Complaint
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago
+      .list-group-item
+        .row
+          .col-auto
+            .avatar.avatar-sm
+              .avatar-title.font-size-lg.bg-danger-soft.rounded-circle.text-danger
+                = fa_solid 'dumpster-fire', 'ml-1'
+          .col.ml-n2
+            %h5.text-uppercase.mb-1 Error
+            %small.text-muted{title: @message.created_at}
+              #{time_ago_in_words @message.created_at} ago

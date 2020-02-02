@@ -16,6 +16,7 @@ application:
 gitlab:
   app:
   env:
+  envName:
 service:
   enabled: true
   annotations: {}
@@ -60,3 +61,10 @@ podDisruptionBudget:
   enabled: false
   # minAvailable: 1
   maxUnavailable: 1
+
+workers:
+  sidekiq:
+    replicaCount: 1
+    terminationGracePeriodSeconds: 60
+    command: ["sh", "./scripts/worker", "start"]
+    preStopCommand: ["sh", "./scripts/worker", "stop"]

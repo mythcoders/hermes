@@ -1,0 +1,20 @@
+#!/bin/bash
+
+figlet -f trek hermes
+
+echo 'Configuring the hyperdrive...'
+
+if [ "$2" == "setup" ]; then
+  echo "Establsihing connection to the databank..."
+  bundle exec rails db:exists && bundle exec rails db:migrate VERBOSE=true || bundle exec rails db:setup VERBOSE=true
+fi
+
+if [ "$1" == "start" ]; then
+  if [ -f "${APP_HOME}/tmp/pids/server.pid" ]; then
+    echo "Scans detected server.pid in sector 1 -- neutralizing"
+    rm -rf ${APP_HOME}/tmp/pids/server.pid
+  fi
+
+  echo "Preparing for warp on port ${APP_PORT}..."
+  bundle exec rails s -b 0.0.0.0 -p $APP_PORT
+fi

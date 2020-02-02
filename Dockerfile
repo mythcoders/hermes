@@ -1,12 +1,22 @@
 FROM registry.gitlab.com/mythcoders/gaia:latest AS base
-COPY Gemfile Gemfile.lock $APP_HOME/
-# Install build dependencies - required for gems with native dependencies
+
+ADD Gemfile* $APP_HOME/
+
 RUN apk add --no-cache --virtual build-deps build-base && \
+  apk add figlet && \
+  wget http://www.figlet.org/fonts/trek.flf -P /usr/share/figlet/fonts && \
   bundle install && \
   apk del build-deps
-EXPOSE $PORT
 
- # Dev environment doesn't run this stage or beyond
+COPY package.json yarn.lock $APP_HOME/
+RUN yarn install
+
+EXPOSE $APP_PORT
+
 FROM base AS build
+
 ADD . $APP_HOME/
-CMD ["sh", "-c", "bundle exec rails s -b 0.0.0.0 -p ${PORT}"]
+
+RUN ELASTIC_APM_ACTIVE=false ASSETS_PRECOMPILE=1 SECRET_KEY_BASE=1 RAILS_ENV=production bundle exec rake assets:precompile
+
+CMD ["sh", "./scripts/app", "start"]

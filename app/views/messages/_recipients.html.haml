@@ -1,0 +1,16 @@
+.card
+  %table-responsive
+    %table.table.table-sm.card-table
+      %thead
+        %tr
+          %th Recipient
+          %th Sent At
+          %th Delivered At
+      %tbody.list
+        - @message.recipients.each do |r|
+          %tr
+            %td
+              %span.badge.badge-secondary.text-uppercase= r.recipient_type
+              = r.email
+            %td= r.send_at
+            %td= r.delivered_at

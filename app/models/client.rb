@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Client < ApplicationRecord
-  has_many :mail_logs
+  has_many :messages
 
   validates_length_of :name, :owner, maximum: 50
   validates_length_of :reroute_email, maximum: 60

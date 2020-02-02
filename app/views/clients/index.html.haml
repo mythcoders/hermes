@@ -1,35 +1,45 @@
 - page_title 'Client Search'
 
+.header.mt-md-5
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Overview
+        %h1.header-title
+          = fa_solid 'users'
+          Clients
+      .col-auto
+        = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
+
 .card
-  %h4.card-header.bg-primary.text-white
-    = fa_solid 'users'
-    Clients
-  %table.table.table-bordered.table-striped.table-border-fix
-    %thead
-      %tr
-        %th Name
-        %th Owner
-        %th.action-column Is Active?
-        %th.action-column Emails Sent?
-    %tbody
-      - @clients.each do |c|
-        %tr{data: { 'clickable-row': '', 'href': client_path(c) }}
-          %td= c.name
-          %td= c.owner
-          %td
-            - if c.is_active
-              = fa_light 'check', 'text-success'
-            - else
-              = fa_light 'times', 'text-warning'
-          %td
-            - if c.are_emails_sent
-              = fa_light 'check', 'text-success'
-            - else
-              = fa_light 'times', 'text-warning'
+  %table-responsive
+    %table.table.table-sm.card-table
+      %thead
+        %tr
+          %th Name
+          %th Owner
+          %th API Access
+          %th Email Delivery
+      %tbody
+        - @clients.each do |c|
+          %tr{data: { 'clickable-row': '', 'href': client_path(c) }}
+            %td= c.name
+            %td= c.owner
+            %td
+              - if c.is_active
+                .text-success
+                  Granted
+              - else
+                .text-danger
+                  Denied
+            %td
+              - if c.are_emails_sent
+                .text-success
+                  Delivered
+              - else
+                .text-warning
+                  Rerouted
   .card-footer
     = paginate @clients
     = page_entries_info @clients
-
-%br
-
-= link_to 'New Client', new_client_path, class: 'btn btn-primary'

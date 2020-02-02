@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :confirmable,
@@ -9,15 +11,16 @@ class User < ApplicationRecord
     email.split('@').last
   end
 
+  def initials
+    name.split.map(&:first).join
+  end
+
   private
 
   def email_domain_is_mythcoders
-    if email_domain != 'mythcoders.com'.freeze
-      Raven.capture_message(
-        "Signup for non-mythcoders account",
-        level: 'warning'
-      )
-      errors.add(:email, 'Domain not valid')
-    end
+    return if email_domain == 'mythcoders.com'
+
+    Raven.capture_message('Signup for non-mythcoders account', level: 'warning')
+    errors.add(:email, 'Domain not valid')
   end
 end

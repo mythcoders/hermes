@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client = Client.new(api_secret: Hermes::KeyGenerator.new, api_key: Hermes::KeyGenerator.new)
+    @client = Client.new(api_secret: SecureRandom.urlsafe_base64(64), api_key: SecureRandom.urlsafe_base64(64))
   end
 
   def create

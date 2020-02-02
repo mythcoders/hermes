@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_192943) do
+ActiveRecord::Schema.define(version: 2019_07_21_042119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,40 +31,63 @@ ActiveRecord::Schema.define(version: 2018_12_03_192943) do
     t.index ["name"], name: "index_clients_on_name", unique: true
   end
 
-  create_table "mail_logs", force: :cascade do |t|
-    t.string "from"
-    t.string "to", null: false
-    t.string "cc"
-    t.string "bcc"
+  create_table "message_activities", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.string "activity_type"
+    t.string "activity_details"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.string "link_url"
+    t.string "reject_reason"
+    t.string "reporting_mta"
+    t.string "smtp_response"
+    t.string "bounce_type"
+    t.string "feedback_id"
+    t.string "complaint_type"
+    t.datetime "complaint_arrival_date"
+    t.datetime "notification_timestamp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_message_activities_on_message_id"
+  end
+
+  create_table "message_activity_recipients", force: :cascade do |t|
+    t.bigint "message_activity_id", null: false
+    t.bigint "message_recipient_id", null: false
+    t.string "action"
+    t.string "status"
+    t.string "diagnosticCode"
+    t.datetime "notification_timestamp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_activity_id"], name: "index_message_activity_recipients_on_message_activity_id"
+    t.index ["message_recipient_id"], name: "index_message_activity_recipients_on_message_recipient_id"
+  end
+
+  create_table "message_recipients", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.string "email"
+    t.string "recipient_type"
+    t.datetime "send_at"
+    t.datetime "delivered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_message_recipients_on_message_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "sender"
     t.string "subject", null: false
     t.string "body"
     t.string "content_type"
-    t.boolean "was_rerouted", null: false
-    t.bigint "client_id", null: false
+    t.string "priority"
+    t.string "environment"
+    t.string "tracking_id"
+    t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "environment", null: false
-    t.string "tracking_id", default: "", null: false
-    t.index ["client_id"], name: "index_mail_logs_on_client_id"
-  end
-
-  create_table "read_receipts", force: :cascade do |t|
-    t.bigint "mail_log_id", null: false
-    t.string "remote_ip"
-    t.string "user_agent"
-    t.string "filename"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["mail_log_id"], name: "index_read_receipts_on_mail_log_id"
-  end
-
-  create_table "read_receipts_queries", force: :cascade do |t|
-    t.bigint "read_receipt_id", null: false
-    t.string "field"
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["read_receipt_id"], name: "index_read_receipts_queries_on_read_receipt_id"
+    t.index ["client_id"], name: "index_messages_on_client_id"
   end
 
   create_table "users", force: :cascade do |t|

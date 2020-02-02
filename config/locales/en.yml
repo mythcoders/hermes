@@ -1,12 +1,29 @@
 en:
-  created: Yes!
-  updated: Yes!
+  attributes:
+    created_at: "Created at"
+    updated_at: "Updated at"
+  created: ""
+  updated: "Something %{record} %{model}"
+  activity_types:
+    received: Received
+    rerouted: Rerouted to Owner
+    delivered: Delivered
+    opened: Opened
+    click: Clicked
+    bounced: Bounced
+    blocked: Blocked
+    scheduled: Scheduled
+    sent: Sent
+  recipient_types:
+    to: Recipient
+    cc: CC
+    bcc: BCC
   rerouted:
     Hermes intercepted the following email and prevented it from being delivered to its intended recipients.
     If you believe this is an error, please contact your Hermes Administrator.
   helpers:
     select:
-      prompt: "Please select"
+      prompt: "- Please select -"
     submit:
       create: "Create"
       submit: Save %{model}
@@ -15,9 +32,9 @@ en:
       client:
         api_key: "API Key"
         api_secret: "API Secret"
-        is_active: "Is client allowed to call the Hermes API?"
-        are_emails_sent: "Should emails be routed to the owner rather than delivered to recipients?"
-      mail_log:
+        is_active: "Grant access to the Hermes API"
+        are_emails_sent: "Sent emails to requested recipients"
+      message:
         to: "Recipient"
   activerecord:
     errors:
@@ -27,54 +44,10 @@ en:
           has_one: "Cannot delete record because a dependent %{record} exists"
           has_many: "Cannot delete record because dependent %{record} exist"
   date:
-    abbr_day_names:
-      - Sun
-      - Mon
-      - Tue
-      - Wed
-      - Thu
-      - Fri
-      - Sat
-    abbr_month_names:
-      -
-      - Jan
-      - Feb
-      - Mar
-      - Apr
-      - May
-      - Jun
-      - Jul
-      - Aug
-      - Sep
-      - Oct
-      - Nov
-      - Dec
-    day_names:
-      - Sunday
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
-      - Saturday
     formats:
       default: "%m-%d-%Y"
       long: "%B %d, %Y"
       short: "%b %d"
-    month_names:
-      -
-      - January
-      - February
-      - March
-      - April
-      - May
-      - June
-      - July
-      - August
-      - September
-      - October
-      - November
-      - December
     order:
       - :month
       - :day
@@ -86,90 +59,9 @@ en:
       default: "%m/%d/%Y %I:%M %p"
       long: "%a, %d %b %Y %I:%M:%S %p %Z"
       short: "%m/%d/%y %I:%M %p"
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: about 1 hour
-        other: about %{count} hours
-      about_x_months:
-        one: about 1 month
-        other: about %{count} months
-      about_x_years:
-        one: about 1 year
-        other: about %{count} years
-      almost_x_years:
-        one: almost 1 year
-        other: almost %{count} years
-      half_a_minute: half a minute
-      less_than_x_minutes:
-        one: less than a minute
-        other: less than %{count} minutes
-      less_than_x_seconds:
-        one: less than 1 second
-        other: less than %{count} seconds
-      over_x_years:
-        one: over 1 year
-        other: over %{count} years
-      x_days:
-        one: 1 day
-        other: "%{count} days"
-      x_minutes:
-        one: 1 minute
-        other: "%{count} minutes"
-      x_months:
-        one: 1 month
-        other: "%{count} months"
-      x_years:
-        one: 1 year
-        other: "%{count} years"
-      x_seconds:
-        one: 1 second
-        other: "%{count} seconds"
-    prompts:
-      day: Day
-      hour: Hour
-      minute: Minute
-      month: Month
-      second: Seconds
-      year: Year
   errors:
-    format: "%{attribute} %{message}"
     messages:
-      accepted: must be accepted
-      blank: can't be blank
-      present: must be blank
-      confirmation: doesn't match %{attribute}
-      empty: can't be empty
-      equal_to: must be equal to %{count}
-      even: must be even
-      exclusion: is reserved
-      greater_than: must be greater than %{count}
-      greater_than_or_equal_to: must be greater than or equal to %{count}
-      inclusion: is not included in the list
-      invalid: is invalid
-      less_than: must be less than %{count}
-      less_than_or_equal_to: must be less than or equal to %{count}
-      model_invalid: "Validation failed: %{errors}"
-      not_a_number: is not a number
-      not_an_integer: must be an integer
-      odd: must be odd
-      required: must exist
-      taken: has already been taken
-      too_long:
-        one: is too long (maximum is 1 character)
-        other: is too long (maximum is %{count} characters)
-      too_short:
-        one: is too short (minimum is 1 character)
-        other: is too short (minimum is %{count} characters)
-      wrong_length:
-        one: is the wrong length (should be 1 character)
-        other: is the wrong length (should be %{count} characters)
-      other_than: must be other than %{count}
-    template:
-      body: "There were problems with the following fields:"
-      header:
-        one: 1 error prohibited this %{model} from being saved
-        other: "%{count} errors prohibited this %{model} from being saved"
+      something: ""
   number:
     currency:
       format:

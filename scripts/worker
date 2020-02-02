@@ -1,0 +1,19 @@
+#!/bin/bash
+
+figlet -f trek hermes
+
+if [ "$1" == "stop" ]; then
+  echo "Halting androids..."
+  for f in tmp/pids/sidekiq*.pid; do
+    bundle exec sidekiqctl stop $f;
+  done
+else
+  echo "Starting androids..."
+
+  if [ -f "${APP_HOME}/tmp/pids/sidekiq.pid" ]; then
+    echo "Scans detected sidekiq.pid in sector 12 -- neutralizing"
+    rm -rf ${APP_HOME}/tmp/pids/sidekiq.pid
+  fi
+
+  bundle exec sidekiq
+fi
