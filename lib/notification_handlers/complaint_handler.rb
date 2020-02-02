@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module NotificationHandlers
-  class ComplaintHandler
-    def handle(_request)
+  class ComplaintHandler < BaseNotificationHandler
+    def handle
       false
     end
   end

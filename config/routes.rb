@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   end
 
   resources :clients
-  resources :messages, param: :tracking_id
+  resources :messages, param: :tracking_id do
+    get 'reroute', action: :reroute, on: :member
+  end
 
   root to: 'home#index', as: 'home'
 end

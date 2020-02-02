@@ -2,14 +2,14 @@
 
 module NotificationHandlers
   class BaseNotificationHandler
-    def handle(_request)
-      false
+    def initialize(notification)
+      @notification = notification
     end
 
     private
 
-    def destination
-      @raw_request.mail.destination
+    def message
+      @message ||= Message.find_by_tracking_id! @notification.tracking_id
     end
   end
 end

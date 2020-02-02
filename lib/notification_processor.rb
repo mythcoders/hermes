@@ -2,7 +2,7 @@
 
 # Processes notifications recived from AWS
 class NotificationProcessor
-  IGNORED_MESSAGE = 'Successfully validated SNS topic for Amazon SES event publishing.'
+  UnknownNotificationError = Class.new(StandardError)
   HANDLER_MAPPINGS = {
     'SubscriptionConfirmation' => 'SubscribeHandler',
     'SubscriptionCancellation' => 'IgnoredHandler',
@@ -17,27 +17,26 @@ class NotificationProcessor
     'RenderingFailure' => 'RenderingFailureHandler'
   }.freeze
 
-  def initialize(notification_request)
-    @notification = notification_request
-    throw "No handler for NotificationType: #{notification_type}" unless HANDLER_MAPPINGS.key?(notification_type)
-
-    @handler = "NotificationHandlers::#{HANDLER_MAPPINGS[notification_type]}".constantize.new
+  def initialize(raw_data)
+    @notification = AwsNotification.new raw_data
+    raise UnknownNotificationError unless valid_notification?
   end
 
   def process
-    @handler.handle @notification
+    handler.handle
   end
 
   private
 
-  def notification_type
-    if @notification['Type'] == 'Notification'
-      return 'SubscriptionValidation' if @notification['Message'] == IGNORED_MESSAGE
+  def handler
+    @handler ||= "NotificationHandlers::#{handler_name}".constantize.new(@notification)
+  end
 
-      # treat the eventType as the notificationType
-      JSON.parse(@notification['Message'])['eventType'].strip
-    else
-      @notification['Type']
-    end
+  def handler_name
+    HANDLER_MAPPINGS[@notification.type]
+  end
+
+  def valid_notification?
+    HANDLER_MAPPINGS.key?(@notification.type)
   end
 end

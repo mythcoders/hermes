@@ -21,20 +21,17 @@
             %a#recipients-tab.nav-link{"aria-controls": "recipients", "aria-selected": "false", "data-toggle": "tab", href: "#recipients", role: "tab"}
               = fa_solid 'mailbox'
               Recipients
-              %span.badge.badge-primary= @message.recipients.count
+              %span.badge.badge-info= @message.recipients.count
           %li.nav-item
             %a#read-tab.nav-link{"aria-controls": "read", "aria-selected": "false", "data-toggle": "tab", href: "#read", role: "tab"}
               = fa_solid 'truck-container'
-              Delivery Analytics
+              Delivery Activity
+              %span.badge.badge-info= @message.delivery_activity.count
           %li.nav-item
             %a#link-tab.nav-link{"aria-controls": "link", "aria-selected": "false", "data-toggle": "tab", href: "#link", role: "tab"}
               = fa_solid 'paperclip'
-              Link Analytics
-          %li.nav-item
-            %a#activity-tab.nav-link{"aria-controls": "image", "aria-selected": "false", "data-toggle": "tab", href: "#activity", role: "tab"}
-              = fa_solid 'history'
-              Workflow
-              %span.badge.badge-primary= @message.activities.count
+              Link Activity
+              %span.badge.badge-info= @message.link_activity.count
 
 #workshopTabContent.tab-content
   #overview.tab-pane.fade.show.active{"aria-labelledby": "overview-tab", role: "tabpanel"}
@@ -42,8 +39,6 @@
   #recipients.tab-pane.fade{"aria-labelledby": "recipients-tab", role: "tabpanel"}
     = render partial: 'recipients'
   #read.tab-pane.fade{"aria-labelledby": "recipients-tab", role: "tabpanel"}
-    Read!
+    .card= render partial: 'activity', locals: { activity: @message.delivery_activity }
   #link.tab-pane.fade{"aria-labelledby": "link-tab", role: "tabpanel"}
-    Links!
-  #activity.tab-pane.fade{"aria-labelledby": "activity-tab", role: "tabpanel"}
-    = render partial: 'activity'
+    .card= render partial: 'activity', locals: { activity: @message.link_activity }

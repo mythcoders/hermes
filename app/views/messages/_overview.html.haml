@@ -30,12 +30,15 @@
             %h5.mb-0 Rule Set
           .col-auto
             %small.text-muted AWS
+        %hr
+        = render partial: 'activity', locals: { activity: @message.basic_activity }
   .col-8
     .card
       .card-body
         .row
           %strong.text-uppercase Subject
           %span.px-3= @message.subject
+        %hr
         .row.mt-2
           - if @message.html?
             = @message.body.html_safe
