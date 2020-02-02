@@ -12,9 +12,9 @@ module Api
     def new
       message = Message.build(mail_params, @current_user)
       return head :bad_request unless message.valid?
-      return head :error unless message.receieve!
+      return head :error unless message.received!
 
-      MailSortWorker.perform_async(message.id)
+      MailSortWorker.perform_async message.tracking_id
       head :created
     end
 

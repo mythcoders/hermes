@@ -4,7 +4,18 @@
 class PostalWorker
   include Sidekiq::Worker
 
-  def perform(_request_params)
-    Rails.logger.debug 'Yikes'
+  def perform(tracking_id)
+    @tracking_id = tracking_id
+
+    return if message.sent?
+
+    ApiMailer.with(message: message).send_message.deliver_now
+    message.processed!
+  end
+
+  private
+
+  def message
+    @message ||= Message.find_by_tracking_id @tracking_id
   end
 end

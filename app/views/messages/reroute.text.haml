@@ -9,4 +9,4 @@
 - if @message.bcc.present?
   = "BCC: #{@message.bcc}"
 = "\n"
-= yield
+= @message.body

@@ -30,29 +30,21 @@ class Message < ApplicationRecord
     message
   end
 
-  def receieve!(timestamp = Time.zone.now)
-    activities << MessageActivity.new(activity_type: :received, notification_timestamp: timestamp)
-    save!
+  ACTIVITY_TYPES.each do |type|
+    define_method "#{type}?" do
+      activities.where(activity_type: type).any?
+    end
+
+    define_method "#{type}!" do |timestamp = Time.zone.now|
+      activities << MessageActivity.new(activity_type: type, notification_timestamp: timestamp)
+      save!
+    end
   end
 
-  def schedule!(timestamp = Time.zone.now)
-    activities << MessageActivity.new(activity_type: :scheduled, notification_timestamp: timestamp)
-    save!
-  end
-
-  def reroute!(timestamp = Time.zone.now)
-    activities << MessageActivity.new(activity_type: :rerouted, notification_timestamp: timestamp)
-    save!
-  end
-
-  def deliver!(timestamp = Time.zone.now)
-    activities << MessageActivity.new(activity_type: :deliver, notification_timestamp: timestamp)
-    save!
-  end
-
-  def sent!(timestamp = Time.zone.now)
-    activities << MessageActivity.new(activity_type: :sent, notification_timestamp: timestamp)
-    save!
+  RECIPIENT_TYPES.each do |type|
+    define_method type.to_s do
+      recipients.where(recipient_type: type)
+    end
   end
 
   def html?
@@ -61,5 +53,17 @@ class Message < ApplicationRecord
 
   def text?
     content_type == 'text'
+  end
+
+  def basic_activity
+    activities.where.not(activity_type: %w[delivered clicked opened])
+  end
+
+  def delivery_activity
+    activities.where(activity_type: %w[delivered opened])
+  end
+
+  def link_activity
+    activities.where(activity_type: 'clicked')
   end
 end

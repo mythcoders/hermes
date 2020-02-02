@@ -2,20 +2,16 @@
 
 module NotificationHandlers
   class SendHandler < BaseNotificationHandler
-    def handle(request)
-      @raw_request = request
-
-      destination.each do |_resp|
-        MessageActivity.new
-      end
-
-      false
+    def handle
+      message.activities << MessageActivity.new(activity_type: :sent,
+                                                notification_timestamp: timestamp)
+      message.save
     end
 
     private
 
-    def destination
-      @raw_request.mail.destination
+    def timestamp
+      @timestamp ||= DateTime.parse @notification.message['mail']['timestamp']
     end
   end
 end

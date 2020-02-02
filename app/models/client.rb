@@ -12,4 +12,8 @@ class Client < ApplicationRecord
   def self.authenticate(key, secret)
     where(api_key: key, api_secret: secret).limit(1).first
   end
+
+  def reroute_recipient
+    MessageRecipient.new(email: "#{owner} <#{reroute_email}>", recipient_type: :to)
+  end
 end

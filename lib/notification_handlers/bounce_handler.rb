@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module NotificationHandlers
-  class BounceHandler
-    def handle(_request)
+  class BounceHandler < BaseNotificationHandler
+    def handle
       false
     end
   end

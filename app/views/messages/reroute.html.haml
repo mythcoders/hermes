@@ -1,0 +1,36 @@
+%p= t('rerouted')
+%table
+  %tr
+    %td
+      %strong CLIENT:
+    %td= "#{@message.client.name} - #{@message.environment}"
+  %tr
+    %td
+      %strong SUBJECT:
+    %td
+      = @message.subject
+  %tr
+    %td
+      %strong FROM:
+    %td
+      = @message.sender
+  %tr
+    %td
+      %strong TO:
+    %td
+      = email_array_to_string @message.to
+  - if @message.cc.present?
+    %tr
+      %td
+        %strong CC:
+      %td
+        = email_array_to_string @message.cc
+  - if @message.bcc.present?
+    %tr
+      %td
+        %strong BCC:
+      %td
+        = email_array_to_string @message.bcc
+%br
+
+= @message.body.html_safe
