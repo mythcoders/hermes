@@ -1,10 +1,30 @@
 - page_title @client.name, 'Client'
 
+.header.mt-md-5
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Clients
+        %h1.header-title
+          .avatar
+            %span.avatar-title.rounded-circle= @client.name.split.map(&:first).join
+          = @client.name
+      .col
+        - if @client.is_active
+          %span.badge.badge-soft-success.text-uppercase API access granted
+        - else
+          %span.badge.badge-soft-danger.text-uppercase API access denied
+        - if @client.are_emails_sent
+          %span.badge.badge-soft-success.text-uppercase Emails delivered
+        - else
+          %span.badge.badge-soft-warning.text-uppercase Emails rerouted
+      .col-auto
+        = link_to 'Go Back', clients_path, class: 'btn btn-outline-primary'
+        = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'
+
 = form_for @client, url: clients_path do |f|
   .card
-    %h5.card-header.bg-primary.text-white
-      = fa_solid 'users'
-      = @client.name
     .card-body
       %dl
         %dt Owner
@@ -15,10 +35,3 @@
         %dd= @client.api_key
         %dt API Secret
         %dd= @client.api_secret
-        %dt= t('helpers.label.client.is_active')
-        %dd= @client.is_active
-        %dt= t('helpers.label.client.are_emails_sent')
-        %dd= @client.are_emails_sent
-    .card-footer
-      = link_to 'Cancel', clients_path, class: 'btn btn-outline-primary'
-      = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'

@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require_relative 'boot'
-require 'rails/all'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'active_record/railtie'
+require 'action_view/railtie'
+require 'pinglish'
 
 Bundler.require(*Rails.groups)
 
@@ -13,36 +17,9 @@ module Hermes
     config.time_zone = 'Eastern Time (US & Canada)'
     config.public_file_server.enabled
     config.autoload_paths += %W[#{config.root}/lib]
-    config.require_master_key = true
+    # config.require_master_key = true
 
-    #Logging
+    # Logging
     config.lograge.enabled = true
-    config.lograge.custom_payload do |controller|
-      {
-        host: controller.request.host,
-        user_id: controller.current_user.try(:id)
-      }
-    end
-    config.lograge.custom_options = lambda do |event|
-      exceptions = %w(controller action format id)
-      {
-        params: event.payload[:params].except(*exceptions)
-      }
-    end
-
-    # Email
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.perform_caching = false
-    ActionMailer::Base.smtp_settings = {
-      user_name: Rails.application.credentials.email[:username],
-      password: Rails.application.credentials.email[:password],
-      domain: 'mythcoders.com',
-      address: 'email-smtp.us-east-1.amazonaws.com',
-      port: 587,
-      authentication: :plain,
-      enable_starttls_auto: true
-    }
   end
 end

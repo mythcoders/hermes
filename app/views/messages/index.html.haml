@@ -1,0 +1,32 @@
+- page_title 'Message Search'
+
+.header.mt-md-5
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Overview
+        %h1.header-title
+          = fa_solid 'archive'
+          Messages
+
+.card
+  %table-responsive
+    %table.table.table-sm.card-table
+      %thead
+        %tr
+          %th Date Sent
+          %th API Client
+          %th Subject
+          %th Environment
+      %tbody.list
+        - @messages.each do |c|
+          %tr{data: { 'clickable-row': '', 'href': message_path(c.tracking_id) }}
+            %td= l(c.created_at)
+            %td= c.client.name
+            %td= c.subject
+            %td
+              %code= c.environment
+  .card-footer
+    = paginate @messages
+    = page_entries_info @messages

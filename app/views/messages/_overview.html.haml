@@ -1,0 +1,43 @@
+.row.mt-2
+  .col-4
+    .card
+      .card-header
+        %h2.header-title
+          .avatar
+            %span.avatar-title.rounded-circle= @message.client.name.split.map(&:first).join
+          = link_to @message.client.name, client_path(@message.client)
+      .card-body
+        .row.align-items-center
+          .col
+            %h5.mb-0 Sender
+          .col-auto
+            %small.text-muted= @message.sender
+        %hr
+        .row.align-items-center
+          .col
+            %h5.mb-0 Environment
+          .col-auto
+            %small.text-muted= @message.environment
+        %hr
+        .row.align-items-center
+          .col
+            %h5.mb-0 Content Type
+          .col-auto
+            %small.text-muted.text-uppercase= @message.content_type
+        %hr
+        .row.align-items-center
+          .col
+            %h5.mb-0 Rule Set
+          .col-auto
+            %small.text-muted AWS
+  .col-8
+    .card
+      .card-body
+        .row
+          %strong.text-uppercase Subject
+          %span.px-3= @message.subject
+        .row.mt-2
+          - if @message.html?
+            = @message.body.html_safe
+          - else
+            %samp= simple_format(@message.body)

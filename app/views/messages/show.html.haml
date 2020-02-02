@@ -1,0 +1,49 @@
+- page_title 'View', 'Messages'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col.ml-n3.ml-md-n2
+        %h6.header-pretitle
+          Messages
+        %h1.header-title
+          = fa_solid 'archive'
+          = "Message #{@message.tracking_id}"
+      .col-auto
+        = link_to 'Go Back', messages_path, class: 'btn btn-outline-primary'
+    .row.align-items-center
+      .col
+        %ul#workshopTab.nav.nav-tabs.nav-overflow.header-tabs{role: "tablist"}
+          %li.nav-item
+            %a#overview-tab.nav-link.active{"aria-controls": "attendee", "aria-selected": "true", "data-toggle": "tab", href: "#overview", role: "tab"}
+              Overview
+          %li.nav-item
+            %a#recipients-tab.nav-link{"aria-controls": "recipients", "aria-selected": "false", "data-toggle": "tab", href: "#recipients", role: "tab"}
+              = fa_solid 'mailbox'
+              Recipients
+              %span.badge.badge-primary= @message.recipients.count
+          %li.nav-item
+            %a#read-tab.nav-link{"aria-controls": "read", "aria-selected": "false", "data-toggle": "tab", href: "#read", role: "tab"}
+              = fa_solid 'truck-container'
+              Delivery Analytics
+          %li.nav-item
+            %a#link-tab.nav-link{"aria-controls": "link", "aria-selected": "false", "data-toggle": "tab", href: "#link", role: "tab"}
+              = fa_solid 'paperclip'
+              Link Analytics
+          %li.nav-item
+            %a#activity-tab.nav-link{"aria-controls": "image", "aria-selected": "false", "data-toggle": "tab", href: "#activity", role: "tab"}
+              = fa_solid 'history'
+              Workflow
+              %span.badge.badge-primary= @message.activities.count
+
+#workshopTabContent.tab-content
+  #overview.tab-pane.fade.show.active{"aria-labelledby": "overview-tab", role: "tabpanel"}
+    = render partial: 'overview'
+  #recipients.tab-pane.fade{"aria-labelledby": "recipients-tab", role: "tabpanel"}
+    = render partial: 'recipients'
+  #read.tab-pane.fade{"aria-labelledby": "recipients-tab", role: "tabpanel"}
+    Read!
+  #link.tab-pane.fade{"aria-labelledby": "link-tab", role: "tabpanel"}
+    Links!
+  #activity.tab-pane.fade{"aria-labelledby": "activity-tab", role: "tabpanel"}
+    = render partial: 'activity'

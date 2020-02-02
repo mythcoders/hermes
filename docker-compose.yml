@@ -1,27 +1,51 @@
 version: '3.7'
 services:
-
   app:
+    image: hermes
     build:
       context: .
       target: base
     container_name: hermes-app
-    command: "bundle exec rails s -b 0.0.0.0 -p 5000"
+    command: ["sh", "./scripts/app", "start", "setup"]
     labels:
       traefik.frontend.rule: "Host:hermes.localhost"
     volumes:
       - "./:/app"
     environment:
       RAILS_ENV: development
+      GITLAB_ENVIRONMENT_NAME: development
+      GITLAB_ENVIRONMENT_URL: http://hermes.localhost
       DATABASE_URL: "postgres://postgres:postgres@db:5432/hermes_dev"
+      REDIS_URL: redis://redis:6379/0
+      REDIS_NAMESPACE: hermes-dev
+      REDIS_WORKER_NAMESPACE: hermes-worker-dev
     depends_on:
       - db
       - net
     stdin_open: true
     tty: true
 
+  worker:
+    image: hermes
+    container_name: hermes-worker
+    command: ["sh", "./scripts/worker", "start"]
+    volumes:
+      - .:/app
+    environment:
+      RAILS_ENV: development
+      GITLAB_ENVIRONMENT_NAME: development
+      GITLAB_ENVIRONMENT_URL: http://hermes.localhost
+      DATABASE_URL: "postgres://postgres:postgres@db:5432/hermes_dev"
+      REDIS_URL: redis://redis:6379/0
+      REDIS_NAMESPACE: hermes-dev
+      REDIS_WORKER_NAMESPACE: hermes-worker-dev
+    depends_on:
+      - app
+      - db
+      - redis
+
   db:
-    image: postgres:11.4
+    image: postgres:11.6
     container_name: hermes-db
     ports:
       - "5432:5432"
@@ -31,8 +55,14 @@ services:
     volumes:
       - pgdata
 
+  redis:
+    image: redis:5.0.5-alpine
+    container_name: hermes-redis
+    ports:
+      - "6379:6379"
+
   net:
-    image: traefik:latest
+    image: traefik:v1.7.16
     container_name: hermes-net
     command: --api --docker
     ports:

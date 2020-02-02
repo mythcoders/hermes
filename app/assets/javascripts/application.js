@@ -1,10 +1,8 @@
 //
-//= require jquery3
-//= require jquery_ujs
 //= require rails-ujs
-//= require popper
-//= require bootstrap
-//= require activestorage
+//= require jquery/dist/jquery.min
+//= require onmount/index.js
+//= require bootstrap/dist/js/bootstrap.bundle.min
 //= require_tree .
 
 $(function() {

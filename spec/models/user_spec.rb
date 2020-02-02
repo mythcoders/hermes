@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject { create(:user) }
 
-  describe "#create" do
-    it "only allow emails that belong to mythcoders" do
+  describe '#create' do
+    it 'only allow emails that belong to mythcoders' do
     end
   end
 
