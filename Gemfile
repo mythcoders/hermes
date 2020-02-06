@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 gem 'audited' # data audits
-gem 'aws-sdk', '~> 3'
+gem 'aws-sdk-sns', '~> 1'
 gem 'bootsnap', require: false
 gem 'devise' # security
 gem 'elastic-apm'
