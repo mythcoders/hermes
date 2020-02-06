@@ -21,8 +21,7 @@ module Api
     private
 
     def mail_params
-      params.require(:message).permit(:environment, :content_type, :subject, :body, :sender_name, :sender_email,
-                                      to: [], cc: [], bcc: [])
+      params.require(:message).permit(:environment, :content_type, :subject, :body, :sender, to: [], cc: [], bcc: [])
     end
 
     def validate_api_credentials

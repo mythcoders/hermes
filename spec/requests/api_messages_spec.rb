@@ -55,8 +55,7 @@ RSpec.describe 'Messages API', type: :request do
       let(:subject) { Faker::Cannabis.buzzword }
       let(:environment) { 'test' }
       let(:content_type) { 'html' }
-      let(:sender_name) { 'Dave' }
-      let(:sender_email) { Faker::Internet.email }
+      let(:sender) { Faker::Internet.email }
       let(:request) do
         {
           message:
@@ -65,8 +64,7 @@ RSpec.describe 'Messages API', type: :request do
               subject: subject,
               environment: environment,
               content_type: content_type,
-              sender_name: sender_name,
-              sender_email: sender_email
+              sender: sender
             }
         }
       end
@@ -96,9 +94,7 @@ RSpec.describe 'Messages API', type: :request do
       end
 
       context 'request does not include sender' do
-        let(:sender_name) { '' }
-        let(:sender_email) { '' }
-
+        let(:sender) { '' }
         it_behaves_like 'bad request'
       end
 

@@ -10,6 +10,7 @@ class Message < ApplicationRecord
   def self.build(params, client)
     message = new(
       client: client,
+      sender: params[:sender],
       subject: params[:subject],
       body: params[:body],
       content_type: params[:content_type],
@@ -17,12 +18,6 @@ class Message < ApplicationRecord
       environment: params[:environment],
       tracking_id: SecureRandom.uuid
     )
-
-    if params[:sender_name].present? && params[:sender_email].present?
-      message.sender = "#{params[:sender_name]} <#{params[:sender_email]}>"
-    elsif params[:sender_email].present?
-      message.sender = params[:sender_email]
-    end
 
     message.recipients << MessageRecipient.build_from_array(params[:to], :to) if params[:to].present?
     message.recipients << MessageRecipient.build_from_array(params[:cc], :cc) if params[:cc].present?
