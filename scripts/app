@@ -1,6 +1,7 @@
 #!/bin/bash
 
-figlet -f trek hermes
+# figlet -f trek hermes
+echo "HERMES"
 
 echo 'Configuring the hyperdrive...'
 

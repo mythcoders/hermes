@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
+  config.hosts << 'hermes.mythcoders.dev'
   config.cache_classes = false
 
   config.eager_load = false

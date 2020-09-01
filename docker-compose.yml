@@ -1,4 +1,13 @@
-version: '3.7'
+version: "3.7"
+
+x-shared-environment-variables: &shared-environment-variables
+  RAILS_ENV: development
+  GITLAB_ENVIRONMENT_NAME: development
+  GITLAB_ENVIRONMENT_URL: https://hermes.mythcoders.dev
+  REDIS_URL: redis://myth-redis:6379/0
+  REDIS_NAMESPACE: hermes-dev
+  REDIS_WORKER_NAMESPACE: hermes-worker-dev
+
 services:
   app:
     image: hermes
@@ -8,20 +17,12 @@ services:
     container_name: hermes-app
     command: ["sh", "./scripts/app", "start", "setup"]
     labels:
-      traefik.frontend.rule: "Host:hermes.localhost"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:hermes.mythcoders.dev"
     volumes:
       - "./:/app"
     environment:
-      RAILS_ENV: development
-      GITLAB_ENVIRONMENT_NAME: development
-      GITLAB_ENVIRONMENT_URL: http://hermes.localhost
-      DATABASE_URL: "postgres://postgres:postgres@db:5432/hermes_dev"
-      REDIS_URL: redis://redis:6379/0
-      REDIS_NAMESPACE: hermes-dev
-      REDIS_WORKER_NAMESPACE: hermes-worker-dev
-    depends_on:
-      - db
-      - net
+      <<: *shared-environment-variables
     stdin_open: true
     tty: true
 
@@ -32,44 +33,11 @@ services:
     volumes:
       - .:/app
     environment:
-      RAILS_ENV: development
-      GITLAB_ENVIRONMENT_NAME: development
-      GITLAB_ENVIRONMENT_URL: http://hermes.localhost
-      DATABASE_URL: "postgres://postgres:postgres@db:5432/hermes_dev"
-      REDIS_URL: redis://redis:6379/0
-      REDIS_NAMESPACE: hermes-dev
-      REDIS_WORKER_NAMESPACE: hermes-worker-dev
+      <<: *shared-environment-variables
     depends_on:
       - app
-      - db
-      - redis
 
-  db:
-    image: postgres:11.6
-    container_name: hermes-db
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-    volumes:
-      - pgdata
-
-  redis:
-    image: redis:5.0.5-alpine
-    container_name: hermes-redis
-    ports:
-      - "6379:6379"
-
-  net:
-    image: traefik:v1.7.16
-    container_name: hermes-net
-    command: --api --docker
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
-volumes:
-  pgdata:
+networks:
+  default:
+    name: mythcoders_dev
+    external: true

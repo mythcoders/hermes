@@ -1,6 +1,7 @@
 #!/bin/bash
 
-figlet -f trek hermes
+# figlet -f trek hermes
+echo "HERMES"
 
 if [ "$1" == "stop" ]; then
   echo "Halting androids..."

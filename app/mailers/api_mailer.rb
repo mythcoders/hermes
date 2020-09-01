@@ -6,8 +6,8 @@ class ApiMailer < ApplicationMailer
     append_hermes_headers
 
     mail(mail_headers) do |format|
-      format.html if @message.html?
-      format.text if @message.text?
+      format.html { render plain: @message.body }
+      format.text { render plain: @message.body }
     end
   end
 
@@ -16,7 +16,7 @@ class ApiMailer < ApplicationMailer
   def append_hermes_headers
     headers 'X-Hermes-ID': @message.tracking_id
     headers 'X-Priority': '1', 'Importance': 'high' if @message.priority.present?
-    headers 'X-SES-CONFIGURATION-SET': 'Hermes'
+    headers 'X-SES-CONFIGURATION-SET': ENV['SES_CONFIGSET'] || 'Hermes'
   end
 
   def mail_headers
