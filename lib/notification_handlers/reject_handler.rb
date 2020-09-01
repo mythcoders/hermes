@@ -3,10 +3,10 @@
 module NotificationHandlers
   class RejectHandler < BaseNotificationHandler
     def handle
-      EmailCallback.create!(email_transaction: transaction,
-                            callback_type: :reject,
-                            callback_timestamp: Time.zone.now,
-                            reject_reason: reject_reason)
+      MessageActivity.create!(message: message,
+                              callback_type: :reject,
+                              callback_timestamp: Time.zone.now,
+                              reject_reason: reject_reason)
     end
 
     private

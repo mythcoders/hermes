@@ -5,10 +5,10 @@ module NotificationHandlers
     def handle
       new_callback.tap do |callback|
         bounced_recipients.each do |bounced_recipient|
-          recipient = transaction.recipients.find_by_email(bounced_recipient['emailAddress']).first
+          recipient = message.recipients.find_by_email(bounced_recipient['emailAddress']).first
           next if recipient.nil?
 
-          callback.email_callback_details << EmailCallbackDetail.new(
+          callback.recipients << MessageActivityRecipient.new(
             recipient: recipient,
             status: bounced_recipient['status'],
             action: bounced_recipient['action'],
@@ -18,23 +18,23 @@ module NotificationHandlers
 
         callback.save!
       end
-      end
+    end
 
     private
 
     def new_callback
-      EmailCallback.new(callback_type: :bounce,
-                        email_transaction: transaction,
-                        callback_timestamp: timestamp,
-                        bounce_type: bounce_type,
-                        bounce_subtype: bounce_subtype,
-                        feedback_id: feedback_id,
-                        reporting_mta: reporting_mta)
+      MessageActivity.new(activity_type: :bounce,
+                          message: message,
+                          notification_timestamp: timestamp,
+                          bounce_type: bounce_type,
+                          bounce_subtype: bounce_subtype,
+                          feedback_id: feedback_id,
+                          reporting_mta: reporting_mta)
     end
 
     def timestamp
       @timestamp ||= DateTime.parse aws_callback.message['bounce']['timestamp']
-      end
+    end
 
     def bounce_type
       @bounce_type ||= aws_callback.message['bounce']['bounceType']

@@ -8,14 +8,14 @@ module NotificationHandlers
           recipient = transaction.recipients.find_by_email(complaint_recipient['emailAddress']).first
           next if recipient.nil?
 
-          callback.email_callback_details << EmailCallbackDetail.new(
+          callback.recipients << MessageActivityRecipient.new(
             recipient: recipient
           )
         end
 
         callback.save!
       end
-      end
+    end
 
     private
 

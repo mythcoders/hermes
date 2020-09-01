@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_160838) do
+ActiveRecord::Schema.define(version: 2020_09_01_221528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -65,6 +65,9 @@ ActiveRecord::Schema.define(version: 2020_09_01_160838) do
     t.datetime "notification_timestamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bounce_subtype"
+    t.string "delay_type"
+    t.datetime "expiration_time"
     t.index ["message_id"], name: "index_message_activities_on_message_id"
   end
 
