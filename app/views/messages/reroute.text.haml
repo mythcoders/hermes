@@ -1,12 +1,17 @@
 = t('rerouted')
-= "\n"
-= "CLIENT: #{@message.client.name} - #{@message.environment}"
-= "SUBJECT: #{@message.subject}"
-= "TO: #{@message.to}"
-= "FROM: #{@message.from}"
+
+CLIENT: #{@message.client.name} - #{@message.environment}
+
+SUBJECT: #{@message.subject}
+
+FROM: #{@message.sender}
+
+TO: #{email_array_to_string @message.to}
+
 - if @message.cc.present?
-  = "CC: #{@message.cc}"
+  CC: #{email_array_to_string @message.cc}
+
 - if @message.bcc.present?
-  = "BCC: #{@message.bcc}"
-= "\n"
-= @message.body
+  BCC: #{email_array_to_string @message.bcc}
+
+= @message.text_body

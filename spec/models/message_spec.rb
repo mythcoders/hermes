@@ -8,7 +8,6 @@ RSpec.describe Message, type: :model do
   it { should validate_presence_of(:client) }
   it { should validate_presence_of(:environment) }
   it { should validate_presence_of(:tracking_id) }
-  it { should validate_presence_of(:content_type) }
   it { should belong_to(:client) }
 
   context 'when being created' do

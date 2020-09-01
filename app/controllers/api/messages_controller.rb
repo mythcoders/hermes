@@ -11,7 +11,7 @@ module Api
 
     def new
       message = Message.build(mail_params, @current_user)
-      return head :bad_request unless message.valid?
+      return render(json: message.errors, status: :bad_request) unless message.valid?
       return head :error unless message.received!
 
       MailSortWorker.perform_async message.tracking_id
@@ -21,7 +21,7 @@ module Api
     private
 
     def mail_params
-      params.require(:message).permit(:environment, :content_type, :subject, :body, :sender, to: [], cc: [], bcc: [])
+      params.require(:message).permit(:environment, :subject, :html_body, :text_body, :sender, to: [], cc: [], bcc: [])
     end
 
     def validate_api_credentials
