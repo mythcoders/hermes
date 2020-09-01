@@ -38,7 +38,7 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-    params.require(:client).permit(:id, :name, :owner, :reroute_email, :api_secret, :api_key, :is_active,
-                                   :are_emails_sent)
+    params.require(:client).permit(:id, :name, :owner, :reroute_email, :reply_to_email, :api_secret, :api_key,
+                                   :is_active)
   end
 end

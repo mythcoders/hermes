@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_042119) do
+ActiveRecord::Schema.define(version: 2020_09_01_221528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "callbacks", force: :cascade do |t|
+    t.string "data", default: "f", null: false
+    t.string "status", default: "f", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "client_environments", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "name", default: "f", null: false
+    t.string "status", default: "f", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_client_environments_on_client_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string "name", null: false
@@ -26,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_042119) do
     t.boolean "are_emails_sent", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reply_to_email"
     t.index ["api_key"], name: "index_clients_on_api_key", unique: true
     t.index ["api_secret"], name: "index_clients_on_api_secret", unique: true
     t.index ["name"], name: "index_clients_on_name", unique: true
@@ -48,6 +65,9 @@ ActiveRecord::Schema.define(version: 2019_07_21_042119) do
     t.datetime "notification_timestamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bounce_subtype"
+    t.string "delay_type"
+    t.datetime "expiration_time"
     t.index ["message_id"], name: "index_message_activities_on_message_id"
   end
 
@@ -79,7 +99,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_042119) do
     t.bigint "client_id", null: false
     t.string "sender"
     t.string "subject", null: false
-    t.string "body"
+    t.string "html_body"
     t.string "content_type"
     t.string "priority"
     t.string "environment"
@@ -87,6 +107,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_042119) do
     t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "text_body"
     t.index ["client_id"], name: "index_messages_on_client_id"
   end
 

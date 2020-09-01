@@ -7,7 +7,7 @@ class MailSortWorker
   def perform(tracking_id)
     @tracking_id = tracking_id
 
-    reroute_message unless message.client.are_emails_sent
+    reroute_message if are_emails_rerouted?
 
     PostalWorker.perform_async(tracking_id)
   end
@@ -21,7 +21,8 @@ class MailSortWorker
   def reroute_message
     return if message.rerouted?
 
-    message.body = rerouted_body
+    message.html_body = rerouted_body('html')
+    message.text_body = rerouted_body('text')
     message.subject = "[REROUTED] #{message.subject}"
     message.sender = ApplicationMailer::DEFAULT_FROM
     message.recipients.destroy_all
@@ -29,11 +30,15 @@ class MailSortWorker
     message.rerouted!
   end
 
-  def rerouted_body
+  def rerouted_body(type)
     ApplicationController.render(
-      template: 'messages/reroute',
+      template: "messages/reroute.#{type}",
       assigns: { message: message },
       layout: false
     )
+  end
+
+  def are_emails_rerouted?
+    ClientEnvironment.find_or_create_by_env(message.client, message.environment).status == 'rerouted'
   end
 end

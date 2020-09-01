@@ -21,12 +21,6 @@
         %hr
         .row.align-items-center
           .col
-            %h5.mb-0 Content Type
-          .col-auto
-            %small.text-muted.text-uppercase= @message.content_type
-        %hr
-        .row.align-items-center
-          .col
             %h5.mb-0 Rule Set
           .col-auto
             %small.text-muted AWS
@@ -35,12 +29,22 @@
   .col-8
     .card
       .card-body
+        .row.align-items-center
+          .col
+            %h4.mb-0 Subject
+          .col-auto
+            %small.text-muted= @message.subject
+      .card-body
         .row
-          %strong.text-uppercase Subject
-          %span.px-3= @message.subject
-        %hr
-        .row.mt-2
-          - if @message.html?
-            = @message.body.html_safe
-          - else
-            %samp= simple_format(@message.body)
+          .col
+            %h4 HTML Body
+        .row
+          .col
+            %div.card-text= raw @message.html_body.html_safe
+      .card-body
+        .row
+          .col
+            %h4 Text Body
+        .row
+          .col
+            %div.card-text= raw @message.text_body

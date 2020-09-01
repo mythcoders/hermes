@@ -7,6 +7,5 @@ FactoryBot.define do
     subject { Faker::Cannabis.buzzword }
     environment { 'rspec' }
     tracking_id { SecureRandom.uuid }
-    content_type { 'html' }
   end
 end

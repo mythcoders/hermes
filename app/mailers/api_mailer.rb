@@ -6,8 +6,8 @@ class ApiMailer < ApplicationMailer
     append_hermes_headers
 
     mail(mail_headers) do |format|
-      format.html { render plain: @message.body }
-      format.text { render plain: @message.body }
+      format.html { render plain: @message.html_body }
+      format.text { render plain: @message.text_body }
     end
   end
 

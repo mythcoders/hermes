@@ -54,7 +54,6 @@ RSpec.describe 'Messages API', type: :request do
       let(:to) { [Faker::Internet.email] }
       let(:subject) { Faker::Cannabis.buzzword }
       let(:environment) { 'test' }
-      let(:content_type) { 'html' }
       let(:sender) { Faker::Internet.email }
       let(:request) do
         {
@@ -63,7 +62,6 @@ RSpec.describe 'Messages API', type: :request do
               to: to,
               subject: subject,
               environment: environment,
-              content_type: content_type,
               sender: sender
             }
         }
@@ -85,11 +83,6 @@ RSpec.describe 'Messages API', type: :request do
 
       context 'request does not include subject' do
         let(:subject) { '' }
-        it_behaves_like 'bad request'
-      end
-
-      context 'request does not include content_type' do
-        let(:content_type) { '' }
         it_behaves_like 'bad request'
       end
 

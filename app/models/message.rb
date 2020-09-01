@@ -4,7 +4,7 @@ class Message < ApplicationRecord
   belongs_to :client
   has_many :recipients, class_name: 'MessageRecipient'
   has_many :activities, class_name: 'MessageActivity'
-  validates_presence_of :sender, :subject, :client, :environment, :tracking_id, :content_type
+  validates_presence_of :sender, :subject, :client, :environment, :tracking_id
   validates_presence_of :recipients, validates_associated: :recipients
 
   def self.build(params, client)
@@ -12,8 +12,8 @@ class Message < ApplicationRecord
       client: client,
       sender: params[:sender],
       subject: params[:subject],
-      body: params[:body],
-      content_type: params[:content_type],
+      html_body: params[:html_body],
+      text_body: params[:text_body],
       priority: params[:priority],
       environment: params[:environment],
       tracking_id: SecureRandom.uuid
@@ -40,14 +40,6 @@ class Message < ApplicationRecord
     define_method type.to_s do
       recipients.where(recipient_type: type)
     end
-  end
-
-  def html?
-    content_type == 'html'
-  end
-
-  def text?
-    content_type == 'text'
   end
 
   def basic_activity

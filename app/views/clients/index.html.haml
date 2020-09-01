@@ -1,6 +1,6 @@
 - page_title 'Client Search'
 
-.header.mt-md-5
+.header
   .header-body
     .row.align-items-center
       .col
@@ -20,7 +20,6 @@
           %th Name
           %th Owner
           %th API Access
-          %th Email Delivery
       %tbody
         - @clients.each do |c|
           %tr{data: { 'clickable-row': '', 'href': client_path(c) }}
@@ -33,13 +32,6 @@
               - else
                 .text-danger
                   Denied
-            %td
-              - if c.are_emails_sent
-                .text-success
-                  Delivered
-              - else
-                .text-warning
-                  Rerouted
   .card-footer
     = paginate @clients
     = page_entries_info @clients

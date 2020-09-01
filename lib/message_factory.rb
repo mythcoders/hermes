@@ -6,8 +6,8 @@ class MessageFactory
       client: params[:client],
       from: "#{params[:sender_name]} <#{params[:sender_email]}>",
       subject: params[:subject],
-      body: params[:body],
-      content_type: params[:content_type],
+      html_body: params[:html_body],
+      text_body: params[:text_body],
       priority: params[:priority],
       environment: params[:environment],
       tracking_id: params[:tracking_id]
