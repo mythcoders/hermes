@@ -9,7 +9,6 @@ gem 'audited' # data audits
 gem 'aws-sdk-sns', '~> 1'
 gem 'bootsnap', require: false
 gem 'devise' # security
-gem 'elastic-apm'
 gem 'haml'
 gem 'jbuilder', '~> 2.5' # JSON APIs https://github.com/rails/jbuilder
 gem 'jquery-turbolinks'
@@ -20,14 +19,16 @@ gem 'pg' # database for Active Record
 gem 'pinglish' # app status checking
 gem 'puma' # app server
 gem 'rails'
-gem 'redis-namespace'
 gem 'sass-rails'
 gem 'sentry-raven' # Exceptions
-gem 'sidekiq', '~> 5.2.7'
-gem 'sidekiq-ent', '~> 1.8.1'
 gem 'sprockets-rails'
 gem 'turbolinks', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
+
+# Sidekiq background jobs
+gem 'redis-namespace'
+gem 'sidekiq', '~> 5.2.7'
+gem 'sidekiq-ent', '~> 1.8.1'
 
 group :development, :test do
   gem 'better_errors'
