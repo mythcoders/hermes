@@ -1,6 +1,6 @@
 - page_title @client.name, 'Client'
 
-.header.mt-md-5
+.header
   .header-body
     .row.align-items-center
       .col
@@ -23,14 +23,63 @@
   .col-4
     .card
       .card-body
-        %dl
-          %dt Owner
-          %dd= @client.owner
-          %dt Reroute Email
-          %dd= @client.reroute_email
-          %dt API Key
-          %dd= @client.api_key
-          %dt API Secret
-          %dd= @client.api_secret
+        .row.align-items-center
+          .col
+            %h5.mb-0 Owner
+          .col-auto
+            %small.text-muted
+              = @client.owner
+        %hr
+        .row.align-items-center
+          .col
+            %h5.mb-0 Reroute Email
+          .col-auto
+            %small.text-muted
+              = @client.reroute_email
+        - if @client.reply_to_email
+          %hr
+            .row.align-items-center
+              .col
+                %h5.mb-0 Default Reply Email
+              .col-auto
+                %small.text-muted
+                  = @client.reply_to_email
+        %hr
+        .row.align-items-center
+          .col
+            %h5.mb-0 API Key
+          .col-auto
+            %small.text-muted
+              = @client.api_key
+        %hr
+        .row.align-items-center
+          .col
+            %h5.mb-0 API Secret
+          .col-auto
+            %small.text-muted
+              = @client.api_secret
   .col-8
+    .card
+      .card-header
+        %h3.card-header-title
+          %i.fad.fa-at.fa-lg
+          Permissions
+      - if @client.environments.any?
+        .table-responsive
+          %table.table.card-table
+            %thead
+              %tr
+                %th Environment Name
+                %th Status
+            %tbody
+              - @client.environments.each do |e|
+                %tr
+                  %td
+                    %pre= e.name
+                  %td
+                    %span.badge.badge-soft-info.text-uppercase= e.status
+      - else
+        .card-body.text-center.bg-transparent
+          %h3 No Email Addresses
+          %p.text-muted This contact does not have any addresses saved.
 
