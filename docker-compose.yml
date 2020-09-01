@@ -4,7 +4,7 @@ x-shared-environment-variables: &shared-environment-variables
   RAILS_ENV: development
   GITLAB_ENVIRONMENT_NAME: development
   GITLAB_ENVIRONMENT_URL: https://hermes.mythcoders.dev
-  REDIS_URL: redis://redis:6379/0
+  REDIS_URL: redis://myth-redis:6379/0
   REDIS_NAMESPACE: hermes-dev
   REDIS_WORKER_NAMESPACE: hermes-worker-dev
 
