@@ -32,11 +32,16 @@
   }
 }
 
+.card-header + .card-footer {
+  border-top-width: 0;
+}
+
 // Title
 
 .card-title {
   margin-bottom: $card-spacer-y / 2;
 }
+
 
 
 //
@@ -295,4 +300,27 @@
   padding-left: 0;
   margin-left: $card-spacer-x;
   margin-right: $card-spacer-x;
+}
+
+
+// Card pagination
+
+.card-pagination.pagination-tabs {
+  margin-top: -$card-spacer-y;
+  margin-bottom: -$card-spacer-y;
+  border: 0;
+}
+
+.card-pagination.pagination-tabs .page-link {
+  border-top-width: 0 !important;
+}
+
+.card-pagination.pagination-tabs .active .page-link {
+  border-width: 0 0 $border-width 0 !important;
+}
+
+// Card divider 
+
+.card-divider {
+  border-color: $card-border-color;
 }

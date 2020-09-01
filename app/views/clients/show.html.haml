@@ -15,23 +15,22 @@
           %span.badge.badge-soft-success.text-uppercase API access granted
         - else
           %span.badge.badge-soft-danger.text-uppercase API access denied
-        - if @client.are_emails_sent
-          %span.badge.badge-soft-success.text-uppercase Emails delivered
-        - else
-          %span.badge.badge-soft-warning.text-uppercase Emails rerouted
       .col-auto
         = link_to 'Go Back', clients_path, class: 'btn btn-outline-primary'
         = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'
 
-= form_for @client, url: clients_path do |f|
-  .card
-    .card-body
-      %dl
-        %dt Owner
-        %dd= @client.owner
-        %dt Reroute Email
-        %dd= @client.reroute_email
-        %dt API Key
-        %dd= @client.api_key
-        %dt API Secret
-        %dd= @client.api_secret
+.row
+  .col-4
+    .card
+      .card-body
+        %dl
+          %dt Owner
+          %dd= @client.owner
+          %dt Reroute Email
+          %dd= @client.reroute_email
+          %dt API Key
+          %dd= @client.api_key
+          %dt API Secret
+          %dd= @client.api_secret
+  .col-8
+

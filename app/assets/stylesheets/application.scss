@@ -9,6 +9,9 @@
 @import "bootstrap/scss/functions";
 
 // Dashkit variables
+@import "dashkit/dark/variables-dark";
+$pre-color: $text-muted;
+
 @import "dashkit/variables";
 
 // Bootstrap core
@@ -16,6 +19,7 @@
 
 // Dashkit core
 @import "dashkit/dashkit";
+@import "dashkit/dark/overrides-dark";
 
 // Custom core
 @import "select2/src/scss/core.scss";
@@ -123,11 +127,6 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.padded-container {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
 }
 
 [data-clickable-row] {
