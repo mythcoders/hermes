@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class Client < ApplicationRecord
-  has_many :messages
   has_many :environments, class_name: 'ClientEnvironment', dependent: :destroy
+  has_many :messages
+  has_many :subscribers
+  has_many :templates, dependent: :destroy
+  has_many :topics, class_name: 'MailingTopic', dependent: :destroy
 
   validates_length_of :name, :owner, maximum: 50
   validates_length_of :reroute_email, :reply_to_email, maximum: 60
