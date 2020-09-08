@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_221528) do
+ActiveRecord::Schema.define(version: 2020_09_06_074539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2020_09_01_221528) do
     t.index ["api_key"], name: "index_clients_on_api_key", unique: true
     t.index ["api_secret"], name: "index_clients_on_api_secret", unique: true
     t.index ["name"], name: "index_clients_on_name", unique: true
+  end
+
+  create_table "mailing_topics", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "name"
+    t.string "description"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_mailing_topics_on_client_id"
   end
 
   create_table "message_activities", force: :cascade do |t|
@@ -111,6 +121,40 @@ ActiveRecord::Schema.define(version: 2020_09_01_221528) do
     t.index ["client_id"], name: "index_messages_on_client_id"
   end
 
+  create_table "subscribers", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "name"
+    t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_subscribers_on_client_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "mailing_topic_id", null: false
+    t.bigint "subscriber_id", null: false
+    t.string "status"
+    t.string "memo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["mailing_topic_id"], name: "index_subscriptions_on_mailing_topic_id"
+    t.index ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "name"
+    t.string "sender_name"
+    t.string "sender_address"
+    t.string "html_body"
+    t.string "text_body"
+    t.string "json_layout"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_templates_on_client_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", default: "", null: false
@@ -136,4 +180,9 @@ ActiveRecord::Schema.define(version: 2020_09_01_221528) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "mailing_topics", "clients"
+  add_foreign_key "subscribers", "clients"
+  add_foreign_key "subscriptions", "mailing_topics"
+  add_foreign_key "subscriptions", "subscribers"
+  add_foreign_key "templates", "clients"
 end

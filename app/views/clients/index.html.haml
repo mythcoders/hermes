@@ -7,7 +7,7 @@
         %h6.header-pretitle
           Overview
         %h1.header-title
-          = fa_solid 'users'
+          = fa_solid 'code'
           Clients
       .col-auto
         = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
@@ -27,11 +27,9 @@
             %td= c.owner
             %td
               - if c.is_active
-                .text-success
-                  Granted
+                %span.badge.badge-soft-success.text-uppercase Approved
               - else
-                .text-danger
-                  Denied
+                %span.badge.badge-soft-danger.text-uppercase Blocked
   .card-footer
     = paginate @clients
     = page_entries_info @clients

@@ -1,0 +1,26 @@
+default: &defaults
+  push_api_key: "<%= Rails.application.credentials.dig(:appsignal_key) %>"
+  name: "Hermes"
+  running_in_container: true
+  ignore_actions:
+    - "GET /_ping"
+    - "GET /_heartbeat"
+
+development:
+  <<: *defaults
+  active: true
+
+review:
+  <<: *defaults
+  active: true
+  revision: "<%= Rails.root.join('VERSION').read.chomp %>"
+
+staging:
+  <<: *defaults
+  active: true
+  revision: "<%= Rails.root.join('VERSION').read.chomp %>"
+
+production:
+  <<: *defaults
+  active: true
+  revision: "<%= Rails.root.join('VERSION').read.chomp %>"

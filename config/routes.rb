@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     post 'notifications', to: 'notifications#new'
   end
 
+  root to: 'home#index', as: 'home'
+
   devise_for :users
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
@@ -15,12 +17,14 @@ Rails.application.routes.draw do
 
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
-  end
 
-  resources :clients
-  resources :messages, param: :tracking_id do
-    get 'reroute', action: :reroute, on: :member
+    resources :clients do
+      resources :client_environments, path: :environments, as: :environments
+    end
+    resources :mailing_topics
+    resources :messages, param: :tracking_id
+    resources :subscribers
+    resources :subscriptions
+    resources :templates
   end
-
-  root to: 'home#index', as: 'home'
 end
