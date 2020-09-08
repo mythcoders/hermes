@@ -18,6 +18,14 @@ module SidebarHelpers
     controller.class == MessagesController
   end
 
+  def topics_controller?
+    controller.class == MailingTopicsController
+  end
+
+  def templates_controller?
+    controller.class == TemplatesController
+  end
+
   def home_action?(action)
     controller.class == HomeController && controller.action_name == action
   end

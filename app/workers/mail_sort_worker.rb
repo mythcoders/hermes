@@ -32,7 +32,7 @@ class MailSortWorker
 
   def rerouted_body(type)
     ApplicationController.render(
-      template: "messages/reroute.#{type}",
+      template: "api_mailer/reroute_message.#{type}",
       assigns: { message: message },
       layout: false
     )

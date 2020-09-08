@@ -3,6 +3,8 @@
 require 'sidekiq-ent/web'
 
 Rails.application.routes.draw do
+  root to: 'home#index', as: 'home'
+
   namespace :api do
     post 'messages', to: 'messages#new'
     post 'notifications', to: 'notifications#new'
@@ -18,9 +20,9 @@ Rails.application.routes.draw do
   end
 
   resources :clients
-  resources :messages, param: :tracking_id do
-    get 'reroute', action: :reroute, on: :member
-  end
-
-  root to: 'home#index', as: 'home'
+  resources :mailing_topics
+  resources :messages, param: :tracking_id
+  resources :subscribers
+  resources :subscriptions
+  resources :templates
 end

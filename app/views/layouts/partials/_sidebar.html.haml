@@ -15,10 +15,18 @@
           = link_to clients_path, class: 'nav-link' do
             = fa_solid 'users', 'fa-lg sidebar-icon'
             Clients
+        %li.nav-item{class: ('active' if topics_controller?)}
+          = link_to mailing_topics_path, class: 'nav-link' do
+            = fa_solid 'clipboard-list', 'fa-lg sidebar-icon'
+            Mailing Topics
         %li.nav-item{class: ('active' if messages_controller?)}
           = link_to messages_path, class: 'nav-link' do
             = fa_solid 'archive', 'fa-lg sidebar-icon'
             Messages
+        %li.nav-item{class: ('active' if templates_controller?)}
+          = link_to templates_path, class: 'nav-link' do
+            = fa_solid 'object-group', 'fa-lg sidebar-icon'
+            Templates
       %h6.navbar-heading.mb-n1 IT Operations
       %ul.navbar-nav.mb-md-3
         %li.nav-item
