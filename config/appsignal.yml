@@ -10,14 +10,17 @@ development:
   <<: *defaults
   active: true
 
-production:
-  <<: *defaults
-  active: true
-
 review:
   <<: *defaults
   active: true
+  revision: "<%= Rails.root.join('VERSION').read.chomp %>"
 
 staging:
   <<: *defaults
   active: true
+  revision: "<%= Rails.root.join('VERSION').read.chomp %>"
+
+production:
+  <<: *defaults
+  active: true
+  revision: "<%= Rails.root.join('VERSION').read.chomp %>"
