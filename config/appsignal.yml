@@ -1,8 +1,10 @@
 default: &defaults
   push_api_key: "<%= Rails.application.credentials.dig(:appsignal_key) %>"
-
-  # Your app's name
   name: "Hermes"
+  running_in_container: true
+  ignore_actions:
+    - "GET /_ping"
+    - "GET /_heartbeat"
 
 
   # Actions that should not be monitored by AppSignal
