@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 gem 'aasm'
+gem 'appsignal'
 gem 'audited' # data audits
 gem 'aws-sdk-sns', '~> 1'
 gem 'bootsnap', require: false

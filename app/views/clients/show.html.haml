@@ -10,11 +10,6 @@
           .avatar
             %span.avatar-title.rounded-circle= @client.name.split.map(&:first).join
           = @client.name
-      .col
-        - if @client.is_active
-          %span.badge.badge-soft-success.text-uppercase API access granted
-        - else
-          %span.badge.badge-soft-danger.text-uppercase API access denied
       .col-auto
         = link_to 'Go Back', clients_path, class: 'btn btn-outline-primary'
         = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'
@@ -47,6 +42,16 @@
         %hr
         .row.align-items-center
           .col
+            %h5.mb-0 API Access
+          .col-auto
+            %small
+              - if @client.is_active
+                %span.badge.badge-soft-success.text-uppercase approved
+              - else
+                %span.badge.badge-soft-danger.text-uppercase blocked
+        %hr
+        .row.align-items-center
+          .col
             %h5.mb-0 API Key
           .col-auto
             %small.text-muted
@@ -62,11 +67,11 @@
     .card
       .card-header
         %h3.card-header-title
-          %i.fad.fa-at.fa-lg
-          Permissions
+          %i.fad.fa-key-skeleton.fa-lg
+          API Permissions
       - if @client.environments.any?
         .table-responsive
-          %table.table.card-table
+          %table.table.card-table.table-sm
             %thead
               %tr
                 %th Environment Name
@@ -82,4 +87,56 @@
         .card-body.text-center.bg-transparent
           %h3 No Email Addresses
           %p.text-muted This contact does not have any addresses saved.
+    .card
+      .card-header
+        %h3.card-header-title
+          %i.fad.fa-clipboard-list.fa-lg
+          Mailing Topics
+      - if @client.topics.any?
+        .table-responsive
+          %table.table.card-table
+            %thead
+              %tr
+                %th Name
+                %th Status
+            %tbody
+              - @client.topics.each do |t|
+                %tr
+                  %td= t.name
+                  %td
+                    - if t.active
+                      %span.badge.badge-soft-success.text-uppercase active
+                    - else
+                      %span.badge.badge-soft-warning.text-uppercase inactive
+      - else
+        .card-body.text-center.bg-transparent
+          %h3 No Topic
+          %p.text-muted This client does not have any topics saved.
+
+
+    .card
+      .card-header
+        %h3.card-header-title
+          %i.fad.fa-object-group.fa-lg
+          Templates
+      - if @client.templates.any?
+        .table-responsive
+          %table.table.card-table
+            %thead
+              %tr
+                %th Name
+                %th Status
+            %tbody
+              - @client.templates.each do |t|
+                %tr
+                  %td= t.name
+                  %td
+                    - if t.active
+                      %span.badge.badge-soft-success.text-uppercase active
+                    - else
+                      %span.badge.badge-soft-warning.text-uppercase inactive
+      - else
+        .card-body.text-center.bg-transparent
+          %h3 No Templates
+          %p.text-muted This client does not have any email templates saved.
 

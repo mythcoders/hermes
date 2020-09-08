@@ -7,6 +7,29 @@
         %h6.header-pretitle
           Overview
         %h1.header-title
-          = fa_solid 'archive'
+          = fa_solid 'clipboard-list'
           Mailing Topics
+      .col-auto
+        = link_to 'New Topic', new_mailing_topic_path, class: 'btn btn-primary lift'
 
+.card
+  %table-responsive
+    %table.table.table-sm.card-table
+      %thead
+        %tr
+          %th Name
+          %th Client
+          %th Status
+      %tbody
+        - @topics.each do |c|
+          %tr{data: { 'clickable-row': '', 'href': mailing_topic_path(c) }}
+            %td= c.name
+            %td= c.client.name
+            %td
+              - if c.active
+                %span.badge.badge-soft-success.text-uppercase Active
+              - else
+                %span.badge.badge-soft-warning.text-uppercase Inactive
+  .card-footer
+    = paginate @topics
+    = page_entries_info @topics

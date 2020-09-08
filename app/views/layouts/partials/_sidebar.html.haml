@@ -13,7 +13,7 @@
       %ul.navbar-nav
         %li.nav-item{class: ('active' if clients_controller?)}
           = link_to clients_path, class: 'nav-link' do
-            = fa_solid 'users', 'fa-lg sidebar-icon'
+            = fa_solid 'code', 'fa-lg sidebar-icon'
             Clients
         %li.nav-item{class: ('active' if topics_controller?)}
           = link_to mailing_topics_path, class: 'nav-link' do
@@ -23,6 +23,10 @@
           = link_to messages_path, class: 'nav-link' do
             = fa_solid 'archive', 'fa-lg sidebar-icon'
             Messages
+        %li.nav-item{class: ('active' if subscribers_controller?)}
+          = link_to subscribers_path, class: 'nav-link' do
+            = fa_solid 'users', 'fa-lg sidebar-icon'
+            Subscribers
         %li.nav-item{class: ('active' if templates_controller?)}
           = link_to templates_path, class: 'nav-link' do
             = fa_solid 'object-group', 'fa-lg sidebar-icon'

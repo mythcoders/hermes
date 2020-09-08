@@ -1,0 +1,18 @@
+- page_title 'New', 'Mailing Topic'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Mailing Topic
+        %h1.header-title
+          = fa_solid 'clipboard-list'
+          Create a new Mailing Topic
+
+= form_for @topic, url: mailing_topics_path do |f|
+  = error_messages_for 'topic'
+  = render partial: 'mailing_topics/form', locals: { f: f }
+  %hr.mt-5.mb-5
+  = f.submit 'Create topic', class: 'btn btn-block btn-primary'
+  = link_to 'Cancel', mailing_topics_path, class: 'btn btn-block btn-link text-muted'

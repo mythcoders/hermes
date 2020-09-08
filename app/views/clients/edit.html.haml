@@ -7,7 +7,7 @@
         %h6.header-pretitle
           Clients
         %h1.header-title
-          = fa_solid 'users'
+          = fa_solid 'code'
           = "Edit #{@client.name}"
 
 = form_for @client, url: client_path(@client), method: :patch  do |f|
@@ -15,4 +15,4 @@
   = render partial: 'clients/form', locals: { f: f }
   %hr.mt-5.mb-5
   = f.submit 'Save changes to client', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', clients_path, class: 'btn btn-block btn-link text-muted'
+  = link_to 'Cancel', client_path(@client), class: 'btn btn-block btn-link text-muted'

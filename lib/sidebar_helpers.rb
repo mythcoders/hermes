@@ -26,6 +26,10 @@ module SidebarHelpers
     controller.class == TemplatesController
   end
 
+  def subscribers_controller?
+    controller.class == SubscribersController
+  end
+
   def home_action?(action)
     controller.class == HomeController && controller.action_name == action
   end
