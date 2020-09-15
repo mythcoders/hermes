@@ -26,6 +26,7 @@ gem 'sentry-raven' # Exceptions
 gem 'sprockets-rails'
 gem 'turbolinks', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
+gem 'view_component'
 
 # Sidekiq background jobs
 gem 'redis-namespace'
