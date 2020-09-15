@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_074539) do
+ActiveRecord::Schema.define(version: 2020_09_15_033340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -180,7 +180,13 @@ ActiveRecord::Schema.define(version: 2020_09_06_074539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "client_environments", "clients"
   add_foreign_key "mailing_topics", "clients"
+  add_foreign_key "message_activities", "messages"
+  add_foreign_key "message_activity_recipients", "message_activities"
+  add_foreign_key "message_activity_recipients", "message_recipients"
+  add_foreign_key "message_recipients", "messages"
+  add_foreign_key "messages", "clients"
   add_foreign_key "subscribers", "clients"
   add_foreign_key "subscriptions", "mailing_topics"
   add_foreign_key "subscriptions", "subscribers"
