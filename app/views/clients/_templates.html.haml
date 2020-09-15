@@ -7,7 +7,7 @@
           Templates
       .col-auto
         %a.btn.btn-sm.btn-white{href: new_client_template_path(@client)}
-          New Templates
+          New
   - if @client.templates.any?
     .table-responsive
       %table.table.card-table.table-sm
@@ -16,7 +16,7 @@
             %th Name
             %th{style: 'width: 40%'} Status
         %tbody
-          - @client.templates.each do |t|
+          - @client.templates.order(:name).each do |t|
             %tr
               %td= link_to t.name, edit_client_template_path(@client, t)
               %td

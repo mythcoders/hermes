@@ -1,4 +1,4 @@
-- page_title 'Message Search'
+- page_title 'All Subscriptions'
 
 .header
   .header-body
@@ -12,17 +12,20 @@
 
 .card
   %table-responsive
-    %table.table.table-sm.card-table
+    %table.table.card-table
       %thead
         %tr
-          %th Date Sent
-          %th API Client
-          %th Subject
+          %th User
+          %th Client
+          %th Topic
+          %th Status
       %tbody.list
-        - @subscriptions.each do |c|
-          %tr{data: { 'clickable-row': '', 'href': subscription_path(c) }}
-            %td= l(c.created_at)
-            %td= c.client.name
+        - @subscriptions.each do |s|
+          %tr{data: { 'clickable-row': '', 'href': subscription_path(s) }}
+            %td= s.subscriber.name
+            %td= s.topic.client.name
+            %td= s.topic.name
+            %td= l(s.created_at)
   .card-footer
     = paginate @subscriptions
     = page_entries_info @subscriptions

@@ -7,7 +7,7 @@
           API Permissions
       .col-auto
         %a.btn.btn-sm.btn-white{href: new_client_environment_path(@client)}
-          New Permission
+          New
   - if @client.environments.any?
     .table-responsive
       %table.table.card-table.table-sm
@@ -16,7 +16,7 @@
             %th Environment Name
             %th{style: 'width: 40%'}Status
         %tbody
-          - @client.environments.each do |e|
+          - @client.environments.order(:name).each do |e|
             %tr
               %td= link_to e.name, edit_client_environment_path(@client, e)
               %td
