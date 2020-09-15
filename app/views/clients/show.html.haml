@@ -64,79 +64,8 @@
             %small.text-muted
               = @client.api_secret
   .col-8
-    .card
-      .card-header
-        %h3.card-header-title
-          %i.fad.fa-key-skeleton.fa-lg
-          API Permissions
-      - if @client.environments.any?
-        .table-responsive
-          %table.table.card-table.table-sm
-            %thead
-              %tr
-                %th Environment Name
-                %th Status
-            %tbody
-              - @client.environments.each do |e|
-                %tr
-                  %td
-                    %pre= e.name
-                  %td
-                    %span.badge.badge-soft-info.text-uppercase= e.status
-      - else
-        .card-body.text-center.bg-transparent
-          %h3 No Email Addresses
-          %p.text-muted This contact does not have any addresses saved.
-    .card
-      .card-header
-        %h3.card-header-title
-          %i.fad.fa-clipboard-list.fa-lg
-          Mailing Topics
-      - if @client.topics.any?
-        .table-responsive
-          %table.table.card-table
-            %thead
-              %tr
-                %th Name
-                %th Status
-            %tbody
-              - @client.topics.each do |t|
-                %tr
-                  %td= t.name
-                  %td
-                    - if t.active
-                      %span.badge.badge-soft-success.text-uppercase active
-                    - else
-                      %span.badge.badge-soft-warning.text-uppercase inactive
-      - else
-        .card-body.text-center.bg-transparent
-          %h3 No Topic
-          %p.text-muted This client does not have any topics saved.
+    = render partial: 'environments'
 
+    = render partial: 'topics'
 
-    .card
-      .card-header
-        %h3.card-header-title
-          %i.fad.fa-object-group.fa-lg
-          Templates
-      - if @client.templates.any?
-        .table-responsive
-          %table.table.card-table
-            %thead
-              %tr
-                %th Name
-                %th Status
-            %tbody
-              - @client.templates.each do |t|
-                %tr
-                  %td= t.name
-                  %td
-                    - if t.active
-                      %span.badge.badge-soft-success.text-uppercase active
-                    - else
-                      %span.badge.badge-soft-warning.text-uppercase inactive
-      - else
-        .card-body.text-center.bg-transparent
-          %h3 No Templates
-          %p.text-muted This client does not have any email templates saved.
-
+    = render partial: 'templates'

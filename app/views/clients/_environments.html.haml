@@ -1,0 +1,27 @@
+.card
+  .card-header
+    .row.align-items-center
+      .col
+        %h3.card-header-title
+          %i.fad.fa-key-skeleton.fa-lg
+          API Permissions
+      .col-auto
+        %a.btn.btn-sm.btn-white{href: new_client_environment_path(@client)}
+          New Permission
+  - if @client.environments.any?
+    .table-responsive
+      %table.table.card-table.table-sm
+        %thead
+          %tr
+            %th Environment Name
+            %th{style: 'width: 40%'}Status
+        %tbody
+          - @client.environments.each do |e|
+            %tr
+              %td= link_to e.name, edit_client_environment_path(@client, e)
+              %td
+                %span.badge.badge-soft-info.text-uppercase= e.status
+  - else
+    .card-body.text-center.bg-transparent
+      %h3 No Environments
+      %p.text-muted This client does not have permissions in any environments.

@@ -1,0 +1,18 @@
+- page_title 'New', 'Template'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Template
+        %h1.header-title
+          = fa_solid 'clipboard-list'
+          Create a new Tempalte
+
+= form_for @template, url: client_templates_path do |f|
+  = error_messages_for 'template'
+  = render partial: 'templates/form', locals: { f: f }
+  %hr.mt-5.mb-5
+  = f.submit 'Create template', class: 'btn btn-block btn-primary'
+  = link_to 'Cancel', client_path(@template.client_id), class: 'btn btn-block btn-link text-muted'

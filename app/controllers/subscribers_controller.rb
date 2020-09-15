@@ -4,10 +4,6 @@ class SubscribersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_subscriber, only: %i[show]
 
-  def index
-    @subscribers = Subscriber.page(params[:page]).per(15)
-  end
-
   def new
     @subscriber = Subscriber.new
   end

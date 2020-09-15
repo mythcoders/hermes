@@ -1,0 +1,30 @@
+.card
+  .card-header
+    .row.align-items-center
+      .col
+        %h3.card-header-title
+          %i.fad.fa-object-group.fa-lg
+          Templates
+      .col-auto
+        %a.btn.btn-sm.btn-white{href: new_client_template_path(@client)}
+          New Templates
+  - if @client.templates.any?
+    .table-responsive
+      %table.table.card-table.table-sm
+        %thead
+          %tr
+            %th Name
+            %th{style: 'width: 40%'} Status
+        %tbody
+          - @client.templates.each do |t|
+            %tr
+              %td= link_to t.name, edit_client_template_path(@client, t)
+              %td
+                - if t.active
+                  %span.badge.badge-soft-success.text-uppercase active
+                - else
+                  %span.badge.badge-soft-warning.text-uppercase inactive
+  - else
+    .card-body.text-center.bg-transparent
+      %h3 No Templates
+      %p.text-muted This client does not have any email templates saved.

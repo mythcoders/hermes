@@ -19,12 +19,12 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
 
     resources :clients do
-      resources :client_environments, path: :environments, as: :environments
+      resources :client_environments, path: :permissions, as: :environments
+      resources :mailing_topics, path: :topics, as: :topics
+      resources :subscribers
+      resources :templates
     end
-    resources :mailing_topics
     resources :messages, param: :tracking_id
-    resources :subscribers
     resources :subscriptions
-    resources :templates
   end
 end

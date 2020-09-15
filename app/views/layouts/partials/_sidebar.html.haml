@@ -3,7 +3,7 @@
     %button.navbar-toggler{"aria-controls" => "navbarVertical", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarVertical", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     = link_to home_path, class: 'navbar-brand' do
-      = fa_light 'mail-bulk'
+      = fa_solid 'mail-bulk'
       Hermes
       - if Rails.env.development?
         %strong.text-info DEV
@@ -15,25 +15,30 @@
           = link_to clients_path, class: 'nav-link' do
             = fa_solid 'code', 'fa-lg sidebar-icon'
             Clients
-        %li.nav-item{class: ('active' if topics_controller?)}
-          = link_to mailing_topics_path, class: 'nav-link' do
-            = fa_solid 'clipboard-list', 'fa-lg sidebar-icon'
-            Mailing Topics
         %li.nav-item{class: ('active' if messages_controller?)}
           = link_to messages_path, class: 'nav-link' do
             = fa_solid 'archive', 'fa-lg sidebar-icon'
             Messages
         %li.nav-item{class: ('active' if subscribers_controller?)}
-          = link_to subscribers_path, class: 'nav-link' do
+          = link_to subscriptions_path, class: 'nav-link' do
             = fa_solid 'users', 'fa-lg sidebar-icon'
-            Subscribers
-        %li.nav-item{class: ('active' if templates_controller?)}
-          = link_to templates_path, class: 'nav-link' do
-            = fa_solid 'object-group', 'fa-lg sidebar-icon'
-            Templates
+            Subscriptions
       %h6.navbar-heading.mb-n1 IT Operations
       %ul.navbar-nav.mb-md-3
         %li.nav-item
           = link_to sidekiq_web_path, class: 'nav-link', target: '_blank' do
             = fa_solid 'server', 'fa-lg sidebar-icon'
             Sidekiq
+      .mt-auto
+        #sidebarUser.navbar-user.d-none.d-md-flex
+          .dropup
+            %a#sidebarIconCopy.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              .avatar.avatar-sm.avatar-online
+                %span.avatar-title.rounded-circle= current_user.initials
+            .dropdown-menu{"aria-labelledby" => "sidebarIconCopy"}
+              %a.dropdown-item{href: edit_user_registration_path}
+                = fa_duo 'user-circle'
+                Security
+              %a.dropdown-item{"data-target": "#logoutModal", "data-toggle": "modal", href: '#'}
+                = fa_duo 'sign-out-alt'
+                Logout
