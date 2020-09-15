@@ -8,14 +8,17 @@ class ClientEnvironment < ApplicationRecord
   enum status: {
     rerouted: 'rerouted',
     whitelisted: 'whitelisted',
-    approved: 'approved'
+    approved: 'approved',
+    rejected: 'rejected',
+    hold: 'hold',
+    ignored: 'ignored'
   }
 
   def fancy_name
     "#{name} (#{status})"
   end
 
-  def self.find_or_create_by_env(client, environment)
+  def self.find_or_create_by_env!(client, environment)
     find_by!(client_id: client.id, name: environment)
   rescue ActiveRecord::RecordNotFound
     create!(client_id: client.id, name: environment, status: :rerouted)

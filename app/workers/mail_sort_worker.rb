@@ -9,7 +9,7 @@ class MailSortWorker
 
     reroute_message if are_emails_rerouted?
 
-    PostalWorker.perform_async(tracking_id)
+    PostalWorker.perform_async(tracking_id) unless are_emails_held?
   end
 
   private
@@ -39,6 +39,10 @@ class MailSortWorker
   end
 
   def are_emails_rerouted?
-    ClientEnvironment.find_or_create_by_env(message.client, message.environment).status == 'rerouted'
+    message.client_environment.status == 'rerouted'
+  end
+
+  def are_emails_held?
+    message.client_environment.status == 'hold'
   end
 end
