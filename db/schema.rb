@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_051422) do
+ActiveRecord::Schema.define(version: 2020_09_15_201651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_051422) do
     t.string "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "name"], name: "index_client_environments_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_client_environments_on_client_id"
   end
 
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_051422) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "name"], name: "index_mailing_topics_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_mailing_topics_on_client_id"
   end
 
@@ -127,17 +129,22 @@ ActiveRecord::Schema.define(version: 2020_09_15_051422) do
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "address"], name: "index_subscribers_on_client_id_and_address", unique: true
     t.index ["client_id"], name: "index_subscribers_on_client_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "mailing_topic_id", null: false
     t.bigint "subscriber_id", null: false
-    t.string "status"
+    t.integer "status"
     t.string "memo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "identifier", null: false
+    t.index ["identifier"], name: "index_subscriptions_on_identifier", unique: true
+    t.index ["mailing_topic_id", "subscriber_id"], name: "index_subscriptions_on_mailing_topic_id_and_subscriber_id", unique: true
     t.index ["mailing_topic_id"], name: "index_subscriptions_on_mailing_topic_id"
+    t.index ["status"], name: "index_subscriptions_on_status"
     t.index ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
   end
 
@@ -152,6 +159,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_051422) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "name"], name: "index_templates_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_templates_on_client_id"
   end
 
