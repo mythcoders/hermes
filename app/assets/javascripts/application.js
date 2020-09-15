@@ -5,18 +5,28 @@
 //= require bootstrap/dist/js/bootstrap.bundle.min
 //= require_tree .
 
-$(function() {
+$(function () {
   $('[data-clickable-row]').on('click', function () {
-    var row_href;
-    row_href = $(this).attr('data-href');
+    var row_href
+    row_href = $(this).attr('data-href')
     if (row_href) {
-      return document.location = $(this).attr('data-href');
+      return document.location = $(this).attr('data-href')
     }
-  });
-});
+  })
+  var toggles = document.querySelectorAll('[data-toggle="wizard"]');
+
+  [].forEach.call(toggles, function (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault()
+
+      // Toggle tab
+      $(toggle).tab('show').removeClass('active')
+    })
+  })
+})
 function ShowLoader() {
-  $("#pageLoading").fadeIn();
+  $("#pageLoading").fadeIn()
 }
 function HideLoader() {
-  $("#pageLoading").fadeOut();
+  $("#pageLoading").fadeOut()
 }

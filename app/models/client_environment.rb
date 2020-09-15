@@ -11,6 +11,10 @@ class ClientEnvironment < ApplicationRecord
     approved: 'approved'
   }
 
+  def fancy_name
+    "#{name} (#{status})"
+  end
+
   def self.find_or_create_by_env(client, environment)
     find_by!(client_id: client.id, name: environment)
   rescue ActiveRecord::RecordNotFound

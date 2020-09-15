@@ -5,10 +5,10 @@
     .row.align-items-center
       .col
         %h6.header-pretitle
-          Messages
+          Subscriptions
         %h1.header-title
-          = fa_solid 'history'
-          Mail Log
+          = fa_solid 'users'
+          All Subscriptions
 
 .card
   %table-responsive
@@ -18,15 +18,11 @@
           %th Date Sent
           %th API Client
           %th Subject
-          %th Environment
       %tbody.list
-        - @messages.each do |c|
-          %tr{data: { 'clickable-row': '', 'href': message_path(c.tracking_id) }}
+        - @subscriptions.each do |c|
+          %tr{data: { 'clickable-row': '', 'href': subscription_path(c) }}
             %td= l(c.created_at)
             %td= c.client.name
-            %td= c.subject
-            %td
-              %code= c.environment
   .card-footer
-    = paginate @messages
-    = page_entries_info @messages
+    = paginate @subscriptions
+    = page_entries_info @subscriptions

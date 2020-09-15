@@ -17,9 +17,9 @@
             Clients
         %li.nav-item{class: ('active' if messages_controller?)}
           = link_to messages_path, class: 'nav-link' do
-            = fa_solid 'archive', 'fa-lg sidebar-icon'
-            Messages
-        %li.nav-item{class: ('active' if subscribers_controller?)}
+            = fa_solid 'history', 'fa-lg sidebar-icon'
+            Mail Log
+        %li.nav-item{class: ('active' if subscriptions_controller?)}
           = link_to subscriptions_path, class: 'nav-link' do
             = fa_solid 'users', 'fa-lg sidebar-icon'
             Subscriptions
