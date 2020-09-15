@@ -40,12 +40,10 @@ Rails.application.configure do
   }
 
   config.active_support.deprecation = :log
-
+  # config.active_storage.service = :local
+  config.active_storage.service = :amazon
   config.active_record.migration_error = :page_load
-
   config.assets.debug = false
-
   config.assets.quiet = true
-
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end

@@ -7,6 +7,7 @@ x-shared-environment-variables: &shared-environment-variables
   REDIS_URL: redis://myth-redis:6379/0
   REDIS_NAMESPACE: hermes-dev
   REDIS_WORKER_NAMESPACE: hermes-worker-dev
+  STORAGE_BUCKET: mcdig-dvstg-com1
 
 services:
   app:
