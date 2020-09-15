@@ -36,29 +36,28 @@
         .row.align-items-center
           .col
             %h3.card-header-title
-              %i.fad.fa-object-group.fa-lg
+              %i.fad.fa-users.fa-lg
               Subscribers
           .col-auto
-            %a.btn.btn-sm.btn-white{href: new_client_template_path(@client)}
-              New Templates
-      - if @client.templates.any?
+            %a.btn.btn-sm.btn-white{href: new_client_subscriber_path(@client)}
+              New Subscriber
+      - if @client.subscribers.any?
         .table-responsive
           %table.table.card-table.table-sm
             %thead
               %tr
                 %th Name
-                %th{style: 'width: 40%'} Status
+                %th Email
+                %th Subscriptions
             %tbody
-              - @client.templates.each do |t|
+              - @client.subscribers.each do |s|
                 %tr
-                  %td= link_to t.name, edit_client_template_path(@client, t)
-                  %td
-                    - if t.active
-                      %span.badge.badge-soft-success.text-uppercase active
-                    - else
-                      %span.badge.badge-soft-warning.text-uppercase inactive
+                  %td= link_to s.name, edit_client_subscriber_path(@client, s)
+                  %td= s.address
+                  %td 0
+
       - else
         .card-body.text-center.bg-transparent
-          %h3 No Templates
-          %p.text-muted This client does not have any email templates saved.
+          %h3 No Subscribers
+          %p.text-muted This client does not have anyone subscribed.
 

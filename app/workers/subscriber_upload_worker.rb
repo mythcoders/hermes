@@ -4,8 +4,8 @@
 class SupscriberUploadWorker
   include Sidekiq::Worker
 
-  def perform(tracking_id)
-    @tracking_id = tracking_id
+  def perform(attachment_id)
+    @tracking_id = attachment_id
 
     return if message.sent?
 

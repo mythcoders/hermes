@@ -2,17 +2,17 @@
 
 class SubscribersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_subscriber, only: %i[show]
+  before_action :set_subscriber, only: %i[show edit update]
 
   def new
-    @subscriber = Subscriber.new
+    @subscriber = Subscriber.new(client_id: params[:client_id])
   end
 
   def create
     @subscriber = Subscriber.new(subscriber_params)
     if @subscriber.save
       flash['success'] = t('created')
-      redirect_to subscribers_path
+      redirect_to client_subscribers_path(@subscriber.client_id)
     else
       render 'new'
     end
@@ -21,7 +21,7 @@ class SubscribersController < ApplicationController
   def update
     if @subscriber.update(subscriber_params)
       flash['success'] = t('updated')
-      redirect_to subscribers_path
+      redirect_to client_subscribers_path(@subscriber.client_id)
     else
       render 'edit'
     end

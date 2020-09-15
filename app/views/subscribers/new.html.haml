@@ -10,9 +10,9 @@
           = fa_solid 'users'
           Create a new Subscriber
 
-= form_for @subscriber, url: subscribers_path do |f|
+= form_for @subscriber, url: client_subscribers_path do |f|
   = error_messages_for 'subscriber'
   = render partial: 'subscribers/form', locals: { f: f }
   %hr.mt-5.mb-5
   = f.submit 'Create subscriber', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', subscribers_path, class: 'btn btn-block btn-link text-muted'
+  = link_to 'Cancel', client_subscribers_path(@subscriber.client_id), class: 'btn btn-block btn-link text-muted'

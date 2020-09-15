@@ -1,18 +1,18 @@
-- page_title 'Edit', 'Mailing Topic'
+- page_title 'Edit', 'Subscriber'
 
 .header
   .header-body
     .row.align-items-center
       .col
         %h6.header-pretitle
-          Mailing Topics
+          Subscribers
         %h1.header-title
-          = fa_solid 'clipboard-list'
-          = "Edit #{@topic.name}"
+          = fa_solid 'users'
+          = "Edit #{@subscriber.name}"
 
-= form_for @topic, url: mailing_topic_path(@topic), method: :patch  do |f|
-  = error_messages_for 'topic'
-  = render partial: 'mailing_topics/form', locals: { f: f }
+= form_for @subscriber, url: client_subscriber_path(@subscriber), method: :patch  do |f|
+  = error_messages_for 'subscriber'
+  = render partial: 'subscribers/form', locals: { f: f }
   %hr.mt-5.mb-5
-  = f.submit 'Save changes to topic', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', mailing_topic_path(@topic), class: 'btn btn-block btn-link text-muted'
+  = f.submit 'Save changes to subscriber', class: 'btn btn-block btn-primary'
+  = link_to 'Cancel', client_subscribers_path(@subscriber), class: 'btn btn-block btn-link text-muted'

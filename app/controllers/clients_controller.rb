@@ -2,7 +2,7 @@
 
 class ClientsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_client, only: %i[show edit update send_email messages subscribers]
+  before_action :set_client, only: %i[show edit update send_email]
 
   def index
     @clients = Client.order(name: :desc).page(params[:page]).per(15)
@@ -33,6 +33,14 @@ class ClientsController < ApplicationController
 
   def mail
     @message = AdhocEmail.new(email_params)
+  end
+
+  def messages
+    @client = Client.includes(:messages).find(params[:client_id])
+  end
+
+  def subscribers
+    @client = Client.includes(:subscribers).find(params[:client_id])
   end
 
   private

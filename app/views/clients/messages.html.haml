@@ -35,29 +35,31 @@
         .row.align-items-center
           .col
             %h3.card-header-title
-              %i.fad.fa-object-group.fa-lg
+              %i.fad.fa-envelope-open-text.fa-lg
               Messages
           .col-auto
             %a.btn.btn-sm.btn-white{href: new_client_template_path(@client)}
               New Templates
-      - if @client.templates.any?
+      - if @client.messages.any?
         .table-responsive
           %table.table.card-table.table-sm
             %thead
               %tr
-                %th Name
-                %th{style: 'width: 40%'} Status
+                %th Timestamp
+                %th Tracking ID
+                %th Subject
+                %th Status
             %tbody
-              - @client.templates.each do |t|
+              - @client.messages.each do |m|
                 %tr
-                  %td= link_to t.name, edit_client_template_path(@client, t)
+                  %td= link_to m.tracking_id, message_path(m.tracking_id)
+                  %td= l(m.created_at)
+                  %td= m.subject
                   %td
-                    - if t.active
-                      %span.badge.badge-soft-success.text-uppercase active
-                    - else
-                      %span.badge.badge-soft-warning.text-uppercase inactive
+                    %code= m.environment
+
       - else
         .card-body.text-center.bg-transparent
-          %h3 No Templates
+          %h3 No Messages
           %p.text-muted This client does not have any email templates saved.
 
