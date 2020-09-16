@@ -17,6 +17,7 @@ gem 'jquery-turbolinks'
 gem 'kaminari' # Pagination
 gem 'lograge'
 gem 'lograge-sql'
+gem 'mustache' # template rendering
 gem 'pg' # database for Active Record
 gem 'pinglish' # app status checking
 gem 'puma' # app server

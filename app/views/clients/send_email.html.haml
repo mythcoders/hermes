@@ -19,9 +19,9 @@
                      options_from_collection_for_select(@client.topics.active, 'id', 'name'),
                      { include_blank: '- Select -' },
                      { class: 'form-control', 'data-toggle': 'select' }
-        .form-group
-          = f.label :send_time, class: 'col-form-label'
-          = f.datetime_field :send_time, class: 'form-control'
+        -# .form-group
+        -#   = f.label :send_time, class: 'col-form-label'
+        -#   = f.datetime_field :send_time, class: 'form-control'
 
         .form-group
           = f.label :template, class: 'col-form-label'

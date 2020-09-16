@@ -18,7 +18,7 @@
         %tbody
           - @client.templates.order(:name).each do |t|
             %tr
-              %td= link_to t.name, edit_client_template_path(@client, t)
+              %td= link_to t.name, client_template_path(@client, t)
               %td
                 - if t.active
                   %span.badge.badge-soft-success.text-uppercase active

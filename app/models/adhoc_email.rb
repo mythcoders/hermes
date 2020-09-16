@@ -36,7 +36,9 @@ class AdhocEmail
   end
 
   def recipients
-    mailing_topic
+    mailing_topic.subscriptions.active.map do |_sub|
+      subscription.subscriber.formatted_address
+    end
   end
 
   def mailing_topic
