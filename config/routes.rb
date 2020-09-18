@@ -29,6 +29,6 @@ Rails.application.routes.draw do
       resources :templates, except: %i[delete]
     end
     resources :messages, param: :tracking_id, only: %i[index show]
-    resources :subscriptions
+    resources :subscriptions, only: %i[index edit update]
   end
 end

@@ -41,6 +41,11 @@ en:
       client_upload:
         file_types:
           subscriber: Subscriber Bulk Import
+      subscription:
+        statuses:
+          active: Active
+          inactive: Inactive
+          paused: Paused
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"
