@@ -48,13 +48,11 @@
               %tr
                 %th Name
                 %th Email
-                %th Subscriptions
             %tbody
               - @client.subscribers.each do |s|
                 %tr
-                  %td= link_to s.name, edit_client_subscriber_path(@client, s)
+                  %td= link_to s.name, client_subscriber_path(@client, s)
                   %td= s.address
-                  %td 0
 
       - else
         .card-body.text-center.bg-transparent

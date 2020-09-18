@@ -14,11 +14,13 @@
         %thead
           %tr
             %th Type
+            %th Date
             %th{style: 'width: 40%'} Status
         %tbody
           - @client.uploads.order(created_at: :desc).each do |t|
             %tr
-              %td= t.file_type
+              %td= ClientUpload.human_enum_name :file_types, t.file_type
+              %td= l t.created_at
               %td= t.status
   - else
     .card-body.text-center.bg-transparent
