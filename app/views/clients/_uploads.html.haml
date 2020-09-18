@@ -1,0 +1,26 @@
+.card
+  .card-header
+    .row.align-items-center
+      .col
+        %h3.card-header-title
+          %i.fas.fa-file-import.fa-lg
+          Uploads
+      .col-auto
+        %a.btn.btn-sm.btn-white{href: new_client_upload_path(@client)}
+          New
+  - if @client.uploads.any?
+    .table-responsive
+      %table.table.card-table.table-sm
+        %thead
+          %tr
+            %th Type
+            %th{style: 'width: 40%'} Status
+        %tbody
+          - @client.uploads.order(created_at: :desc).each do |t|
+            %tr
+              %td= t.file_type
+              %td= t.status
+  - else
+    .card-body.text-center.bg-transparent
+      %h3 No Uploads
+      %p.text-muted This client does not have any files uploaded yet.

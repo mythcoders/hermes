@@ -1,5 +1,6 @@
-class AdhocEmail
-  include ActiveModel::Model
+# frozen_string_literal: true
+
+class AdhocEmailForm < ApplicationForm
   attr_accessor :mailing_topic_id, :send_time, :template_id, :environment_id, :subject, :html_body, :text_body
 
   def save

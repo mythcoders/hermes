@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get 'subscribers', to: 'clients#subscribers', as: 'subscribers'
       match 'send_email', to: 'clients#send_email', as: 'send_email', via: %i[get post]
       resources :client_environments, path: :permissions, as: :environments, except: %i[delete]
+      resources :client_uploads, path: :uploads, as: :uploads, except: %i[delete]
       resources :mailing_topics, path: :topics, as: :topics, except: %i[delete]
       resources :subscribers, except: %i[delete]
       resources :templates, except: %i[delete]

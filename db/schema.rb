@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_202953) do
+ActiveRecord::Schema.define(version: 2020_09_18_063434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 2020_09_15_202953) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id", "name"], name: "index_client_environments_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_client_environments_on_client_id"
+  end
+
+  create_table "client_uploads", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "file_type"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_client_uploads_on_client_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -211,6 +220,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_202953) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "client_environments", "clients"
+  add_foreign_key "client_uploads", "clients"
   add_foreign_key "mailing_topics", "clients"
   add_foreign_key "message_activities", "messages"
   add_foreign_key "message_activity_recipients", "message_activities"

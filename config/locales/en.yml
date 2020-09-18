@@ -37,6 +37,10 @@ en:
       message:
         to: "Recipient"
   activerecord:
+    attributes:
+      client_upload:
+        file_types:
+          subscriber: Subscriber Bulk Import
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"

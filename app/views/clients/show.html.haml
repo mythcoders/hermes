@@ -12,7 +12,6 @@
           = @client.name
       .col-auto
         = link_to 'Go Back', clients_path, class: 'btn btn-white'
-        = link_to 'Upload', client_send_email_path(@client), class: 'btn btn-secondary'
         = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'
         - if @client.environments.any?
           = link_to 'Send Email', client_send_email_path(@client), class: 'btn btn-primary'
@@ -34,3 +33,4 @@
     = render partial: 'environments'
     = render partial: 'topics'
     = render partial: 'templates'
+    = render partial: 'uploads'

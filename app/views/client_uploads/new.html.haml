@@ -1,0 +1,33 @@
+- page_title 'New', 'Upload'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Client Uploads
+        %h1.header-title
+          = fa_solid 'file-import'
+          Create a new Upload
+
+= form_for @upload, url: client_uploads_path, method: :post do |f|
+  = error_messages_for 'upload'
+
+  = f.hidden_field :id
+  = f.hidden_field :client_id
+
+  .form-group
+    = f.label :file_type, class: 'col-form-label'
+    = f.select :file_type,
+      options_from_collection_for_select(file_upload_types, 'value', 'label'),
+      { include_blank: '- Select -' },
+      { class: 'custom-select' }
+
+  .form-group
+    .custom-file
+      = f.file_field :file, accept: 'text/csv', class: 'custom-file-input'
+      = f.label :file, class: 'custom-file-label'
+
+  %hr.mt-5.mb-5
+  = f.submit 'Upload', class: 'btn btn-block btn-primary'
+  = link_to 'Cancel', client_path(@upload.client_id), class: 'btn btn-block btn-link text-muted'

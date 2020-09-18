@@ -3,9 +3,12 @@
 //= require jquery/dist/jquery.min
 //= require onmount/index.js
 //= require bootstrap/dist/js/bootstrap.bundle.min
+//= require bs-custom-file-input
 //= require_tree .
 
 $(function () {
+  bsCustomFileInput.init()
+
   $('[data-clickable-row]').on('click', function () {
     var row_href
     row_href = $(this).attr('data-href')
@@ -13,8 +16,8 @@ $(function () {
       return document.location = $(this).attr('data-href')
     }
   })
-  var toggles = document.querySelectorAll('[data-toggle="wizard"]');
 
+  var toggles = document.querySelectorAll('[data-toggle="wizard"]');
   [].forEach.call(toggles, function (toggle) {
     toggle.addEventListener('click', function (e) {
       e.preventDefault()

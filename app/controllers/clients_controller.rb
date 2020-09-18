@@ -32,7 +32,7 @@ class ClientsController < ApplicationController
   end
 
   def mail
-    @message = AdhocEmail.new(email_params)
+    @message = AdhocEmailForm.new(email_params)
   end
 
   def messages
