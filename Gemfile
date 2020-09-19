@@ -11,6 +11,7 @@ gem 'audited' # data audits
 gem 'aws-sdk-sns', '~> 1'
 gem 'bootsnap', require: false
 gem 'devise' # security
+gem 'elastic-apm'
 gem 'haml'
 gem 'jbuilder', '~> 2.5' # JSON APIs https://github.com/rails/jbuilder
 gem 'jquery-turbolinks'
