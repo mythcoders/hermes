@@ -13,7 +13,7 @@ class ClientUploadWorker
       IO.foreach(file) do |row|
         BulkUpload::SubscriberImporter.process(row)
       rescue StandardError => e
-        Appsignal.send_error e
+        Raven.capture_exception e
       end
     end
 

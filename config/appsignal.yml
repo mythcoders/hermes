@@ -8,19 +8,19 @@ default: &defaults
 
 development:
   <<: *defaults
-  active: true
+  active: false
 
 review:
   <<: *defaults
-  active: true
+  active: false
   revision: "<%= Rails.root.join('VERSION').read.chomp %>"
 
 staging:
   <<: *defaults
-  active: true
+  active: false
   revision: "<%= Rails.root.join('VERSION').read.chomp %>"
 
 production:
   <<: *defaults
-  active: true
+  active: false
   revision: "<%= Rails.root.join('VERSION').read.chomp %>"
