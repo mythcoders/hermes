@@ -33,6 +33,14 @@ class ClientsController < ApplicationController
 
   def mail
     @message = AdhocEmailForm.new(email_params)
+    return render 'send_email' if request.get?
+
+    if @message.save
+      flash['success'] = t('updated')
+      redirect_to client_path(@client)
+    else
+      render 'send_email'
+    end
   end
 
   def messages

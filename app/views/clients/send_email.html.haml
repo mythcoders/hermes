@@ -14,8 +14,8 @@
               Tell us the who, when, what, and how
 
         .form-group
-          = f.label :mailing_topic, class: 'col-form-label'
-          = f.select :mailing_topic,
+          = f.label :mailing_topic_id, class: 'col-form-label'
+          = f.select :mailing_topic_id,
                      options_from_collection_for_select(@client.topics.active, 'id', 'name'),
                      { include_blank: '- Select -' },
                      { class: 'form-control', 'data-toggle': 'select' }
@@ -24,15 +24,15 @@
         -#   = f.datetime_field :send_time, class: 'form-control'
 
         .form-group
-          = f.label :template, class: 'col-form-label'
-          = f.select :template,
+          = f.label :template_id, class: 'col-form-label'
+          = f.select :template_id,
                      options_from_collection_for_select(@client.templates.active, 'id', 'name'),
                      { include_blank: '- Select -' },
                      { class: 'form-control', 'data-toggle': 'select' }
 
         .form-group
-          = f.label :environment, class: 'col-form-label'
-          = f.select :environment,
+          = f.label :environment_id, class: 'col-form-label'
+          = f.select :environment_id,
                      options_from_collection_for_select(@client.environments, 'id', 'fancy_name'),
                      { include_blank: '- Select -' },
                      { class: 'form-control', 'data-toggle': 'select' }

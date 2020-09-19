@@ -21,24 +21,28 @@ class AdhocEmailForm < ApplicationForm
     {
       environment: environment.name,
       subject: subject,
-      html_body: full_html_body,
-      text_body: full_text_body,
+      html_body: render_html,
+      text_body: render_text,
       sender: template.sender,
       bcc: recipients
     }
   end
 
-  def full_html_body
-    html_body + template.html_body
+  def render_text
+    return text_body unless template
+
+    Mustache.render(template.text_body, { body: text_body })
   end
 
-  def full_text_body
-    text_body + template.text_body
+  def render_html
+    return html_body unless template
+
+    Mustache.render(template.html_body, { body: html_body })
   end
 
   def recipients
-    mailing_topic.subscriptions.active.map do |_sub|
-      subscription.subscriber.formatted_address
+    mailing_topic.subscriptions.active.map do |sub|
+      sub.subscriber.formatted_address
     end
   end
 
