@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 env:
-  REGISTRY_IMAGE: docker.pkg.github.com/mythcoders/hubble/hubble
+  REGISTRY_IMAGE: ghcr.io/mythcoders/hubble
   DATABASE_URL: postgres://hubble:hubble@localhost:5432/hubble_test
   RAILS_ENV: test
 
@@ -17,18 +17,18 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: registry login
-        uses: azure/docker-login@v1
-        with:
-          login-server: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.PACKAGE_TOKEN }}
-
       - name: write build info
         run: |
           echo $GITHUB_REF > BRANCH
           echo $GITHUB_ACTOR > AUTHOR
           echo $GITHUB_SHA > REVISION
+
+      - name: registry login
+        uses: azure/docker-login@v1
+        with:
+          login-server: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PACKAGE_TOKEN }}
 
       - name: build image and push
         uses: docker/build-push-action@v1.1.0
@@ -36,7 +36,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PACKAGE_TOKEN }}
           registry: ghcr.io
-          repository: ${{github.repository}}
+          repository: ${{ github.repository }}
           tag_with_ref: true
           push: true
   # tests:
