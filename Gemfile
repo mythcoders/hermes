@@ -7,6 +7,7 @@ ruby '2.6.3'
 
 gem 'aasm'
 gem 'audited' # data audits
+gem 'aws-sdk-s3', require: false
 gem 'aws-sdk-sns', '~> 1'
 gem 'bootsnap', require: false
 gem 'devise' # security
