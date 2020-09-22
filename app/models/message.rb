@@ -53,4 +53,8 @@ class Message < ApplicationRecord
   def link_activity
     activities.where(activity_type: 'clicked')
   end
+
+  def client_environment
+    @client_environment ||= ClientEnvironment.find_or_create_by_env!(client, environment)
+  end
 end

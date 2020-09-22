@@ -18,13 +18,17 @@ Rails.application.routes.draw do
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
 
-    resources :clients do
-      resources :client_environments, path: :environments, as: :environments
+    resources :clients, except: %i[delete] do
+      get 'messages', to: 'clients#messages', as: 'messages'
+      get 'subscribers', to: 'clients#subscribers', as: 'subscribers'
+      match 'send_email', to: 'clients#send_email', as: 'send_email', via: %i[get post]
+      resources :client_environments, path: :permissions, as: :environments, except: %i[delete]
+      resources :client_uploads, path: :uploads, as: :uploads, except: %i[delete]
+      resources :mailing_topics, path: :topics, as: :topics, except: %i[delete]
+      resources :subscribers, except: %i[delete]
+      resources :templates, except: %i[delete]
     end
-    resources :mailing_topics
-    resources :messages, param: :tracking_id
-    resources :subscribers
-    resources :subscriptions
-    resources :templates
+    resources :messages, param: :tracking_id, only: %i[index show]
+    resources :subscriptions, only: %i[index edit update]
   end
 end

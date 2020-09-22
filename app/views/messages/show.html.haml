@@ -1,4 +1,4 @@
-- page_title 'View', 'Messages'
+- page_title 'View Message', 'Mail Log'
 
 .header
   .header-body
@@ -10,7 +10,7 @@
           = fa_solid 'archive'
           = "Message #{@message.tracking_id}"
       .col-auto
-        = link_to 'Go Back', messages_path, class: 'btn btn-outline-primary'
+        = link_to 'Go Back', messages_path, class: 'btn btn-white'
     .row.align-items-center
       .col
         %ul#workshopTab.nav.nav-tabs.nav-overflow.header-tabs{role: "tablist"}

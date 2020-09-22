@@ -8,11 +8,11 @@
           Mailing Topic
         %h1.header-title
           = fa_solid 'clipboard-list'
-          Create a new Mailing Topic
+          Create new Mailing Topic for #{@topic.client.name}
 
-= form_for @topic, url: mailing_topics_path do |f|
+= form_for @topic, url: client_topics_path do |f|
   = error_messages_for 'topic'
   = render partial: 'mailing_topics/form', locals: { f: f }
   %hr.mt-5.mb-5
   = f.submit 'Create topic', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', mailing_topics_path, class: 'btn btn-block btn-link text-muted'
+  = link_to 'Cancel', client_path(@topic.client), class: 'btn btn-block btn-link text-muted'

@@ -1,0 +1,18 @@
+- page_title 'Edit', 'Template'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Template
+        %h1.header-title
+          = fa_solid 'clipboard-list'
+          = "Edit #{@environment.name}"
+
+= form_for @environment, url: client_environment_path(@environment), method: :patch  do |f|
+  = error_messages_for 'environment'
+  = render partial: 'client_environments/form', locals: { f: f }
+  %hr.mt-5.mb-5
+  = f.submit 'Save changes to environment', class: 'btn btn-block btn-primary'
+  = link_to 'Cancel', client_path(@environment.client), class: 'btn btn-block btn-link text-muted'

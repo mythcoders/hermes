@@ -91,7 +91,7 @@ RSpec.describe 'Messages API', type: :request do
         it_behaves_like 'bad request'
       end
 
-      context 'request does not include environment' do
+      xcontext 'request does not include environment' do
         let(:environment) { '' }
         it_behaves_like 'bad request'
       end

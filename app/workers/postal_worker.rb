@@ -9,6 +9,8 @@ class PostalWorker
 
     return if message.sent?
 
+    # TODO: Batch messages up by a max of 50 recipients
+
     ApiMailer.with(message: message).send_message.deliver_now
     message.processed!
   end

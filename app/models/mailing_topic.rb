@@ -4,5 +4,8 @@ class MailingTopic < ApplicationRecord
   belongs_to :client
   has_many :subscriptions
 
-  validates_presence_of :client, :name
+  scope :active, -> { where(active: true) }
+
+  validates_presence_of :client
+  validates :name, presence: true, uniqueness: { scope: %i[client] }
 end

@@ -1,0 +1,11 @@
+= f.hidden_field :id
+
+.form-group
+  = f.label :status, class: 'col-form-label'
+  = f.select :status,
+    options_from_collection_for_select(subscription_statuses, 'value', 'label', @subscription.status),
+    { include_blank: '- Select -' },
+    { class: 'custom-select' }
+.form-group
+  = f.label :memo, class: 'col-form-label'
+  = f.text_area :memo, class: 'form-control'

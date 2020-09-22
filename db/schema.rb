@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_074539) do
+ActiveRecord::Schema.define(version: 2020_09_18_063434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "callbacks", force: :cascade do |t|
     t.string "data", default: "f", null: false
@@ -25,11 +46,21 @@ ActiveRecord::Schema.define(version: 2020_09_06_074539) do
 
   create_table "client_environments", force: :cascade do |t|
     t.bigint "client_id", null: false
-    t.string "name", default: "f", null: false
-    t.string "status", default: "f", null: false
+    t.string "name", null: false
+    t.string "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "name"], name: "index_client_environments_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_client_environments_on_client_id"
+  end
+
+  create_table "client_uploads", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "file_type"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_client_uploads_on_client_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -55,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_074539) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "name"], name: "index_mailing_topics_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_mailing_topics_on_client_id"
   end
 
@@ -127,17 +159,22 @@ ActiveRecord::Schema.define(version: 2020_09_06_074539) do
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "address"], name: "index_subscribers_on_client_id_and_address", unique: true
     t.index ["client_id"], name: "index_subscribers_on_client_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "mailing_topic_id", null: false
     t.bigint "subscriber_id", null: false
-    t.string "status"
+    t.integer "status"
     t.string "memo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "identifier", null: false
+    t.index ["identifier"], name: "index_subscriptions_on_identifier", unique: true
+    t.index ["mailing_topic_id", "subscriber_id"], name: "index_subscriptions_on_mailing_topic_id_and_subscriber_id", unique: true
     t.index ["mailing_topic_id"], name: "index_subscriptions_on_mailing_topic_id"
+    t.index ["status"], name: "index_subscriptions_on_status"
     t.index ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
   end
 
@@ -152,6 +189,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_074539) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id", "name"], name: "index_templates_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_templates_on_client_id"
   end
 
@@ -180,7 +218,15 @@ ActiveRecord::Schema.define(version: 2020_09_06_074539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "client_environments", "clients"
+  add_foreign_key "client_uploads", "clients"
   add_foreign_key "mailing_topics", "clients"
+  add_foreign_key "message_activities", "messages"
+  add_foreign_key "message_activity_recipients", "message_activities"
+  add_foreign_key "message_activity_recipients", "message_recipients"
+  add_foreign_key "message_recipients", "messages"
+  add_foreign_key "messages", "clients"
   add_foreign_key "subscribers", "clients"
   add_foreign_key "subscriptions", "mailing_topics"
   add_foreign_key "subscriptions", "subscribers"

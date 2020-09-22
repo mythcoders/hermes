@@ -1,0 +1,17 @@
+- page_title 'New', 'Template'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Template
+        %h1.header-title
+          = fa_solid 'clipboard-list'
+          = @template.name
+      .col-auto
+        = link_to 'Go Back', client_path(@template.client_id), class: 'btn btn-white'
+        = link_to 'Edit', edit_client_template_path(@template), class: 'btn btn-primary'
+
+.embed-responsive.embed-responsive-1by1
+  %iframe.embed-responsive-item{srcdoc: @template.html_body, name: 'email-preview', allowfullscreen: 'true'}

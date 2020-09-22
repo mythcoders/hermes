@@ -10,9 +10,9 @@
           = fa_solid 'clipboard-list'
           = "Edit #{@topic.name}"
 
-= form_for @topic, url: mailing_topic_path(@topic), method: :patch  do |f|
+= form_for @topic, url: client_topic_path(@topic), method: :patch  do |f|
   = error_messages_for 'topic'
   = render partial: 'mailing_topics/form', locals: { f: f }
   %hr.mt-5.mb-5
   = f.submit 'Save changes to topic', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', mailing_topic_path(@topic), class: 'btn btn-block btn-link text-muted'
+  = link_to 'Cancel', client_path(@topic.client), class: 'btn btn-block btn-link text-muted'

@@ -21,4 +21,8 @@ module IconHelpers
   def fa_brands(icon, html_class = nil)
     tag.i class: "fab fa-#{icon} #{html_class}"
   end
+
+  def fa_duo(icon, html_class = nil)
+    tag.i class: "fad fa-#{icon} #{html_class}"
+  end
 end

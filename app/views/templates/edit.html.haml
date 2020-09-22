@@ -1,0 +1,18 @@
+- page_title 'Edit', 'Template'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Template
+        %h1.header-title
+          = fa_solid 'clipboard-list'
+          = "Edit #{@template.name}"
+
+= form_for @template, url: client_template_path(@template), method: :patch  do |f|
+  = error_messages_for 'template'
+  = render partial: 'templates/form', locals: { f: f }
+  %hr.mt-5.mb-5
+  = f.submit 'Save changes to template', class: 'btn btn-block btn-primary'
+  = link_to 'Cancel', client_path(@template.client), class: 'btn btn-block btn-link text-muted'

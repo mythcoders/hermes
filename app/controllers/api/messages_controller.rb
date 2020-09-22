@@ -4,13 +4,14 @@ module Api
   class MessagesController < ActionController::Base
     skip_before_action :verify_authenticity_token
     before_action :validate_api_credentials
+    before_action :validate_api_environment
 
     rescue_from ActionController::ParameterMissing do
       head :bad_request
     end
 
     def new
-      message = Message.build(mail_params, @current_user)
+      message = Message.build(mail_params, @client)
       return render(json: message.errors, status: :bad_request) unless message.valid?
       return head :error unless message.received!
 
@@ -25,11 +26,22 @@ module Api
     end
 
     def validate_api_credentials
-      @current_user = authenticate_with_http_basic { |u, p| Client.authenticate(u, p) }
-      return head :unauthorized unless @current_user
+      @client = authenticate_with_http_basic { |u, p| Client.authenticate(u, p) }
+      return head :unauthorized unless @client
 
-      # TODO: Add rate limiting
-      head :forbidden unless @current_user.is_active
+      head :forbidden unless @client.is_active
+    end
+
+    def validate_api_environment
+      return unless mail_params[:environment]
+
+      return head :method_not_allowed if client_environment.status == 'rejected'
+
+      head :accepted if client_environment.status == 'ignored'
+    end
+
+    def client_environment
+      @client_environment ||= ClientEnvironment.find_or_create_by_env!(@client, mail_params[:environment])
     end
   end
 end

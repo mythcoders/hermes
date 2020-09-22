@@ -6,17 +6,18 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 gem 'aasm'
-gem 'appsignal'
 gem 'audited' # data audits
 gem 'aws-sdk-sns', '~> 1'
 gem 'bootsnap', require: false
 gem 'devise' # security
+gem 'elastic-apm'
 gem 'haml'
 gem 'jbuilder', '~> 2.5' # JSON APIs https://github.com/rails/jbuilder
 gem 'jquery-turbolinks'
 gem 'kaminari' # Pagination
 gem 'lograge'
 gem 'lograge-sql'
+gem 'mustache' # template rendering
 gem 'pg' # database for Active Record
 gem 'pinglish' # app status checking
 gem 'puma' # app server
@@ -26,6 +27,7 @@ gem 'sentry-raven' # Exceptions
 gem 'sprockets-rails'
 gem 'turbolinks', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
+gem 'view_component'
 
 # Sidekiq background jobs
 gem 'redis-namespace'

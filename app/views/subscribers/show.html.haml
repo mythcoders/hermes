@@ -1,0 +1,33 @@
+- page_title 'View', 'Subscribers'
+
+.header
+  .header-body
+    .row.align-items-center
+      .col
+        %h6.header-pretitle
+          Subscribers
+        %h1.header-title
+          = fa_solid 'users'
+          = @subscriber.name
+      .col-auto
+        = link_to 'Go Back', client_subscribers_path(@subscriber.client_id), class: 'btn btn-white'
+        = link_to 'Edit', edit_client_subscriber_path(@subscriber.client_id, @subscriber), class: 'btn btn-primary'
+.card
+  .card-header
+    .row.align-items-center
+      .col
+        %h3.card-header-title
+          %i.fas.fa-clipboard-list.fa-lg
+          Subscribed Mailing Topics
+  - if @subscriber.subscriptions.any?
+    .table-responsive
+      %table.table.card-table
+        %tbody
+          - @subscriber.subscriptions.includes(:topic).each do |s|
+            %tr
+              %td= s.topic.name
+
+  - else
+    .card-body.text-center.bg-transparent
+      %h3 No Subscriptions
+      %p.text-muted This subscriber does not have subscriptions.

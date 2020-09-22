@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/mythcoders/gaia:latest AS base
+FROM ghcr.io/mythcoders/gaia:latest AS base
 
 ADD Gemfile* $APP_HOME/
 
@@ -18,6 +18,7 @@ FROM base AS build
 
 ADD . $APP_HOME/
 
-RUN ASSETS_PRECOMPILE=1 SECRET_KEY_BASE=1 RAILS_ENV=production bundle exec rake assets:precompile
+RUN ELASTIC_APM_ENABLED=false ASSETS_PRECOMPILE=1 SECRET_KEY_BASE=1 NODE_ENV=production RAILS_ENV=production \
+  bundle exec rake assets:precompile
 
 CMD ["sh", "./scripts/app", "start"]
