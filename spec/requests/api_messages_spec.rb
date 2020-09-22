@@ -13,7 +13,7 @@ RSpec.describe 'Messages API', type: :request do
   shared_examples 'bad request' do
     it 'responds with 400 status' do
       post '/api/messages', params: request, headers: api_basic_auth(client)
-      expect(response.status).to eq(400)
+      expect(response.status).to eq(422)
     end
   end
 
