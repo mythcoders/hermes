@@ -22,11 +22,9 @@ class ApiMailer < ApplicationMailer
   def mail_headers
     {
       subject: @message.subject,
-      to: @message.to.map(&:email),
-      from: @message.sender ||= DEFAULT_FROM,
-      cc: @message.cc.map(&:email),
-      bcc: @message.bcc.map(&:email),
-      reply_to: DEFAULT_REPLY
+      from: @message.from,
+      reply_to: @message.from,
+      to: @message.to
     }
   end
 end
