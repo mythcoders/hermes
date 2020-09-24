@@ -2,8 +2,8 @@ en:
   attributes:
     created_at: "Created at"
     updated_at: "Updated at"
-  created: ""
-  updated: "Something %{record} %{model}"
+  created: Record was created successfully
+  updated: Record was updated successfully
   activity_types:
     received: Received
     rerouted: Rerouted to Owner

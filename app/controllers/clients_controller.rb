@@ -2,7 +2,7 @@
 
 class ClientsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_client, only: %i[show edit update send_email]
+  before_action :set_client, only: %i[show edit update new_email]
 
   def index
     @clients = Client.order(name: :desc).page(params[:page]).per(15)
@@ -31,15 +31,19 @@ class ClientsController < ApplicationController
     end
   end
 
-  def mail
-    @message = AdhocEmailForm.new(email_params)
-    return render 'send_email' if request.get?
+  def new_email
+    @message = AdhocEmailForm.new
+  end
 
-    if @message.save
+  def send_email
+    @message = AdhocEmailForm.new(email_params)
+
+    if @message.save!
       flash['success'] = t('updated')
-      redirect_to client_path(@client)
+      redirect_to client_path(params[:client_id])
     else
-      render 'send_email'
+      flash['error'] = 'Correct the errors'
+      render 'new_email'
     end
   end
 
@@ -63,7 +67,7 @@ class ClientsController < ApplicationController
   end
 
   def email_params
-    params.require(:message).permit(:mailing_topic_id, :send_time, :template_id, :environment_id, :subject,
-                                    :html_body, :text_body)
+    params.require(:adhoc_email_form).permit(:mailing_topic_id, :template_id, :environment_id, :subject, :html_body,
+                                             :text_body)
   end
 end

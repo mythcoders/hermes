@@ -2,7 +2,7 @@
 
 .row.justify-content-center
   .col-12.col-lg-10.col-xl-8
-    = form_for :message, url: client_send_email_path(@client), html: { id: 'wizardSteps', class: 'tab-content py-6' } do |f|
+    = form_for @message, url: client_send_email_path(@client), html: { id: 'wizardSteps', class: 'tab-content py-6' } do |f|
       #wizardStepOne.tab-pane.fade.active.show{"aria-labelledby" => "wizardTabOne", :role => "tabpanel"}
         .row.justify-content-center
           .col-12.col-md-10.col-lg-8.col-xl-6.text-center
@@ -13,10 +13,12 @@
             %p.mb-5.text-muted
               Tell us the who, when, what, and how
 
+        = error_messages_for 'message'
+
         .form-group
           = f.label :mailing_topic_id, class: 'col-form-label'
           = f.select :mailing_topic_id,
-                     options_from_collection_for_select(@client.topics.active, 'id', 'name'),
+                     options_from_collection_for_select(@client.topics.active, 'id', 'name', @message.mailing_topic_id),
                      { include_blank: '- Select -' },
                      { class: 'form-control', 'data-toggle': 'select' }
         -# .form-group
@@ -26,14 +28,14 @@
         .form-group
           = f.label :template_id, class: 'col-form-label'
           = f.select :template_id,
-                     options_from_collection_for_select(@client.templates.active, 'id', 'name'),
+                     options_from_collection_for_select(@client.templates.active, 'id', 'name', @message.template_id),
                      { include_blank: '- Select -' },
                      { class: 'form-control', 'data-toggle': 'select' }
 
         .form-group
           = f.label :environment_id, class: 'col-form-label'
           = f.select :environment_id,
-                     options_from_collection_for_select(@client.environments, 'id', 'fancy_name'),
+                     options_from_collection_for_select(@client.environments, 'id', 'fancy_name', @message.environment_id),
                      { include_blank: '- Select -' },
                      { class: 'form-control', 'data-toggle': 'select' }
 

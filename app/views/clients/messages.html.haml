@@ -14,7 +14,7 @@
         = link_to 'Go Back', clients_path, class: 'btn btn-white'
         = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'
         - if @client.environments.any?
-          = link_to 'Send Email', client_send_email_path(@client), class: 'btn btn-primary'
+          = link_to 'Send Email', client_new_email_path(@client), class: 'btn btn-primary'
     .row.align-items-center
       .col
         %ul.nav.nav-tabs.nav-overflow.header-tabs
@@ -39,7 +39,7 @@
               Messages
           - if @client.environments.any?
             .col-auto
-              %a.btn.btn-sm.btn-white{href: client_send_email_path(@client)}
+              %a.btn.btn-sm.btn-white{href: client_new_email_path(@client)}
                 New
       - if @client.messages.any?
         .table-responsive
