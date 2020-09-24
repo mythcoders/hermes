@@ -8,21 +8,18 @@ class Message < ApplicationRecord
   validates_presence_of :recipients, validates_associated: :recipients
 
   def self.build(params, client)
-    message = new(
-      client: client,
-      sender: params[:sender],
-      subject: params[:subject],
-      html_body: params[:html_body],
-      text_body: params[:text_body],
-      priority: params[:priority],
-      environment: params[:environment],
-      tracking_id: SecureRandom.uuid
-    )
-
-    message.recipients << MessageRecipient.build_from_array(params[:to], :to) if params[:to].present?
-    message.recipients << MessageRecipient.build_from_array(params[:cc], :cc) if params[:cc].present?
-    message.recipients << MessageRecipient.build_from_array(params[:bcc], :bcc) if params[:bcc].present?
-    message
+    new(client: client).tap do |message|
+      message.environment = params[:environment]
+      message.html_body = params[:html_body]
+      message.priority = params[:priority]
+      message.sender = params[:sender]
+      message.subject = params[:subject]
+      message.text_body = params[:text_body]
+      message.tracking_id = SecureRandom.uuid
+      message.recipients << MessageRecipient.build_from_array(params[:to], :to) if params[:to].present?
+      message.recipients << MessageRecipient.build_from_array(params[:cc], :cc) if params[:cc].present?
+      message.recipients << MessageRecipient.build_from_array(params[:bcc], :bcc) if params[:bcc].present?
+    end
   end
 
   ACTIVITY_TYPES.each do |type|

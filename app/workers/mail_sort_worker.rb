@@ -9,7 +9,7 @@ class MailSortWorker
 
     reroute_message if are_emails_rerouted?
 
-    PostalWorker.perform_async(tracking_id) unless are_emails_held?
+    PostalWorker.perform_async(tracking_id) unless are_emails_held? || are_emails_ignored?
   end
 
   private
@@ -44,5 +44,9 @@ class MailSortWorker
 
   def are_emails_held?
     message.client_environment.status == 'hold'
+  end
+
+  def are_emails_ignored?
+    message.client_environment.status == 'ignore'
   end
 end

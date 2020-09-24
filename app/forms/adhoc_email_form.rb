@@ -3,10 +3,18 @@
 class AdhocEmailForm < ApplicationForm
   attr_accessor :mailing_topic_id, :send_time, :template_id, :environment_id, :subject, :html_body, :text_body
 
-  def save
-    message = Message.build(mail_params, @current_user)
+  def save!
+    @message = Message.build(mail_params, mailing_topic.client)
 
-    message.received!
+    if @message.invalid?
+      errors.merge! @message.errors
+      return false
+    elsif environment.status == 'rejected'
+      errors.add(:base, 'Environment is rejected')
+      return false
+    end
+
+    receive_and_sort_message
   rescue ActiveRecord::StatementInvalid => e
     # Handle exception that caused the transaction to fail
     # e.message and e.cause.message can be helpful
@@ -17,14 +25,23 @@ class AdhocEmailForm < ApplicationForm
 
   private
 
+  def receive_and_sort_message
+    if @message.received!
+      MailSortWorker.perform_async @message.tracking_id
+      true
+    else
+      false
+    end
+  end
+
   def mail_params
     {
+      bcc: recipients,
       environment: environment.name,
-      subject: subject,
       html_body: render_html,
-      text_body: render_text,
       sender: template.sender,
-      bcc: recipients
+      subject: subject,
+      text_body: render_text
     }
   end
 

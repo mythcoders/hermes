@@ -40,7 +40,8 @@
             %h4 HTML Body
         .row
           .col
-            %div.card-text= raw @message.html_body.html_safe
+            .embed-responsive.embed-responsive-1by1
+              %iframe.embed-responsive-item{srcdoc: @message.html_body, name: 'email-preview', allowfullscreen: 'true'}
       .card-body
         .row
           .col
