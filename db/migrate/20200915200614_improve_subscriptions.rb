@@ -1,6 +1,6 @@
 class ImproveSubscriptions < ActiveRecord::Migration[6.0]
   def up
-    change_column :subscriptions, :status, :integer, using: 'status::integer'
+    change_column :subscriptions, :status, :integer, using: "status::integer"
     add_column :subscriptions, :identifier, :string, null: false
   end
 

@@ -11,19 +11,19 @@ class MailingTopicsController < ApplicationController
   def create
     @topic = MailingTopic.new(topic_params)
     if @topic.save
-      flash['success'] = t('created')
+      flash["success"] = t("created")
       redirect_to client_path(@topic.client_id)
     else
-      render 'new'
+      render "new"
     end
   end
 
   def update
     if @topic.update(topic_params)
-      flash['success'] = t('updated')
+      flash["success"] = t("updated")
       redirect_to client_path(@topic.client_id)
     else
-      render 'edit'
+      render "edit"
     end
   end
 

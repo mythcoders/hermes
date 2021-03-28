@@ -21,8 +21,8 @@
           %th Environment
       %tbody.list
         - @messages.each do |c|
-          %tr{data: { 'clickable-row': '', 'href': message_path(c.tracking_id) }}
-            %td= l(c.created_at)
+          %tr
+            %td= link_to l(c.created_at), message_path(c.tracking_id)
             %td= c.client.name
             %td= c.subject
             %td

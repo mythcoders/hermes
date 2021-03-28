@@ -10,10 +10,10 @@ class SubscriptionsController < ApplicationController
 
   def update
     if @subscription.update(subscription_params)
-      flash['success'] = t('updated')
+      flash["success"] = t("updated")
       redirect_to edit_subscription_path(@subscription.client_id)
     else
-      render 'edit'
+      render "edit"
     end
   end
 

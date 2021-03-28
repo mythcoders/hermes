@@ -1,6 +1,0 @@
-apiVersion: v1
-appVersion: "2002"
-description: A Helm chart for hermes
-name: hermes
-version: 0.7.0
-home: https://hermes.mythcoders.io

@@ -22,7 +22,7 @@ module ApplicationHelper
 
   # Renders a list of error messages
   def render_error_messages(errors)
-    html = ''
+    html = ""
     if errors.present?
       html += "<div id='errorExplanation' class='text-danger'><ul>\n"
       errors.each do |error|

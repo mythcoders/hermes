@@ -10,7 +10,7 @@ class ClientUpload < ApplicationRecord
   validates_presence_of :client, :file_type
 
   enum file_type: {
-    subscriber: 'subscriber'
+    subscriber: "subscriber"
   }
 
   aasm column: :status do

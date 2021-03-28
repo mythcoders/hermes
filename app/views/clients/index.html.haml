@@ -1,16 +1,12 @@
 - page_title 'Client Search'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Clients
-        %h1.header-title
-          = fa_solid 'code'
-          All Clients
-      .col-auto
-        = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
+
+.content
+  %h1.content-title.font-size-22
+    = fa_solid 'code'
+    Clients
+  .col-auto
+    = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
 
 .card
   %table-responsive
@@ -22,8 +18,8 @@
           %th API Access
       %tbody
         - @clients.each do |c|
-          %tr{data: { 'clickable-row': '', 'href': client_path(c) }}
-            %td= c.name
+          %tr
+            %td= link_to c.name, client_path(c)
             %td= c.owner
             %td
               - if c.is_active

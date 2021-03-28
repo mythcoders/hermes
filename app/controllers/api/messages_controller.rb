@@ -35,7 +35,7 @@ module Api
     def validate_api_environment
       return unless mail_params[:environment]
 
-      head :method_not_allowed if client_environment.status == 'rejected'
+      head :method_not_allowed if client_environment.status == "rejected"
     end
 
     def client_environment

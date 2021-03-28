@@ -13,7 +13,7 @@ class ClientUploadsController < ApplicationController
     return unless params[:client_upload]
 
     @client.file_uploads.attach(upload_params)
-    flash[:success] = 'something'
+    flash[:success] = "something"
     # Worker.perform_async 1
     # params[:client_upload][:file]
   end
@@ -22,19 +22,19 @@ class ClientUploadsController < ApplicationController
     @upload = ClientUpload.new(upload_params)
     @upload.data_file.attach(file_blob_param)
     if @upload.save
-      flash['success'] = t('created')
+      flash["success"] = t("created")
       redirect_to client_path(@upload.client_id)
     else
-      render 'new'
+      render "new"
     end
   end
 
   def update
     if @upload.update(upload_params)
-      flash['success'] = t('updated')
+      flash["success"] = t("updated")
       redirect_to client_path(@upload.client_id)
     else
-      render 'edit'
+      render "edit"
     end
   end
 

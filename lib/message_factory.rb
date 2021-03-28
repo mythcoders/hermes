@@ -16,7 +16,7 @@ class MessageFactory
     message.recipients << MessageRecipientFactory.build_from_array(params[:to])
     message.recipients << MessageRecipientFactory.build_from_array(params[:cc]) if params[:cc].present?
     message.recipients << MessageRecipientFactory.build_from_array(params[:bcc]) if params[:bcc].present?
-    message.activities << MessageActivity.new(type: 'Received', time: recieve_time)
+    message.activities << MessageActivity.new(type: "Received", time: recieve_time)
     message
   end
 end

@@ -5,7 +5,7 @@ FactoryBot.define do
     client { create(:client) }
     sender { Faker::Internet.email }
     subject { Faker::Cannabis.buzzword }
-    environment { 'rspec' }
+    environment { "rspec" }
     tracking_id { SecureRandom.uuid }
   end
 end

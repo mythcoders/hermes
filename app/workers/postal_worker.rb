@@ -11,8 +11,8 @@ class PostalWorker
 
     message.recipients.each do |r|
       ApiMailer.with(message: build_params(message, r))
-               .send_message
-               .deliver_now
+        .send_message
+        .deliver_now
     end
 
     message.processed!

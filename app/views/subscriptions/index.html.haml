@@ -21,8 +21,8 @@
           %th Status
       %tbody.list
         - @subscriptions.each do |s|
-          %tr{data: { 'clickable-row': '', 'href': edit_subscription_path(s) }}
-            %td= s.subscriber.name
+          %tr
+            %td= link_to s.subscriber.name, edit_subscription_path(s)
             %td= s.topic.client.name
             %td= s.topic.name
             %td= l(s.created_at)

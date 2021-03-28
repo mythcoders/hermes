@@ -10,7 +10,7 @@ class MessageRecipient < ApplicationRecord
   def self.build_from_array(list, type)
     list.map do |item|
       new(email: item,
-          recipient_type: type)
+        recipient_type: type)
     end
   end
 end

@@ -21,8 +21,8 @@ class MailSortWorker
   def reroute_message
     return if message.rerouted?
 
-    message.html_body = rerouted_body('html')
-    message.text_body = rerouted_body('text')
+    message.html_body = rerouted_body("html")
+    message.text_body = rerouted_body("text")
     message.subject = "[REROUTED] #{message.subject}"
     message.sender = ApplicationMailer::DEFAULT_FROM
     message.recipients.destroy_all
@@ -33,20 +33,20 @@ class MailSortWorker
   def rerouted_body(type)
     ApplicationController.render(
       template: "api_mailer/reroute_message.#{type}",
-      assigns: { message: message },
+      assigns: {message: message},
       layout: false
     )
   end
 
   def are_emails_rerouted?
-    message.client_environment.status == 'rerouted'
+    message.client_environment.status == "rerouted"
   end
 
   def are_emails_held?
-    message.client_environment.status == 'hold'
+    message.client_environment.status == "hold"
   end
 
   def are_emails_ignored?
-    message.client_environment.status == 'ignore'
+    message.client_environment.status == "ignore"
   end
 end

@@ -11,19 +11,19 @@ class ClientEnvironmentsController < ApplicationController
   def create
     @environment = ClientEnvironment.new(environment_params)
     if @environment.save
-      flash['success'] = t('created')
+      flash["success"] = t("created")
       redirect_to client_path(@environment.client_id)
     else
-      render 'new'
+      render "new"
     end
   end
 
   def update
     if @environment.update(environment_params)
-      flash['success'] = t('updated')
+      flash["success"] = t("updated")
       redirect_to client_path(@environment.client_id)
     else
-      render 'edit'
+      render "edit"
     end
   end
 

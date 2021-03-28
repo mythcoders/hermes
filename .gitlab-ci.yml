@@ -5,6 +5,7 @@ variables:
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
   LICENSE_MANAGEMENT_DISABLED: 1
   CODE_QUALITY_DISABLED: 1
+  ELASTIC_APM_ACTIVE: "false"
 
 build:
   stage: build
@@ -16,6 +17,7 @@ build:
 
 test:
   stage: test
+  needs: ["build"]
   image: $CONTAINER_IMAGE
   services:
     - postgres:latest

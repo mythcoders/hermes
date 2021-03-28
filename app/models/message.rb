@@ -2,8 +2,8 @@
 
 class Message < ApplicationRecord
   belongs_to :client
-  has_many :recipients, class_name: 'MessageRecipient'
-  has_many :activities, class_name: 'MessageActivity'
+  has_many :recipients, class_name: "MessageRecipient"
+  has_many :activities, class_name: "MessageActivity"
   validates_presence_of :sender, :subject, :client, :environment, :tracking_id
   validates_presence_of :recipients, validates_associated: :recipients
 
@@ -48,7 +48,7 @@ class Message < ApplicationRecord
   end
 
   def link_activity
-    activities.where(activity_type: 'clicked')
+    activities.where(activity_type: "clicked")
   end
 
   def client_environment

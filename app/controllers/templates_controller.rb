@@ -11,19 +11,19 @@ class TemplatesController < ApplicationController
   def create
     @template = Template.new(template_params)
     if @template.save
-      flash['success'] = t('created')
+      flash["success"] = t("created")
       redirect_to client_path(@template.client_id)
     else
-      render 'new'
+      render "new"
     end
   end
 
   def update
     if @template.update(template_params)
-      flash['success'] = t('updated')
+      flash["success"] = t("updated")
       redirect_to client_path(@template.client_id)
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -35,6 +35,6 @@ class TemplatesController < ApplicationController
 
   def template_params
     params.require(:template).permit(:client_id, :name, :sender_name, :sender_address, :html_body, :text_body,
-                                     :json_layout, :active)
+      :json_layout, :active)
   end
 end

@@ -12,7 +12,7 @@ class ClientUploadWorker
     data_stream.open do |file|
       IO.foreach(file) do |row|
         BulkUpload::SubscriberImporter.process(row)
-      rescue StandardError => e
+      rescue => e
         Raven.capture_exception e
       end
     end

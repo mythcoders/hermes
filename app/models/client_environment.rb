@@ -3,15 +3,15 @@
 class ClientEnvironment < ApplicationRecord
   belongs_to :client, inverse_of: :environments
 
-  validates :name, presence: true, uniqueness: { scope: %i[client] }
+  validates :name, presence: true, uniqueness: {scope: %i[client]}
 
   enum status: {
-    rerouted: 'rerouted',
-    whitelisted: 'whitelisted',
-    approved: 'approved',
-    rejected: 'rejected',
-    hold: 'hold',
-    ignored: 'ignored'
+    rerouted: "rerouted",
+    whitelisted: "whitelisted",
+    approved: "approved",
+    rejected: "rejected",
+    hold: "hold",
+    ignored: "ignored"
   }
 
   def fancy_name
