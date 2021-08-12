@@ -2,21 +2,22 @@
 %html
   %head
     = render partial: 'layouts/partials/header'
-  %body.d-flex.align-items-center.bg-auth.border-top.border-top-2.border-primary
-    .container
-      = render partial: 'layouts/partials/alerts'
-      .row
-        .col-sm-8.offset-sm-2
-          .card
-            .card-header
-              %h4.card-header-title
-                %strong
-                  Hermes
-                  - if Rails.env.development?
-                    DEV
-                  - if Rails.env.test?
-                    TEST
-                |
-                = yield :header
-            .card-body
-              = yield
+  %body.dark-mode{"data-set-preferred-mode-onload": "true",
+                  "data-dm-shortcut-enabled": "true",
+                  "data-sidebar-shortcut-enabled": "true"}
+    .page-wrapper.with-navbar
+      = render partial: 'layouts/partials/navbar'
+      .content-wrapper
+        .row
+          .col-sm-6.offset-sm-3
+            .card.p-0
+              .px-card.py-10.bg-light-lm.bg-very-dark-dm
+                %h2.card-title.font-size-18.m-0= yield :header
+              .content= yield
+              .px-card.py-10.bg-light-lm.bg-very-dark-dm
+                %p.font-size-12
+                  This is a restricted network. Use of this network, its equipment, and resources is monitored at all
+                  times and requires explicit permission from MythCoders, LLC. If you do not have this permission in
+                  writing, you are violating the regulations of this network and can and will be prosecuted to the full
+                  extent of the law. By continuing into this system, you are acknowledging that you are aware of and agree
+                  to these terms.

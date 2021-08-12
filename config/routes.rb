@@ -3,14 +3,14 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
+  root to: "home#index", as: "home"
+
   namespace :api do
     post "messages", to: "messages#new"
     post "notifications", to: "notifications#new"
   end
 
-  root to: "home#index", as: "home"
-
-  devise_for :users
+  devise_for :users, path: "security"
   concern :paginatable do
     get "(page/:page)", action: :index, on: :collection, as: ""
   end

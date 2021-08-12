@@ -1,21 +1,23 @@
 %nav.navbar
-  .navbar-content
-    %button.btn.btn-action{:type => "button", 'data-controller': 'sidebar', 'data-action': 'click->sidebar#toggle'}
-      %i.fa.fa-bars{"aria-hidden" => "true"}
-      %span.sr-only Toggle sidebar
-  %a.navbar-brand{:href => "#"}
+  - if user_signed_in?
+    .navbar-content
+      %button.btn.btn-action{:type => "button", 'data-controller': 'sidebar', 'data-action': 'click->sidebar#toggle'}
+        %i.fa.fa-bars{"aria-hidden" => "true"}
+        %span.sr-only Toggle sidebar
+  %a.navbar-brand{href: home_path}
     Hermes
   - unless Rails.env.production?
     %span.navbar-text.text-monospace= Rails.env
-  .navbar-content.ml-auto
-    .dropdown.with-arrow
-      %button#navbar-dropdown-toggle-btn-1.btn{"data-toggle" => "dropdown", :type => "button"}
-        Menu
-        %i.fas.fa-angle-down{"aria-hidden" => "true"}
-      .dropdown-menu.dropdown-menu-right.w-200{"aria-labelledby" => "navbar-dropdown-toggle-btn-1"}
-        %a.dropdown-item{:href => "#"} Docs
-        %a.dropdown-item{:href => "#"} Products
-        .dropdown-divider
-        %a.dropdown-item{href: "#logout-modal", role: "button"}
-          %i.fal.fa-sign-out
-          Logout
+  - if user_signed_in?
+    .navbar-content.ml-auto
+      .dropdown.with-arrow
+        %button#navbar-dropdown-toggle-btn-1.btn{"data-toggle" => "dropdown", :type => "button"}
+          Menu
+          %i.fas.fa-angle-down{"aria-hidden" => "true"}
+        .dropdown-menu.dropdown-menu-right.w-200{"aria-labelledby" => "navbar-dropdown-toggle-btn-1"}
+          %a.dropdown-item{:href => "#"} Docs
+          %a.dropdown-item{:href => "#"} Products
+          .dropdown-divider
+          %a.dropdown-item{href: "#logout-modal", role: "button"}
+            %i.fal.fa-sign-out
+            Logout
