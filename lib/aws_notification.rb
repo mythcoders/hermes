@@ -19,7 +19,7 @@ class AwsNotification
   end
 
   def tracking_id
-    @tracking_id ||= headers.select { |header| header["name"] == "X-Hermes-ID" }.first["value"]
+    @tracking_id ||= headers.find { |header| header["name"] == "X-Hermes-ID" }["value"]
   end
 
   def message
