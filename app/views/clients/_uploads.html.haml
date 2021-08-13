@@ -1,12 +1,12 @@
 .card
   .card-header
-    .row.align-items-center
+    .row
       .col
-        %h3.card-header-title
-          %i.fas.fa-file-import.fa-lg
+        %h3.card-title
+          %i.fas.fa-file-import
           Uploads
       .col-auto
-        %a.btn.btn-sm.btn-white{href: new_client_upload_path(@client)}
+        %a.btn.btn-sm{href: new_client_upload_path(@client)}
           New
   - if @client.uploads.any?
     .table-responsive
@@ -24,5 +24,5 @@
               %td= t.status
   - else
     .card-body.text-center.bg-transparent
-      %h3 No Uploads
+      %h3.content-title No Uploads
       %p.text-muted This client does not have any files uploaded yet.

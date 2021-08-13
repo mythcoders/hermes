@@ -1,11 +1,13 @@
 - page_title 'Client Search'
 
 .content
-  %h1.content-title.font-size-22
-    = fa_solid 'code'
-    Clients
-  .col-auto
-    = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
+  .row
+    .col
+      %h1.content-title.font-size-22
+        = fa_solid 'code'
+        Clients
+    .col-auto
+      = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
 
 .card
   %table-responsive
@@ -22,9 +24,9 @@
             %td= c.owner
             %td
               - if c.is_active
-                %span.badge.badge-soft-success.text-uppercase Approved
+                %span.badge.badge-success.badge-pill.text-uppercase Approved
               - else
-                %span.badge.badge-soft-danger.text-uppercase Blocked
-  .card-footer
+                %span.badge.badge-danger.badge-pill.text-uppercase Blocked
+  .mt-20
     = paginate @clients
     = page_entries_info @clients

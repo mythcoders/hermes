@@ -1,12 +1,12 @@
 .card
   .card-header
-    .row.align-items-center
+    .row
       .col
-        %h3.card-header-title
-          %i.fas.fa-clipboard-list.fa-lg
+        %h3.card-title
+          %i.fas.fa-clipboard-list
           Mailing Topics
       .col-auto
-        %a.btn.btn-sm.btn-white{href: new_client_topic_path(@client)}
+        %a.btn.btn-sm{href: new_client_topic_path(@client)}
           New
   - if @client.topics.any?
     .table-responsive
@@ -23,10 +23,10 @@
               %td= t.subscriptions.count
               %td
                 - if t.active
-                  %span.badge.badge-soft-success.text-uppercase active
+                  %span.badge.badge-success.badge-pill.text-uppercase active
                 - else
-                  %span.badge.badge-soft-info.text-uppercase inactive
+                  %span.badge.badge-secondary.badge-pill.text-uppercase inactive
   - else
     .card-body.text-center.bg-transparent
-      %h3 No Topics
+      %h3.content-title No Topics
       %p.text-muted This client does not have any topics saved.

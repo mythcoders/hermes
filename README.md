@@ -9,6 +9,10 @@ to be sent out but reroute emails sent in testing environments.
 
 A log of all emails sent is also kept.
 
+## Software
+
+The UI is built with [Halfmoon](https://www.gethalfmoon.com/)
+
 ## Planned Features
 
 - Delivery and read reports

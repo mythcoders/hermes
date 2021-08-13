@@ -1,23 +1,6 @@
 - page_title @client.name, 'Client'
 
-.content
-  %h1.content-title.font-size-22
-    %span.avatar-title.rounded-circle= @client.name.split.map(&:first).join
-    = @client.name
-.col-auto
-  = link_to 'Go Back', clients_path, class: 'btn btn-white'
-  = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'
-  - if @client.environments.any?
-    = link_to 'Send Email', client_new_email_path(@client), class: 'btn btn-primary'
-.row.align-items-center
-  .col
-    %ul.nav.nav-tabs.nav-overflow.header-tabs
-      %li.nav-item
-        %a.nav-link.text-nowrap{href: client_path(@client), class: 'active'} Summary
-      %li.nav-item
-        %a.nav-link.text-nowrap{href: client_messages_path(@client), class: ''} Messages
-      %li.nav-item
-        %a.nav-link.text-nowrap{href: client_subscribers_path(@client), class: ''} Subscribers
+= render partial: 'header', locals: { action: :summary }
 
 .row
   .col-4

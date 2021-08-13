@@ -1,18 +1,15 @@
 .sidebar-overlay{'data-controller': 'sidebar', 'data-action': 'click->sidebar#toggle'}
 .sidebar
   .sidebar-menu
-    .sidebar-divider
     %a.sidebar-link.sidebar-link-with-icon{:href => home_path, class: home_action?('index') ? 'active': ''}
       %span.sidebar-icon
         %i.fal.fa-code{"aria-hidden" => "true"}
       Dashboard
+    .sidebar-divider
     %a.sidebar-link.sidebar-link-with-icon{:href => clients_path, class: clients_controller? ? 'active' : ''}
       %span.sidebar-icon
         %i.fal.fa-users{"aria-hidden" => "true"}
       Clients
-    %br
-    %h5.sidebar-title Modules
-    .sidebar-divider
     %a.sidebar-link.sidebar-link-with-icon{:href => messages_path, class: messages_controller? ? 'active' : ''}
       %span.sidebar-icon
         %i.fal.fa-stream{"aria-hidden" => "true"}
@@ -21,6 +18,7 @@
       %span.sidebar-icon
         %i.fal.fa-users{"aria-hidden" => "true"}
       Subscriptions
+    .sidebar-divider
     %a.sidebar-link.sidebar-link-with-icon{:href => sidekiq_web_path, target: '_blank'}
       %span.sidebar-icon
         %i.fal.fa-server{"aria-hidden" => "true"}

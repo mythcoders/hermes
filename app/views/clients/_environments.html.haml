@@ -1,12 +1,12 @@
 .card
   .card-header
-    .row.align-items-center
+    .row
       .col
-        %h3.card-header-title
-          %i.fas.fa-key-skeleton.fa-lg
+        %h3.card-title
+          %i.fas.fa-key-skeleton
           API Permissions
       .col-auto
-        %a.btn.btn-sm.btn-white{href: new_client_environment_path(@client)}
+        %a.btn.btn-sm{href: new_client_environment_path(@client)}
           New
   - if @client.environments.any?
     .table-responsive
@@ -21,14 +21,14 @@
               %td= link_to e.name, edit_client_environment_path(@client, e)
               %td
                 - if e.status == 'approved'
-                  %span.badge.badge-soft-success.text-uppercase= e.status
+                  %span.badge.badge-success.badge-pill.text-uppercase= e.status
                 - elsif e.status == 'rejected'
-                  %span.badge.badge-soft-danger.text-uppercase= e.status
+                  %span.badge.badge-danger.badge-pill.text-uppercase= e.status
                 - elsif e.status == 'hold'
-                  %span.badge.badge-soft-warning.text-uppercase= e.status
+                  %span.badge.badge-secondary.badge-pill.text-uppercase= e.status
                 - else
-                  %span.badge.badge-soft-info.text-uppercase= e.status
+                  %span.badge.badge-pill.text-uppercase= e.status
   - else
-    .card-body.text-center.bg-transparent
-      %h3 No Environments
+    .text-center
+      %h3.content-title No Environments
       %p.text-muted This client does not have permissions in any environments.

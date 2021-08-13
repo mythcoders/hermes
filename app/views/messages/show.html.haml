@@ -21,17 +21,17 @@
             %a#recipients-tab.nav-link{"aria-controls": "recipients", "aria-selected": "false", "data-toggle": "tab", href: "#recipients", role: "tab"}
               = fa_solid 'mailbox'
               Recipients
-              %span.badge.badge-info= @message.recipients.count
+              %span.badge.badge-primary= @message.recipients.count
           %li.nav-item
             %a#read-tab.nav-link{"aria-controls": "read", "aria-selected": "false", "data-toggle": "tab", href: "#read", role: "tab"}
               = fa_solid 'truck-container'
               Delivery Activity
-              %span.badge.badge-info= @message.delivery_activity.count
+              %span.badge.badge-primary= @message.delivery_activity.count
           %li.nav-item
             %a#link-tab.nav-link{"aria-controls": "link", "aria-selected": "false", "data-toggle": "tab", href: "#link", role: "tab"}
               = fa_solid 'paperclip'
               Link Activity
-              %span.badge.badge-info= @message.link_activity.count
+              %span.badge.badge-primary= @message.link_activity.count
 
 #workshopTabContent.tab-content
   #overview.tab-pane.fade.show.active{"aria-labelledby": "overview-tab", role: "tabpanel"}

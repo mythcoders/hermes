@@ -2,11 +2,13 @@
 %html{html_attrs('en-us')}
   %head
     = render partial: 'layouts/partials/header'
-  %body.dark-mode{"data-set-preferred-mode-onload": "true",
+  %body.dark-mode{"data-sidebar-type": "overlayed-sm-and-down",
+                  "data-set-preferred-mode-onload": "true",
                   "data-dm-shortcut-enabled": "true",
                   "data-sidebar-shortcut-enabled": "true"}
     = render partial: 'layouts/partials/logout'
     .page-wrapper.with-navbar.with-sidebar.with-transitions
+      .sticky-alerts
       = render partial: 'layouts/partials/navbar'
       = render partial: 'layouts/partials/sidebar'
       .content-wrapper

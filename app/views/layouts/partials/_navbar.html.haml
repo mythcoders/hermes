@@ -4,10 +4,10 @@
       %button.btn.btn-action{:type => "button", 'data-controller': 'sidebar', 'data-action': 'click->sidebar#toggle'}
         %i.fa.fa-bars{"aria-hidden" => "true"}
         %span.sr-only Toggle sidebar
-  %a.navbar-brand{href: home_path}
-    Hermes
+  %a.navbar-brand.ml-10.ml-sm-15{href: home_path}
+    %span.mr-5.mr-sm-10 Hermes
   - unless Rails.env.production?
-    %span.navbar-text.text-monospace= Rails.env
+    %span.badge.font-size-12.text-monospace.text-secondary.ml-auto= Rails.env
   - if user_signed_in?
     .navbar-content.ml-auto
       .dropdown.with-arrow
