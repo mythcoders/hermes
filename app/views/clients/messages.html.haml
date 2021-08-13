@@ -32,7 +32,9 @@
                   %td= m.subject
                   %td
                     %span.badge.text-monospace= m.environment
-
+        .p-10
+          = paginate @messages
+          = page_entries_info @messages
       - else
         .text-center
           %h3.content-title.mt-10 No Messages

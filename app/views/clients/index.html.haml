@@ -24,9 +24,9 @@
             %td= c.owner
             %td.float-right
               - if c.is_active
-                %span.badge.badge-success.badge-pill.text-uppercase Approved
+                %span.badge.badge-success.text-uppercase Approved
               - else
-                %span.badge.badge-danger.badge-pill.text-uppercase Blocked
+                %span.badge.badge-danger.text-uppercase Blocked
   .p-10
     = paginate @clients
     = page_entries_info @clients

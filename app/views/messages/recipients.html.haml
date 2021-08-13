@@ -18,7 +18,7 @@
               = mail_to r.email
               - unless r.recipient_type == "to"
                 %span.badge.badge-secondary.text-uppercase= r.recipient_type
-            %td= r.delivered_at
+            %td= l r.delivered_at
             %td= r.send_at || 'Deliver on receipt'
           - if has_activity
             - r.activities.each do |act|
@@ -27,3 +27,6 @@
                   .text-monospace
                     = act.reporting_mta
                     %br= act.smtp_response
+  .p-10
+    = paginate @recipients
+    = page_entries_info @recipients

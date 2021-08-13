@@ -21,9 +21,9 @@
               %td= link_to t.name, client_template_path(@client, t)
               %td
                 - if t.active
-                  %span.badge.badge-success.badge-pill.text-uppercase active
+                  %span.badge.badge-success.text-uppercase active
                 - else
-                  %span.badge.badge-secondary.badge-pill.text-uppercase inactive
+                  %span.badge.badge-secondary.text-uppercase inactive
   - else
     .text-center
       %h3.content-title.mt-10 No Templates

@@ -1,5 +1,5 @@
-.card
-  .row.align-items-center.mt-0
+.card.p-15
+  .row.align-items-center
     .col
       %strong Owner
     .col-auto
@@ -23,6 +23,6 @@
       %strong API Access
     .col-auto
       - if @client.is_active
-        %span.badge.badge-success.badge-pill.text-uppercase approved
+        %span.badge.badge-success.text-uppercase approved
       - else
-        %span.badge.badge-danger.badge-pill.text-uppercase blocked
+        %span.badge.badge-danger.text-uppercase blocked

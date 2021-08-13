@@ -13,19 +13,13 @@
       %tbody
         - @logs.each do |r|
           %tr{style: "border-bottom: none"}
-            %td
-              = r.activity_type
+            %td= activity_message(r.activity_type)
             %td.text-monospace
               - if r.activity_type == "clicked"
                 = r.link_url
                 %hr
               = r.user_agent
-            %td.float-right= r.notification_timestamp
-          -# %tr{title: r.notification_timestamp}
-          -#   %td{colspan: 3}
-          -#     .text-monospace
-          -#       - if r.activity_type == "delivered"
-          -#         = r.reporting_mta
-          -#         %br= r.smtp_response
-          -#       - else
-          -#         = r.user_agent
+            %td.float-right= l r.notification_timestamp
+  .p-10
+    = paginate @logs
+    = page_entries_info @logs
