@@ -33,7 +33,7 @@ module MessagesHelper
     when "received"
       "API request recieved"
     when "rerouted"
-      "Rerouted to client owner"
+      "Rerouted"
     when "processed"
       "Forwarded to AWS"
     when "opened"

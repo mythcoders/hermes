@@ -8,25 +8,12 @@
         %h6.text-uppercase.mt-1.mb-1
           = fa_solid activity_icon(r.activity_type)
           = message
-        - if r.activity_type == 'rerouted'
-          %p.font-size-12 Hermes modified the message to prevent it from going to its intended recipients
-        - if r.activity_type == 'delivered'
-          %small= r.recipient.email
-          %br
-        - if r.activity_type == 'clicked'
-          %small= r.link_url
-          %br
-        - if r.activity_type == 'opened'
-          %small #{r.ip_address} - #{r.user_agent}
-          %br
+        %p.font-size-12
+          - if r.activity_type == 'received'
+            Hermes received the message and saved it for processing.
+          - elsif r.activity_type == 'rerouted'
+            Because of the environment, Hermes modified the message and rerouted it to the Client Owner.
+          - elsif r.activity_type == 'processed'
+            Hermes finished processing and sent it along for delivery.
         %small.text-muted{title: r.notification_timestamp}
           #{time_ago_in_words r.notification_timestamp} ago
-        - if r.activity_type == 'delivered'
-          %a{"aria-controls" => "collapseDiff-#{r.id}", "aria-expanded" => "false", "data-toggle" => "collapse",
-          :href => "#collapseInfo-#{r.id}", :role => "button"}
-            View details
-          .collapse{id: "collapseInfo-#{r.id}"}
-            .card.card-body.mt-2
-              %pre.card-text.overflow-auto
-                = r.reporting_mta
-                = r.smtp_response

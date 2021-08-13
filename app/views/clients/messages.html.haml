@@ -24,17 +24,15 @@
             %thead
               %tr
                 %th Timestamp
-                %th Tracking ID
                 %th Subject
                 %th Env
             %tbody
               - @client.messages.order(created_at: :desc).each do |m|
                 %tr
                   %td= link_to l(m.created_at), message_path(m.tracking_id)
-                  %td= m.tracking_id
                   %td= m.subject
                   %td
-                    %code= m.environment
+                    %span.badge.text-monospace= m.environment
 
       - else
         .text-center

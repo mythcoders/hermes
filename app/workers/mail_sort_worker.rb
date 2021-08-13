@@ -8,8 +8,13 @@ class MailSortWorker
     @tracking_id = tracking_id
 
     reroute_message if are_emails_rerouted?
+    return if are_emails_held? || are_emails_ignored?
 
-    PostalWorker.perform_async(tracking_id) unless are_emails_held? || are_emails_ignored?
+    if message.text_body.blank?
+      message.text_body = PlainText.from_html(message.html_body)
+    end
+
+    PostalWorker.perform_async(tracking_id)
   end
 
   private
