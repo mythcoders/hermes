@@ -7,18 +7,17 @@
     = render partial: 'overview'
 
   .col-12.col-md-8
-    .card
-      .card-header
+    .card.p-0
+      .px-card.py-10.bg-light-lm.bg-very-dark-dm
         .row
           .col
-            %h3.card-title
-              %i.fad.fa-envelope-open-text
+            %h2.card-title.font-size-18.m-0
               Messages
           - if @client.environments.any?
             .col-auto
               %a.btn.btn-sm{href: client_new_email_path(@client)}
                 New
-      - if @client.messages.any?
+      - if @messages.any?
         .table-responsive
           %table.table.card-table.table-sm
             %thead
@@ -27,7 +26,7 @@
                 %th Subject
                 %th Env
             %tbody
-              - @client.messages.order(created_at: :desc).each do |m|
+              - @messages.each do |m|
                 %tr
                   %td= link_to l(m.created_at), message_path(m.tracking_id)
                   %td= m.subject
@@ -36,6 +35,6 @@
 
       - else
         .text-center
-          %h3.content-title No Messages
+          %h3.content-title.mt-10 No Messages
           %p.text-muted This client does not have any email templates saved.
 

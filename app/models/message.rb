@@ -43,12 +43,8 @@ class Message < ApplicationRecord
     activities.where.not(activity_type: %w[delivered clicked opened])
   end
 
-  def delivery_activity
-    activities.where(activity_type: %w[delivered opened])
-  end
-
-  def link_activity
-    activities.where(activity_type: "clicked")
+  def user_activity
+    activities.where(activity_type: %w[clicked opened])
   end
 
   def client_environment

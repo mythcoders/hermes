@@ -26,17 +26,3 @@
         %span.badge.badge-success.badge-pill.text-uppercase approved
       - else
         %span.badge.badge-danger.badge-pill.text-uppercase blocked
-  %hr
-  .row.align-items-center
-    .col
-      %strong API Key
-    .col-auto
-      %small.text-muted
-        = @client.api_key
-  %hr
-  .row.align-items-center
-    .col
-      %strong API Secret
-    .col-auto
-      %small.text-muted
-        = @client.api_secret

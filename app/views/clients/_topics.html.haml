@@ -1,8 +1,8 @@
-.card
-  .card-header
+.card.p-0
+  .px-card.py-10.bg-light-lm.bg-very-dark-dm
     .row
       .col
-        %h3.card-title
+        %h2.card-title.font-size-18.m-0
           %i.fas.fa-clipboard-list
           Mailing Topics
       .col-auto
@@ -27,6 +27,6 @@
                 - else
                   %span.badge.badge-secondary.badge-pill.text-uppercase inactive
   - else
-    .card-body.text-center.bg-transparent
-      %h3.content-title No Topics
+    .text-center
+      %h3.content-title.mt-10 No Topics
       %p.text-muted This client does not have any topics saved.

@@ -9,24 +9,24 @@
     .col-auto
       = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
 
-.card
+.card.p-0
   %table-responsive
     %table.table.table-sm.card-table
       %thead
         %tr
           %th Name
           %th Owner
-          %th API Access
+          %th.float-right API Access
       %tbody
         - @clients.each do |c|
           %tr
             %td= link_to c.name, client_path(c)
             %td= c.owner
-            %td
+            %td.float-right
               - if c.is_active
                 %span.badge.badge-success.badge-pill.text-uppercase Approved
               - else
                 %span.badge.badge-danger.badge-pill.text-uppercase Blocked
-  .mt-20
+  .p-10
     = paginate @clients
     = page_entries_info @clients

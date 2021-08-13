@@ -8,12 +8,8 @@ class MessagesController < ApplicationController
     @messages = Message.order(created_at: :desc).page(params[:page]).per(15)
   end
 
-  def links
-    @links = @message.link_activity.order(created_at: :desc).page(params[:page])
-  end
-
   def logs
-    @logs = @message.delivery_activity.order(created_at: :desc).page(params[:page])
+    @logs = @message.user_activity.order(created_at: :desc).page(params[:page])
   end
 
   def preview

@@ -1,8 +1,8 @@
-.card
-  .card-header
+.card.p-0
+  .px-card.py-10.bg-light-lm.bg-very-dark-dm
     .row
       .col
-        %h3.card-title
+        %h2.card-title.font-size-18.m-0
           %i.fas.fa-file-import
           Uploads
       .col-auto
@@ -10,7 +10,7 @@
           New
   - if @client.uploads.any?
     .table-responsive
-      %table.table.card-table.table-sm
+      %table.table
         %thead
           %tr
             %th Type
@@ -23,6 +23,6 @@
               %td= l t.created_at
               %td= t.status
   - else
-    .card-body.text-center.bg-transparent
-      %h3.content-title No Uploads
+    .text-center
+      %h3.content-title.mt-10 No Uploads
       %p.text-muted This client does not have any files uploaded yet.

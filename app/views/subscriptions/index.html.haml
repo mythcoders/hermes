@@ -5,7 +5,7 @@
     = fa_solid 'users'
     All Subscriptions
 
-.card
+.card.p-0
   %table-responsive
     %table.table.card-table
       %thead
@@ -21,6 +21,6 @@
             %td= s.topic.client.name
             %td= s.topic.name
             %td= l(s.created_at)
-  .mt-20
+  .p-10
     = paginate @subscriptions
     = page_entries_info @subscriptions

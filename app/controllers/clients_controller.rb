@@ -2,7 +2,7 @@
 
 class ClientsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_client, only: %i[show edit update new_email]
+  before_action :set_client, only: %i[show edit update new_email messages subscribers]
 
   def index
     @clients = Client.order(name: :desc).page(params[:page]).per(15)
@@ -48,11 +48,11 @@ class ClientsController < ApplicationController
   end
 
   def messages
-    @client = Client.includes(:messages).find(params[:client_id])
+    @messages = @client.messages.order(created_at: :desc).page(params[:page])
   end
 
   def subscribers
-    @client = Client.includes(:subscribers).find(params[:client_id])
+    @subscribers = @client.subscribers.order(created_at: :desc).page(params[:page])
   end
 
   private

@@ -7,6 +7,20 @@
     = render partial: 'overview'
 
   .col-8
+    %details.collapse-panel{style: "margin: 30px"}
+      %summary.collapse-header.bg-very-dark-dm.font-size-18
+        %i.fas.fa-key-skeleton
+        API Credentials
+      .collapse-content.p-0
+        %table-responsive
+          %table.table.p-0
+            %tbody
+              %tr
+                %td Key/Username
+                %td.text-monospace= @client.api_key
+              %tr
+                %td Secret/Password
+                %td.text-monospace= @client.api_secret
     = render partial: 'environments'
     = render partial: 'topics'
     = render partial: 'templates'

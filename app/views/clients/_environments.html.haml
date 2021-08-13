@@ -1,19 +1,19 @@
-.card
-  .card-header
+.card.p-0
+  .px-card.py-10.bg-light-lm.bg-very-dark-dm
     .row
       .col
-        %h3.card-title
+        %h2.card-title.font-size-18.m-0
           %i.fas.fa-key-skeleton
-          API Permissions
+          API Environments
       .col-auto
         %a.btn.btn-sm{href: new_client_environment_path(@client)}
           New
   - if @client.environments.any?
     .table-responsive
-      %table.table.card-table.table-sm
+      %table.table
         %thead
           %tr
-            %th Environment Name
+            %th Name
             %th{style: 'width: 40%'} Permission Level
         %tbody
           - @client.environments.order(:name).each do |e|
@@ -30,5 +30,5 @@
                   %span.badge.badge-pill.text-uppercase= e.status
   - else
     .text-center
-      %h3.content-title No Environments
+      %h3.content-title.mt-10 No Environments
       %p.text-muted This client does not have permissions in any environments.

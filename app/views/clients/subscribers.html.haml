@@ -7,11 +7,11 @@
     = render partial: 'overview'
 
   .col-12.col-md-8
-    .card
-      .card-header
+    .card.p-0
+      .px-card.py-10.bg-light-lm.bg-very-dark-dm
         .row
           .col
-            %h3.card-title
+            %h2.card-title.font-size-18.m-0
               %i.fad.fa-users
               Subscribers
           .col-auto
@@ -32,6 +32,6 @@
 
       - else
         .text-center
-          %h3.content-title No Subscribers
+          %h3.content-title.mt-10 No Subscribers
           %p.text-muted This client does not have anyone subscribed.
 

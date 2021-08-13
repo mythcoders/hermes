@@ -5,7 +5,7 @@
     = fa_solid 'stream'
     Logs
 
-.card
+.card.p-0
   %table-responsive
     %table.table.table-sm.card-table
       %thead
@@ -22,6 +22,6 @@
             %td= c.subject
             %td
               %code= c.environment
-  .mt-20
+  .p-10
     = paginate @messages
     = page_entries_info @messages

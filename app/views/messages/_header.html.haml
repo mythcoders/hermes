@@ -11,14 +11,11 @@
         Recipients
         %span.badge.badge-primary= @message.recipients.count
       %a.btn{href: message_logs_path(@message.tracking_id), class: ('alt-dm' if action != :logs)}
-        = fa_solid 'truck-container'
-        Delivery Activity
-        %span.badge.badge-primary= @message.delivery_activity.count
-      %a.btn{href: message_links_path(@message.tracking_id), class: ('alt-dm' if action != :links)}
         = fa_solid 'paperclip'
-        Link Activity
-        %span.badge.badge-primary= @message.link_activity.count
+        Activity
+        %span.badge.badge-primary= @message.user_activity.count
     .col-auto
       .btn-group
         = link_to 'All Messages', messages_path, class: 'btn alt-dm'
+        = link_to "#{@message.client.name} Messages", client_messages_path(@message.client_id), class: 'btn alt-dm'
         = link_to 'Preview', message_preview_path(@message.tracking_id), class: 'btn btn-primary', target: '_blank'

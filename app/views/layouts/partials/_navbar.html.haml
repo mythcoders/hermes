@@ -11,13 +11,10 @@
   - if user_signed_in?
     .navbar-content.ml-auto
       .dropdown.with-arrow
-        %button#navbar-dropdown-toggle-btn-1.btn{"data-toggle" => "dropdown", :type => "button"}
+        %button#user-menu-toggle.btn{"data-toggle" => "dropdown", :type => "button"}
           Menu
           %i.fas.fa-angle-down{"aria-hidden" => "true"}
-        .dropdown-menu.dropdown-menu-right.w-200{"aria-labelledby" => "navbar-dropdown-toggle-btn-1"}
-          %a.dropdown-item{:href => "#"} Docs
-          %a.dropdown-item{:href => "#"} Products
-          .dropdown-divider
+        .dropdown-menu.dropdown-menu-right.w-200{"aria-labelledby" => "user-menu-toggle"}
           %a.dropdown-item{href: "#logout-modal", role: "button"}
             %i.fal.fa-sign-out
             Logout

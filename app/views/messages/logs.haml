@@ -1,21 +1,31 @@
 - page_title 'View Message', 'Mail Log'
 
 = render partial: 'header', locals: { action: :logs }
-.card
+
+.card.p-0
   %table-responsive
     %table.table.table-sm
       %thead
         %tr
-          %th Recipient
-          %th Timestamp
-          %th.float-right MTA
+          %th Event
+          %th Details
+          %th.float-right Timestamp
       %tbody
         - @logs.each do |r|
           %tr{style: "border-bottom: none"}
-            %td= r.recipient.email
-            %td= r.notification_timestamp
             %td
-              .float-right.text-monospace= r.reporting_mta
-          %tr{title: r.notification_timestamp}
-            %td{colspan: 3}
-              .text-monospace= r.smtp_response
+              = r.activity_type
+            %td.text-monospace
+              - if r.activity_type == "clicked"
+                = r.link_url
+                %hr
+              = r.user_agent
+            %td.float-right= r.notification_timestamp
+          -# %tr{title: r.notification_timestamp}
+          -#   %td{colspan: 3}
+          -#     .text-monospace
+          -#       - if r.activity_type == "delivered"
+          -#         = r.reporting_mta
+          -#         %br= r.smtp_response
+          -#       - else
+          -#         = r.user_agent
