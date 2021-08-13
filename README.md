@@ -1,36 +1,31 @@
 # Hermes
 
-Hermes is a Rails application with API for sending emails to a separate SMTP service.
-
-Upon registering, Clients receive an `api secret` and an `api key` to begin calling the API.
-Separate approval is required before emails send by your application are actually sent to customers.
-Until then, email are rerouted to the applications owner. This is handy for allowing emails in production
-to be sent out but reroute emails sent in testing environments.
-
-A log of all emails sent is also kept.
+Rails API for logging emails and then sending them to AWS Simple Email Service for delivery.
+Supports multiple API clients and tracking emails sent by each client.
 
 ## Software
 
 The UI is built with [Halfmoon](https://www.gethalfmoon.com/)
 
-## Planned Features
+## Getting Started
 
-- Delivery and read reports
-- Header and footer templates
-- Mail-merge
-- Other forms of communication like SMS
+Create a `Client` to receive an `key` and `secret` for calling the API. Separate approval is required before emails send
+by your client application are actually sent to customers. Until then, email are rerouted to the applications owner.
+This is handy for allowing emails in production to be sent out but reroute emails sent in testing environments.
+
+A log of all emails sent is also kept.
 
 ## Message Structure
 
 | Field         | Type     |
 | ------------- | -------- |
-| from\*        | string   |
-| to\*          | string[] |
-| cc            | string[] |
 | bcc           | string[] |
-| subject\*     | string   |
-| html_body     | string   |
-| text_body     | string   |
+| cc            | string[] |
 | environment\* | string   |
+| from\*        | string   |
+| html_body     | string   |
+| subject\*     | string   |
+| text_body     | string   |
+| to\*          | string[] |
 
 _\* denotes a required field_
