@@ -37,9 +37,9 @@ module MessagesHelper
     when "processed"
       "Forwarded to AWS"
     when "opened"
-      "Message opened"
+      "Open"
     when "clicked"
-      "Link clicked"
+      "Click"
     else
       key
     end

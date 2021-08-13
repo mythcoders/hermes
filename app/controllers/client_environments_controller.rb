@@ -34,6 +34,6 @@ class ClientEnvironmentsController < ApplicationController
   end
 
   def environment_params
-    params.require(:client_environment).permit(:client_id, :name, :status)
+    params.require(:client_environment).permit(:client_id, :name, :status, :regex)
   end
 end

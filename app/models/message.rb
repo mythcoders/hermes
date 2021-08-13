@@ -40,7 +40,7 @@ class Message < ApplicationRecord
   end
 
   def basic_activity
-    activities.where.not(activity_type: %w[delivered clicked opened])
+    activities.where(activity_type: %w[received rerouted processed])
   end
 
   def user_activity

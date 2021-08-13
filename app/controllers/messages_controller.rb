@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
   end
 
   def recipients
-    @recipients = @message.recipients.order(created_at: :desc).page(params[:page])
+    @recipients = @message.recipients.includes(:activities).order(created_at: :desc).page(params[:page])
   end
 
   private
