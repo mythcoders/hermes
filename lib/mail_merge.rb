@@ -15,7 +15,7 @@ class MailMerge
 
   def hermes_fields
     {
-      hermes_url: Hermes.env_url,
+      hermes_url: HermesApp.env_url,
       unsubscribe_url: subscription_url
     }
   end
@@ -28,7 +28,7 @@ class MailMerge
   end
 
   def subscription_url
-    "#{Hermes.env_url}/subscriptions/#{subscription_id}?tracking_id=#{tracking_id}"
+    "#{HermesApp.env_url}/subscriptions/#{subscription_id}?tracking_id=#{tracking_id}"
   end
 
   def subscription_id

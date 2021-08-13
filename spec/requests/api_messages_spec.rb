@@ -32,7 +32,7 @@ RSpec.describe "Messages API", type: :request do
     it "queues MailSortJob" do
       expect do
         post "/api/messages", params: request, headers: api_basic_auth(client)
-      end.to change { MailSortJob.jobs.size }.by(1)
+      end.to have_enqueued_job MailSortJob
     end
   end
 

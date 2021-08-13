@@ -2,7 +2,7 @@
 
 require "pathname"
 
-module Hermes
+module HermesApp
   class << self
     def root
       Pathname.new(File.expand_path("..", __dir__))
@@ -36,10 +36,10 @@ module Hermes
       elsif ENV["GITLAB_ENVIRONMENT_URL"].present?
         ENV["GITLAB_ENVIRONMENT_URL"].split("//").last
       else
-        "hubble.mythcoders.dev"
+        "hermes.mythcoders.dev"
       end
     end
   end
 
-  REVISION = File.read(Hubble.root.join("REVISION")).strip.freeze
+  REVISION = File.read(HermesApp.root.join("REVISION")).strip.freeze
 end
