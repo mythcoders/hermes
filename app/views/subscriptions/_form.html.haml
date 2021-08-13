@@ -5,7 +5,7 @@
   = f.select :status,
     options_from_collection_for_select(subscription_statuses, 'value', 'label', @subscription.status),
     { include_blank: '- Select -' },
-    { class: 'custom-select' }
+    { class: 'form-control' }
 .form-group
   = f.label :memo, class: 'col-form-label'
   = f.text_area :memo, class: 'form-control'

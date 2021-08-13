@@ -1,18 +1,13 @@
 - page_title 'All Subscriptions'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Subscriptions
-        %h1.card-title
-          = fa_solid 'users'
-          Subscription #{@subscription.identifier}
+.content
+  %h1.content-title
+    = fa_solid 'users'
+    Subscription #{@subscription.identifier}
 
-= form_for @subscription, url: subscription_path(@subscription), method: :patch  do |f|
-  = error_messages_for 'subscription'
-  = render partial: 'subscriptions/form', locals: { f: f }
-  %hr.mt-5.mb-5
-  = f.submit 'Save changes to subscription', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', subscriptions_path, class: 'btn btn-block btn-link text-muted'
+  = form_for @subscription, url: subscription_path(@subscription), method: :patch  do |f|
+    = error_messages_for 'subscription'
+    = render partial: 'subscriptions/form', locals: { f: f }
+    %hr.mt-5.mb-5
+    = f.submit 'Save changes to subscription', class: 'btn btn-block btn-primary'
+    = link_to 'Cancel', subscriptions_path, class: 'btn btn-block btn-link text-muted'

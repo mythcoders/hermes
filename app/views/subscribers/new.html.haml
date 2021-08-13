@@ -1,18 +1,13 @@
 - page_title 'New', 'Subscriber'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Subscriber
-        %h1.card-title
-          = fa_solid 'users'
-          Create a new Subscriber
+.content
+  %h1.content-title
+    = fa_solid 'users'
+    Create a new Subscriber
 
-= form_for @subscriber, url: client_subscribers_path do |f|
-  = error_messages_for 'subscriber'
-  = render partial: 'subscribers/form', locals: { f: f }
-  %hr.mt-5.mb-5
-  = f.submit 'Create subscriber', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', client_subscribers_path(@subscriber.client_id), class: 'btn btn-block btn-link text-muted'
+  = form_for @subscriber, url: client_subscribers_path do |f|
+    = error_messages_for 'subscriber'
+    = render partial: 'subscribers/form', locals: { f: f }
+    %hr.mt-5.mb-5
+    = f.submit 'Create subscriber', class: 'btn btn-block btn-primary'
+    = link_to 'Cancel', client_subscribers_path(@subscriber.client_id), class: 'btn btn-block btn-link text-muted'

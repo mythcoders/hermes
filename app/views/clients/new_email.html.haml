@@ -1,26 +1,21 @@
 - page_title 'Send Email'
 
-.row.justify-content-center
-  .col-12.col-lg-10.col-xl-8
-    = form_for @message, url: client_send_email_path(@client), html: { id: 'wizardSteps', class: 'tab-content py-6' } do |f|
-      #wizardStepOne.tab-pane.fade.active.show{"aria-labelledby" => "wizardTabOne", :role => "tabpanel"}
-        .row.justify-content-center
-          .col-12.col-md-10.col-lg-8.col-xl-6.text-center
-            %h6.mb-4.text-uppercase.text-muted
-              Step 1 of 2
-            %h1.mb-3
-              Let’s start with the basics.
-            %p.mb-5.text-muted
-              Tell us the who, when, what, and how
+.content
+  %h1.content-title
+    = fa_solid 'code'
+    Send Email
 
+  .row.justify-content-center
+    .col-12.col-lg-10.col-xl-8
+      = form_for @message, url: client_send_email_path(@client), html: { id: 'wizardSteps', class: 'tab-content py-6' } do |f|
         = error_messages_for 'message'
 
         .form-group
           = f.label :mailing_topic_id, class: 'col-form-label'
           = f.select :mailing_topic_id,
-                     options_from_collection_for_select(@client.topics.active, 'id', 'name', @message.mailing_topic_id),
-                     { include_blank: '- Select -' },
-                     { class: 'form-control', 'data-toggle': 'select' }
+                      options_from_collection_for_select(@client.topics.active, 'id', 'name', @message.mailing_topic_id),
+                      { include_blank: '- Select -' },
+                      { class: 'form-control', 'data-toggle': 'select' }
         -# .form-group
         -#   = f.label :send_time, class: 'col-form-label'
         -#   = f.datetime_field :send_time, class: 'form-control'
@@ -28,36 +23,18 @@
         .form-group
           = f.label :template_id, class: 'col-form-label'
           = f.select :template_id,
-                     options_from_collection_for_select(@client.templates.active, 'id', 'name', @message.template_id),
-                     { include_blank: '- Select -' },
-                     { class: 'form-control', 'data-toggle': 'select' }
+                      options_from_collection_for_select(@client.templates.active, 'id', 'name', @message.template_id),
+                      { include_blank: '- Select -' },
+                      { class: 'form-control', 'data-toggle': 'select' }
 
         .form-group
           = f.label :environment_id, class: 'col-form-label'
           = f.select :environment_id,
-                     options_from_collection_for_select(@client.environments, 'id', 'fancy_name', @message.environment_id),
-                     { include_blank: '- Select -' },
-                     { class: 'form-control', 'data-toggle': 'select' }
+                      options_from_collection_for_select(@client.environments, 'id', 'fancy_name', @message.environment_id),
+                      { include_blank: '- Select -' },
+                      { class: 'form-control', 'data-toggle': 'select' }
 
         %hr.my-5
-
-        .row.align-items-center
-          .col-auto
-            = link_to 'Cancel', client_path(@client), class: 'btn btn-lg btn-white'
-          .col.text-center
-            %h6.text-uppercase.text-muted.mb-0 Step 1 of 2
-          .col-auto
-            %a.btn.btn-lg.btn-primary{"data-toggle" => "wizard", :href => "#wizardStepTwo"} Continue
-
-      #wizardStepTwo.tab-pane.fade{"aria-labelledby" => "wizardTabTwo", :role => "tabpanel"}
-        .row.justify-content-center
-          .col-12.col-md-10.col-lg-8.col-xl-6.text-center
-            %h6.mb-4.text-uppercase.text-muted
-              Step 2 of 2
-            %h1.mb-3
-              Next, let’s upload some files.
-            %p.mb-5.text-muted
-              We need to style your team page and make sure you have all your starting files.
 
         .form-group
           = f.label :subject, class: 'col-form-label'
@@ -73,8 +50,7 @@
 
         .row.align-items-center
           .col-auto
-            %a.btn.btn-lg.btn-white{"data-toggle" => "wizard", :href => "#wizardStepOne"} Back
+            = link_to 'Back', client_path(@client), class: 'btn alt-dm'
           .col.text-center
-            %h6.text-uppercase.text-muted.mb-0 Step 2 of 2
           .col-auto
-            = f.submit 'Schedule for Delivery', class: 'btn btn-block btn-success'
+            = f.submit 'Schedule for Delivery', class: 'btn btn-success'
