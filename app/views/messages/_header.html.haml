@@ -7,11 +7,11 @@
       %a.btn{href: message_path(@message.tracking_id), class: ('alt-dm' if action != :summary)}
         Overview
       %a.btn{href: message_recipients_path(@message.tracking_id), class: ('alt-dm' if action != :recipients)}
-        = fa_solid 'mailbox'
+        %i.fas.fa-mailbox
         Recipients
         %span.badge.badge-primary= @message.recipients.count
       %a.btn{href: message_logs_path(@message.tracking_id), class: ('alt-dm' if action != :logs)}
-        = fa_solid 'paperclip'
+        %i.fas.fa-paperclip
         Activity
         %span.badge.badge-primary= @message.user_activity.count
     .col-auto

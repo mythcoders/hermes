@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 # Takes a MessageID and sends the message to the approperate destination
-class PostalWorker
-  include Sidekiq::Worker
-
+class PostalWorkerJob < ApplicationJob
   def perform(tracking_id)
     @tracking_id = tracking_id
 

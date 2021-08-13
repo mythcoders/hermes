@@ -8,26 +8,26 @@
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_solid 'user'
+          %i.fas.fa-user
       = f.text_field :name, class: 'form-control', placeholder: 'Full Name', autofocus: true, autocomplete: 'off'
   .form-group
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_solid 'lock-alt'
+          %i.fas.fa-lock-alt
       = f.email_field :email, autocomplete: 'off', class: 'form-control', :placeholder => 'Email Address'
   .form-group
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_solid 'key'
+          %i.fas.fa-key
       = f.password_field :password, autocomplete: 'off', class: 'form-control', :placeholder => 'Password'
 
   .form-group
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_solid 'key'
+          %i.fas.fa-key
       = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', :placeholder => 'Password Confirmation'
 
     - if @minimum_password_length

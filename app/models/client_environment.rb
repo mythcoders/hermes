@@ -5,13 +5,19 @@ class ClientEnvironment < ApplicationRecord
 
   validates :name, presence: true, uniqueness: {scope: %i[client]}
 
+  # approved: Messages are delivered without any filtering
+  # hold: Messages are saved but not delivered
+  # ignored: Messages are not saved but no error is returned
+  # rejected: Messages are not saved and an error is returned
+  # rerouted: Messages are sent to the Client owner
+  # whitelisted: Messages are only delivered to recipeints whitelisted for the Client
   enum status: {
-    rerouted: "rerouted",
-    whitelisted: "whitelisted",
     approved: "approved",
-    rejected: "rejected",
     hold: "hold",
-    ignored: "ignored"
+    ignored: "ignored",
+    rejected: "rejected",
+    rerouted: "rerouted",
+    whitelisted: "whitelisted"
   }
 
   def fancy_name

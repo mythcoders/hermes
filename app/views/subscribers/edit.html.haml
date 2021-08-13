@@ -2,7 +2,7 @@
 
 .content
   %h1.content-title
-    = fa_solid 'users'
+    %i.fas.fa-users
     = "Edit #{@subscriber.name}"
 
   = form_for @subscriber, url: client_subscriber_path(@subscriber), method: :patch  do |f|

@@ -7,13 +7,13 @@
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_solid 'lock-alt'
+          %i.fas.fa-lock-alt
       = f.email_field :email, autofocus: true, class: 'form-control', :placeholder => 'Email Address', autocomplete: false
   .form-group
     .input-group
       .input-group-prepend
         %span.input-group-text
-          = fa_solid 'key'
+          %i.fas.fa-key
       = f.password_field :password, autocomplete: 'off', class: 'form-control', :placeholder => 'Password'
   .form-group
     = f.submit 'Sign in', class: 'btn btn-primary btn-block btn-login'

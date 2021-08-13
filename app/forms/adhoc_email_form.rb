@@ -27,7 +27,7 @@ class AdhocEmailForm < ApplicationForm
 
   def receive_and_sort_message
     if @message.received!
-      MailSortWorker.perform_async @message.tracking_id
+      MailSortJob.perform_later @message.tracking_id
       true
     else
       false

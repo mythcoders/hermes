@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  include IconHelpers
   include SidebarHelpers
 
   # Handles HTML title element

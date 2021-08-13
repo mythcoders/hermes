@@ -29,10 +29,10 @@ RSpec.describe "Messages API", type: :request do
       end.to change { Message.count }.by(1)
     end
 
-    it "queues MailSortWorker" do
+    it "queues MailSortJob" do
       expect do
         post "/api/messages", params: request, headers: api_basic_auth(client)
-      end.to change { MailSortWorker.jobs.size }.by(1)
+      end.to change { MailSortJob.jobs.size }.by(1)
     end
   end
 

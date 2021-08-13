@@ -4,7 +4,7 @@
   .row
     .col
       %h1.content-title
-        = fa_solid 'users'
+        %i.fas.fa-users
         = @subscriber.name
     .col-auto
       = link_to 'Go Back', client_subscribers_path(@subscriber.client_id), class: 'btn alt-dm'

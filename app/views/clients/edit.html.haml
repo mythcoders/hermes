@@ -2,7 +2,7 @@
 
 .content
   %h1.content-title
-    = fa_solid 'code'
+    %i.fas.fa-code
     = "Edit #{@client.name}"
 
   = form_for @client, url: client_path(@client), method: :patch  do |f|

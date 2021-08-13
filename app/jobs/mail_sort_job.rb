@@ -1,20 +1,24 @@
 # frozen_string_literal: true
 
 # Takes a MessageID and begins inital sorting of the message
-class MailSortWorker
-  include Sidekiq::Worker
-
+class MailSortJob < ApplicationJob
   def perform(tracking_id)
     @tracking_id = tracking_id
 
-    reroute_message if are_emails_rerouted?
-    return if are_emails_held? || are_emails_ignored?
+    ActiveRecord::Base.transaction do
+      if emails_are_rerouted?
+        reroute_message
+        # elsif emails_are_whitelisted?
+        #   remove_non_whitelisted_recipients
+      end
 
-    if message.text_body.blank?
-      message.text_body = PlainText.from_html(message.html_body)
+      if message.text_body.blank?
+        message.text_body = PlainText.from_html(message.html_body)
+        message.save!
+      end
     end
 
-    PostalWorker.perform_async(tracking_id)
+    PostalWorkerJob.perform_later(tracking_id) unless emails_are_held? || emails_are_ignored?
   end
 
   private
@@ -23,7 +27,13 @@ class MailSortWorker
     @message ||= Message.find_by_tracking_id @tracking_id
   end
 
+  def remove_non_whitelisted_recipients
+    whitelisted_emails = []
+    message.recipients.where.not(email: whitelisted_emails).destroy_all
+  end
+
   def reroute_message
+    # prevent us from changing the subject and body twice
     return if message.rerouted?
 
     message.html_body = rerouted_body("html")
@@ -43,15 +53,19 @@ class MailSortWorker
     )
   end
 
-  def are_emails_rerouted?
+  def emails_are_rerouted?
     message.client_environment.status == "rerouted"
   end
 
-  def are_emails_held?
+  def emails_are_whitelisted?
+    message.client_environment.status == "whitelisted"
+  end
+
+  def emails_are_held?
     message.client_environment.status == "hold"
   end
 
-  def are_emails_ignored?
+  def emails_are_ignored?
     message.client_environment.status == "ignore"
   end
 end

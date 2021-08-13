@@ -2,7 +2,7 @@
 
 .content
   %h1.content-title
-    = fa_solid 'clipboard-list'
+    %i.fas.fa-clipboard-list
     Create new Mailing Topic for #{@topic.client.name}
 
   = form_for @topic, url: client_topics_path do |f|

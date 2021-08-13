@@ -2,7 +2,7 @@
 
 .content
   %h1.content-title.font-size-22
-    = fa_solid 'stream'
+    %i.fas.fa-stream
     Logs
 
 .card.p-0
@@ -18,10 +18,10 @@
         - @messages.each do |c|
           %tr
             %td= link_to l(c.created_at), message_path(c.tracking_id)
-            %td= c.client.name
-            %td= c.subject
+            %td= link_to c.client.name, client_path(c.client_id)
+            %td= truncate c.subject, length: 50
             %td
-              %code= c.environment
+              %code= truncate c.environment, length: 20
   .p-10
     = paginate @messages
     = page_entries_info @messages

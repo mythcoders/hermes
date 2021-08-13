@@ -33,6 +33,6 @@ class ClientUpload < ApplicationRecord
   private
 
   def process_upload
-    ClientUploadWorker.perform_async id
+    ClientUploadJob.perform_later id
   end
 end

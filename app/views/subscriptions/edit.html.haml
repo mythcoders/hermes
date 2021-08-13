@@ -2,7 +2,7 @@
 
 .content
   %h1.content-title
-    = fa_solid 'users'
+    %i.fas.fa-users
     Subscription #{@subscription.identifier}
 
   = form_for @subscription, url: subscription_path(@subscription), method: :patch  do |f|

@@ -2,7 +2,7 @@
 
 .content
   %h1.content-title
-    = fa_solid 'clipboard-list'
+    %i.fas.fa-clipboard-list
     = "Edit #{@topic.name}"
 
   = form_for @topic, url: client_topic_path(@topic), method: :patch  do |f|

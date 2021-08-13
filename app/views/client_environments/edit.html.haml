@@ -2,7 +2,7 @@
 
 .content
   %h1.card-title
-    = fa_solid 'clipboard-list'
+    %i.fas.fa-clipboard-list
     = "Edit #{@environment.name}"
 
   = form_for @environment, url: client_environment_path(@environment), method: :patch  do |f|

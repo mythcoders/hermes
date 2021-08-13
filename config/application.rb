@@ -7,7 +7,7 @@ require "active_storage/engine"
 require "action_controller/railtie"
 require "action_view/railtie"
 require "action_mailer/railtie"
-# require 'active_job/railtie'
+require "active_job/railtie"
 require "action_cable/engine"
 # require 'action_mailbox/engine'
 require "action_text/engine"
@@ -32,6 +32,8 @@ module Hermes
     config.public_file_server.enabled
     config.autoload_paths += %W[#{config.root}/lib]
     # config.require_master_key = true
+
+    config.active_job.queue_adapter = :sidekiq
 
     # Storage
     config.active_storage.variant_processor = :vips

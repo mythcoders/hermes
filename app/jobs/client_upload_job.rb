@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ClientUploadWorker
-  include Sidekiq::Worker
-
+class ClientUploadJob < ApplicationJob
   def perform(upload_id)
     @upload_id = upload_id
     return if client_upload.finished?

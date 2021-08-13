@@ -3,8 +3,12 @@
     .col
       %h1.content-title.font-size-22= @client.name
       %a.btn{href: client_path(@client), class: ('alt-dm' if action != :summary)} Summary
-      %a.btn{href: client_messages_path(@client), class: ('alt-dm' if action != :messages)} Messages
-      %a.btn{href: client_subscribers_path(@client), class: ('alt-dm' if action != :subscribers)} Subscribers
+      %a.btn{href: client_messages_path(@client), class: ('alt-dm' if action != :messages)}
+        %i.fas.fa-stream
+        Messages
+      %a.btn{href: client_subscribers_path(@client), class: ('alt-dm' if action != :subscribers)}
+        %i.fas.fa-users
+        Subscribers
     .col-auto
       .btn-group
         = link_to 'All Clients', clients_path, class: 'btn alt-dm'

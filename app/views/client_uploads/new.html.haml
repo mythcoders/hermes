@@ -2,7 +2,7 @@
 
 .content
   %h1.card-title
-    = fa_solid 'file-import'
+    %i.fas.fa-file-import
     Create a new Upload
 
   = form_for @upload, url: client_uploads_path, method: :post do |f|
