@@ -9,5 +9,5 @@
     = error_messages_for 'environment'
     = render partial: 'client_environments/form', locals: { f: f }
     %hr.mt-5.mb-5
-    = f.submit 'Save changes to environment', class: 'btn btn-block btn-primary'
-    = link_to 'Cancel', client_path(@environment.client), class: 'btn btn-block btn-link text-muted'
+    = link_to 'Cancel', client_path(@environment.client), class: 'btn alt-dm'
+    = f.submit 'Save changes', class: 'btn btn-success float-right'

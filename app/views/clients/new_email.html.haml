@@ -48,9 +48,5 @@
 
         %hr.my-5
 
-        .row.align-items-center
-          .col-auto
-            = link_to 'Back', client_path(@client), class: 'btn alt-dm'
-          .col.text-center
-          .col-auto
-            = f.submit 'Schedule for Delivery', class: 'btn btn-success'
+        = link_to 'Back', client_path(@client), class: 'btn alt-dm'
+        = f.submit 'Schedule', class: 'btn btn-success float-right'

@@ -9,5 +9,6 @@
     = error_messages_for 'client'
     = render partial: 'clients/form', locals: { f: f }
     %hr.mt-5.mb-5
-    = f.submit 'Save changes to client', class: 'btn btn-block btn-primary'
-    = link_to 'Cancel', client_path(@client), class: 'btn btn-block btn-link text-muted'
+    = link_to 'Cancel', client_path(@client), class: 'btn'
+    = f.submit 'Save changes', class: 'btn btn-success float-right'
+
