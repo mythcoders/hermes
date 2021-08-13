@@ -29,7 +29,12 @@ Rails.application.routes.draw do
       resources :subscribers, except: %i[delete]
       resources :templates, except: %i[delete]
     end
-    resources :messages, param: :tracking_id, only: %i[index show]
+    resources :messages, param: :tracking_id, only: %i[index show] do
+      get "preview", action: :preview, as: "preview"
+      get "logs", action: :logs, as: "logs"
+      get "links", action: :links, as: "links"
+      get "recipients", action: :recipients, as: "recipients"
+    end
     resources :subscriptions, only: %i[index edit update]
   end
 end

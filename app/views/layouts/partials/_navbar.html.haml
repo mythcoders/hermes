@@ -7,7 +7,7 @@
   %a.navbar-brand.ml-10.ml-sm-15{href: home_path}
     %span.mr-5.mr-sm-10 Hermes
   - unless Rails.env.production?
-    %span.badge.font-size-12.text-monospace.text-secondary.ml-auto= Rails.env
+    %span.badge.font-size-12.text-monospace.text-secondary.ml-auto= Rails.env.upcase
   - if user_signed_in?
     .navbar-content.ml-auto
       .dropdown.with-arrow

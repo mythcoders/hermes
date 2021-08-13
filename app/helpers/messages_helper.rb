@@ -48,13 +48,13 @@ module MessagesHelper
   def activity_color(key)
     case key
     when "rerouted", "complaint"
-      "warning"
+      "secondary"
     when "failed", "error"
       "danger"
     when "sent", "delivered"
       "success"
     else
-      "primary"
+      "default"
     end
   end
 

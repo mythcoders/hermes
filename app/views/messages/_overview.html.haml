@@ -1,51 +1,37 @@
 .row.mt-2
   .col-4
     .card
-      .card-header
-        %h2.header-title
-          .avatar
-            %span.avatar-title.rounded-circle= @message.client.name.split.map(&:first).join
-          = link_to @message.client.name, client_path(@message.client)
-      .card-body
-        .row.align-items-center
-          .col
-            %h5.mb-0 Sender
-          .col-auto
-            %small.text-muted= @message.sender
-        %hr
-        .row.align-items-center
-          .col
-            %h5.mb-0 Environment
-          .col-auto
-            %small.text-muted= @message.environment
-        %hr
-        .row.align-items-center
-          .col
-            %h5.mb-0 Rule Set
-          .col-auto
-            %small.text-muted AWS
-        %hr
-        = render partial: 'activity', locals: { activity: @message.basic_activity }
+      .row.align-items-center
+        .col
+          %strong Client
+        .col-auto
+          %small.text-muted= link_to @message.client.name, client_path(@message.client)
+      %hr
+      .row.align-items-center
+        .col
+          %strong From
+        .col-auto
+          %small.text-muted= @message.sender
+      %hr
+      .row.align-items-center
+        .col
+          %strong Subject
+        .col-auto
+          %small.text-muted= @message.subject
+      %hr
+      .row.align-items-center
+        .col
+          %strong Environment
+        .col-auto
+          %small.text-muted= @message.environment
+      %hr
+      .row.align-items-center
+        .col
+          %strong Rule Set
+        .col-auto
+          %small.text-muted AWS
+
+    .card.p-0= render partial: 'activity', locals: { activity: @message.basic_activity }
   .col-8
     .card
-      .card-body
-        .row.align-items-center
-          .col
-            %h4.mb-0 Subject
-          .col-auto
-            %small.text-muted= @message.subject
-      .card-body
-        .row
-          .col
-            %h4 HTML Body
-        .row
-          .col
-            .embed-responsive.embed-responsive-1by1
-              %iframe.embed-responsive-item{srcdoc: @message.html_body, name: 'email-preview', allowfullscreen: 'true'}
-      .card-body
-        .row
-          .col
-            %h4 Text Body
-        .row
-          .col
-            %div.card-text= raw @message.text_body
+      = raw @message.text_body

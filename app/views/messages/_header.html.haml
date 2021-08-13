@@ -1,0 +1,24 @@
+.content.mb-0
+  .row
+    .col
+      %h1.content-title.font-size-22
+        Message Details
+        %span.badge.text-monospace=@message.tracking_id
+      %a.btn{href: message_path(@message.tracking_id), class: ('alt-dm' if action != :summary)}
+        Overview
+      %a.btn{href: message_recipients_path(@message.tracking_id), class: ('alt-dm' if action != :recipients)}
+        = fa_solid 'mailbox'
+        Recipients
+        %span.badge.badge-primary= @message.recipients.count
+      %a.btn{href: message_logs_path(@message.tracking_id), class: ('alt-dm' if action != :logs)}
+        = fa_solid 'truck-container'
+        Delivery Activity
+        %span.badge.badge-primary= @message.delivery_activity.count
+      %a.btn{href: message_links_path(@message.tracking_id), class: ('alt-dm' if action != :links)}
+        = fa_solid 'paperclip'
+        Link Activity
+        %span.badge.badge-primary= @message.link_activity.count
+    .col-auto
+      .btn-group
+        = link_to 'All Messages', messages_path, class: 'btn alt-dm'
+        = link_to 'Preview', message_preview_path(@message.tracking_id), class: 'btn btn-primary', target: '_blank'

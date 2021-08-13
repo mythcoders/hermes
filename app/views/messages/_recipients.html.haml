@@ -1,13 +1,13 @@
 .card
   %table-responsive
-    %table.table.table-sm.card-table
+    %table.table.table-sm
       %thead
         %tr
           %th Recipient
           %th Delivered At
           %th Scheduled Send
-      %tbody.list
-        - @message.recipients.each do |r|
+      %tbody
+        - recipients.each do |r|
           %tr
             %td
               %span.badge.badge-secondary.text-uppercase= r.recipient_type

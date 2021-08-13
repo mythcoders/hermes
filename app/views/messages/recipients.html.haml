@@ -1,0 +1,4 @@
+- page_title 'View Message', 'Mail Log'
+
+= render partial: 'header', locals: { action: :recipients }
+= render partial: 'recipients', locals: { recipients: @recipients }
