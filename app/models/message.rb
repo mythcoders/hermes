@@ -39,8 +39,8 @@ class Message < ApplicationRecord
     end
   end
 
-  def basic_activity
-    activities.where(activity_type: %w[received rerouted processed])
+  def system_activity
+    activities.where(activity_type: %w[received held ignored rerouted processed])
   end
 
   def user_activity
@@ -48,6 +48,6 @@ class Message < ApplicationRecord
   end
 
   def client_environment
-    @client_environment ||= ClientEnvironment.find_or_create_by_env!(client, environment)
+    @client_environment ||= ClientEnvironment.find_or_create_by_env!(client_id, environment)
   end
 end

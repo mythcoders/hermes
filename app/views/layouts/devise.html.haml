@@ -7,24 +7,24 @@
                   "data-sidebar-shortcut-enabled": "true"}
     .page-wrapper.with-navbar
       = render partial: 'layouts/partials/navbar'
-      .content-wrapper
+      .content-wrapper.d-flex.align-items-center
         .row
           .col-sm-6.offset-sm-3
             .card.p-0
-              .px-card.py-10.bg-light-lm.bg-very-dark-dm
+              .px-card.py-10.bg-light-lm.bg-very-dark-dm.text-center
                 %h2.card-title.font-size-18.m-0= yield :header
               .content= yield
               .px-card.py-10.bg-light-lm.bg-very-dark-dm
-                %p.font-size-12
+                %p.font-size-12.text-center
                   This is a restricted network. Use of this network, its equipment, and resources is monitored at all
                   times and requires explicit permission from MythCoders, LLC. If you do not have this permission in
                   writing, you are violating the regulations of this network and can and will be prosecuted to the full
                   extent of the law. By continuing into this system, you are acknowledging that you are aware of and agree
                   to these terms.
-        %footer.text-muted.text-center.pt-5.mb-3.font-size-12
-          MythCoders, LLC.
-          %br
-          %span
-            Made with
-            %i.fas.fa-heart.text-danger
-            in Ohio.
+            %footer.pt-5.mb-3.text-muted.text-center.font-size-12
+              MythCoders, LLC.
+              %br
+              %span
+                Made with
+                %i.fas.fa-heart.text-danger
+                in Ohio.

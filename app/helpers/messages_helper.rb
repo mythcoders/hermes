@@ -15,14 +15,10 @@ module MessagesHelper
       "dumpster-fire"
     when "processed"
       "badge-check"
-    when "opened"
-      "envelope-open-text"
-    when "clicked"
-      "link"
-    when "delivered"
-      "inbox"
-    when "sent"
-      "paper-plane"
+    when "held"
+      "pause-circle"
+    when "ignored"
+      "ban"
     else
       "info-circle"
     end
@@ -40,6 +36,10 @@ module MessagesHelper
       "Open"
     when "clicked"
       "Click"
+    when "held"
+      "On Hold"
+    when "ignored"
+      "Message Ignored"
     else
       key
     end
@@ -47,12 +47,10 @@ module MessagesHelper
 
   def activity_color(key)
     case key
-    when "rerouted", "complaint"
+    when "rerouted", "complaint", "held"
       "secondary"
     when "failed", "error"
       "danger"
-    when "sent", "delivered"
-      "success"
     else
       "default"
     end

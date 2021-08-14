@@ -6,19 +6,22 @@ class MailSortJob < ApplicationJob
     @tracking_id = tracking_id
 
     ActiveRecord::Base.transaction do
+      if message.text_body.blank?
+        message.text_body = PlainText.from_html(message.html_body)
+        message.save!
+      end
+
       if emails_are_rerouted?
         reroute_message
         # elsif emails_are_whitelisted?
         #   remove_non_whitelisted_recipients
       end
-
-      if message.text_body.blank?
-        message.text_body = PlainText.from_html(message.html_body)
-        message.save!
-      end
     end
 
-    PostalWorkerJob.perform_later(tracking_id) unless emails_are_held? || emails_are_ignored?
+    return message.held! if emails_are_held?
+    return message.ignored! if emails_are_ignored?
+
+    PostalWorkerJob.perform_later(tracking_id)
   end
 
   private
@@ -46,11 +49,14 @@ class MailSortJob < ApplicationJob
   end
 
   def rerouted_body(type)
-    ApplicationController.render(
+    template = ApplicationController.render(
       template: "api_mailer/reroute_message.#{type}",
       assigns: {message: message},
       layout: false
     )
+    return template unless type == "html"
+
+    message.html_body.html_safe.gsub(/^*<body[^>]*>/, "\\0 #{template}")
   end
 
   def emails_are_rerouted?
@@ -66,6 +72,6 @@ class MailSortJob < ApplicationJob
   end
 
   def emails_are_ignored?
-    message.client_environment.status == "ignore"
+    message.client_environment.status == "ignored"
   end
 end

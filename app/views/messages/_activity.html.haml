@@ -10,10 +10,14 @@
           = message
         %p.font-size-12
           - if r.activity_type == 'received'
-            Hermes received the message and saved it for processing.
+            Hermes received the message and recorded it.
           - elsif r.activity_type == 'rerouted'
-            Because of the environment, Hermes modified the message and rerouted it to the Client Owner.
+            Hermes modified the message and rerouted it to the Client Owner.
+          - elsif r.activity_type == 'held'
+            Hermes will deliver this when the queue is released.
+          - elsif r.activity_type == 'ignored'
+            Hermes went about its business.
           - elsif r.activity_type == 'processed'
-            Hermes finished processing and sent it along for delivery.
+            Hermes finished processing and sent it for delivery.
         %small.text-muted{title: r.notification_timestamp}
           #{time_ago_in_words r.notification_timestamp} ago

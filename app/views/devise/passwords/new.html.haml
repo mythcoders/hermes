@@ -5,7 +5,9 @@
 = form_for(resource, as: resource_name, url: password_path(resource_name), :html => { :method => :post, "data-turbo": "false" }) do |f|
   .form-group
     = f.email_field :email, autofocus: true, class: 'form-control', :placeholder => 'Email Address'
-  .form-group
-    = f.submit 'Send reset instructions', class: 'btn btn-primary btn-block btn-login'
-  .login-bottom-links
-    = render 'devise/shared/links'
+
+  = f.submit 'Send reset instructions', class: 'btn btn-primary btn-block'
+
+  .text-center.mt-10
+    Remember your password?
+    = link_to 'Sign in', new_session_path(resource_name)

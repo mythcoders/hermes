@@ -8,7 +8,7 @@
       %a.btn{href: message_path(@message.tracking_id), class: ('alt-dm' if action != :summary)}
         Overview
       %a.btn{href: message_recipients_path(@message.tracking_id), class: ('alt-dm' if action != :recipients)}
-        %i.fas.fa-mailbox
+        %i.fas.fa-users
         Recipients
         %span.badge.badge-primary= @message.recipients.count
       %a.btn{href: message_logs_path(@message.tracking_id), class: ('alt-dm' if action != :logs)}

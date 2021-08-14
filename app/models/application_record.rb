@@ -3,7 +3,7 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  ACTIVITY_TYPES = %i[received rerouted processed sent delivered failed error clicked].freeze
+  ACTIVITY_TYPES = %i[received rerouted processed sent delivered failed error clicked held ignored].freeze
   RECIPIENT_TYPES = %i[to cc bcc].freeze
 
   def self.human_enum_name(enum_name, enum_value)

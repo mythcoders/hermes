@@ -21,7 +21,8 @@
         = @minimum_password_length
         characters minimum
 
-  .form-group
-    = f.submit 'Sign Up', class: 'btn btn-primary btn-block btn-login'
-  .login-bottom-links
-    = render 'devise/shared/links'
+  = f.submit 'Sign Up', class: 'btn btn-primary btn-block'
+
+  .text-center.mt-10
+    Already have an account?
+    = link_to 'Sign in.', new_session_path(resource_name)

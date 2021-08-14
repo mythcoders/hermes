@@ -18,9 +18,9 @@ class User < ApplicationRecord
   private
 
   def email_domain_is_mythcoders
-    return if email_domain == "mythcoders.com"
+    return if email_domain.nil? || email_domain == "mythcoders.com"
 
     Sentry.capture_message("Signup for non-mythcoders account", level: "warning")
-    errors.add(:email, "Domain not valid")
+    errors.add(:email, "Registrations for this domain have not been approved")
   end
 end

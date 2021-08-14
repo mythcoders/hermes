@@ -39,7 +39,7 @@ module Api
     end
 
     def client_environment
-      @client_environment ||= ClientEnvironment.find_or_create_by_env!(@client, mail_params[:environment])
+      @client_environment ||= ClientEnvironment.find_or_create_by_env!(@client.id, mail_params[:environment])
     end
   end
 end
