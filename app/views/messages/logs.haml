@@ -12,7 +12,7 @@
           %th.float-right Timestamp
       %tbody
         - @logs.each do |r|
-          %tr{style: "border-bottom: none"}
+          %tr
             %td= activity_message(r.activity_type)
             %td.text-monospace
               - if r.activity_type == "clicked"

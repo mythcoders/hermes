@@ -11,7 +11,7 @@ class ClientUploadJob < ApplicationJob
       IO.foreach(file) do |row|
         BulkUpload::SubscriberImporter.process(row)
       rescue => e
-        Raven.capture_exception e
+        Sentry.capture_exception e
       end
     end
 

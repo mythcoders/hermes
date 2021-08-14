@@ -5,6 +5,10 @@
       %span.sidebar-icon
         %i.fal.fa-code{"aria-hidden" => "true"}
       Dashboard
+    %a.sidebar-link.sidebar-link-with-icon{:href => sidekiq_web_path, target: '_blank'}
+      %span.sidebar-icon
+        %i.fal.fa-server{"aria-hidden" => "true"}
+      Sidekiq
     .sidebar-divider
     %a.sidebar-link.sidebar-link-with-icon{:href => clients_path, class: clients_controller? ? 'active' : ''}
       %span.sidebar-icon
@@ -19,7 +23,7 @@
         %i.fal.fa-users{"aria-hidden" => "true"}
       Subscriptions
     .sidebar-divider
-    %a.sidebar-link.sidebar-link-with-icon{:href => sidekiq_web_path, target: '_blank'}
+    %a.sidebar-link.sidebar-link-with-icon{href: "#logout-modal", role: "button"}
       %span.sidebar-icon
-        %i.fal.fa-server{"aria-hidden" => "true"}
-      Sidekiq
+        %i.fal.fa-sign-out{"aria-hidden" => "true"}
+      Logout

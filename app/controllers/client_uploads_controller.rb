@@ -25,7 +25,7 @@ class ClientUploadsController < ApplicationController
       flash["success"] = t("created")
       redirect_to client_path(@upload.client_id)
     else
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -34,7 +34,7 @@ class ClientUploadsController < ApplicationController
       flash["success"] = t("updated")
       redirect_to client_path(@upload.client_id)
     else
-      render "edit"
+      render "edit", status: :unprocessable_entity
     end
   end
 

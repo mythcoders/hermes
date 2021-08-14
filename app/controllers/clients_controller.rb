@@ -18,7 +18,7 @@ class ClientsController < ApplicationController
       flash["success"] = t("created")
       redirect_to client_path(@client)
     else
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,7 @@ class ClientsController < ApplicationController
       flash["success"] = t("updated")
       redirect_to client_path(@client)
     else
-      render "edit"
+      render "edit", status: :unprocessable_entity
     end
   end
 
@@ -43,7 +43,7 @@ class ClientsController < ApplicationController
       redirect_to client_path(params[:client_id])
     else
       flash["error"] = "Correct the errors"
-      render "new_email"
+      render "new_email", status: :unprocessable_entity
     end
   end
 

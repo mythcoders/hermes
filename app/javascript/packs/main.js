@@ -1,3 +1,5 @@
+console.log("main.js")
+
 if (!window.__appClientLoaded) {
   window.__appClientLoaded = true
 

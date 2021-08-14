@@ -2,7 +2,8 @@
   .row
     .col
       %h1.content-title.font-size-22
-        Message Details
+        %i.fas.fa-stream
+        Message
         %span.badge.text-monospace=@message.tracking_id
       %a.btn{href: message_path(@message.tracking_id), class: ('alt-dm' if action != :summary)}
         Overview

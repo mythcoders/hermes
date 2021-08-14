@@ -11,6 +11,5 @@ application.load(
 )
 
 document.addEventListener('turbo:load', () => {
-  const halfmoon = require("halfmoon")
-  halfmoon.onDOMContentLoaded()
+  require("halfmoon").onDOMContentLoaded()
 })

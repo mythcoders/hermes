@@ -6,8 +6,8 @@
                   "data-set-preferred-mode-onload": "true",
                   "data-dm-shortcut-enabled": "true",
                   "data-sidebar-shortcut-enabled": "true"}
-    = render partial: 'layouts/partials/logout'
     .page-wrapper.with-navbar.with-sidebar.with-transitions
+      = render partial: 'layouts/partials/logout'
       .sticky-alerts
       = render partial: 'layouts/partials/navbar'
       = render partial: 'layouts/partials/sidebar'
@@ -15,4 +15,12 @@
         = render partial: 'layouts/partials/alerts'
         = yield :breadcrumbs
         = yield
+        %footer.text-muted.text-center.pt-5.mb-3.font-size-12
+          MythCoders, LLC.
+          %br
+          %span
+            Made with
+            %i.fas.fa-heart.text-danger
+            in Ohio.
     = yield :scripts
+

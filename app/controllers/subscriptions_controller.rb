@@ -13,7 +13,7 @@ class SubscriptionsController < ApplicationController
       flash["success"] = t("updated")
       redirect_to edit_subscription_path(@subscription.client_id)
     else
-      render "edit"
+      render "edit", status: :unprocessable_entity
     end
   end
 

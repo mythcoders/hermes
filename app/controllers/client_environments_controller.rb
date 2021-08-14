@@ -23,7 +23,7 @@ class ClientEnvironmentsController < ApplicationController
       flash["success"] = t("updated")
       redirect_to client_path(@environment.client_id)
     else
-      render "edit"
+      render "edit", status: :unprocessable_entity
     end
   end
 

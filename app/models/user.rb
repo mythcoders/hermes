@@ -20,7 +20,7 @@ class User < ApplicationRecord
   def email_domain_is_mythcoders
     return if email_domain == "mythcoders.com"
 
-    Raven.capture_message("Signup for non-mythcoders account", level: "warning")
+    Sentry.capture_message("Signup for non-mythcoders account", level: "warning")
     errors.add(:email, "Domain not valid")
   end
 end
