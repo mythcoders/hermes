@@ -1,18 +1,20 @@
-FROM ghcr.io/mythcoders/gaia:latest AS base
+FROM ghcr.io/mythcoders/gaia:pr-8 AS base
+
+ENV APP_HOME=/opt/hermes
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
 
 ADD Gemfile* $APP_HOME/
 
-RUN echo -e "https://alpine.global.ssl.fastly.net/alpine/v3.10/main\nhttps://alpine.global.ssl.fastly.net/alpine/v3.10/community\n" > /etc/apk/repositories
-
 RUN apk add --no-cache --virtual build-deps build-base && \
-  apk add figlet && \
+  apk add vips && \
   bundle install && \
   apk del build-deps
 
 COPY package.json yarn.lock $APP_HOME/
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
-EXPOSE $APP_PORT
+EXPOSE 5000
 
 FROM base AS build
 

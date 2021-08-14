@@ -1,32 +1,21 @@
 # Hermes
 
-Hermes is a Rails application with API for sending emails to a separate SMTP service.
+Application (and API) for logging emails and sending them to [Amazon Web Services Simple Email Service (SES)](https://aws.amazon.com/ses/) for delivery.
 
-Upon registering, Clients receive an `api secret` and an `api key` to begin calling the API.
-Separate approval is required before emails send by your application are actually sent to customers.
-Until then, email are rerouted to the applications owner. This is handy for allowing emails in production
-to be sent out but reroute emails sent in testing environments.
+MythCoders uses SES as a cost effective way to sent emails but the services unfortunately does not provide the ability to see a log of sent emails. Hermes fills that gap.
 
-A log of all emails sent is also kept.
+## Features
 
-## Planned Features
+- Track email sending from multiple sources before sending to SES for delivery
+- Use environments to apply rules when a client sends an email
+- Easily see SMTP delivery results
+- View when emails are opened and when links are clicked
 
-- Delivery and read reports
-- Header and footer templates
-- Mail-merge
-- Other forms of communication like SMS
+## Software
 
-## Message Structure
+Hermes is a Ruby on Rails application. The UI is built with [Halfmoon](https://www.gethalfmoon.com/)
 
-| Field         | Type     |
-| ------------- | -------- |
-| from\*        | string   |
-| to\*          | string[] |
-| cc            | string[] |
-| bcc           | string[] |
-| subject\*     | string   |
-| html_body     | string   |
-| text_body     | string   |
-| environment\* | string   |
+## Licensing
 
-_\* denotes a required field_
+See the [LICENSE](LICENSE) file for licensing information as it pertains to
+files in this repository.

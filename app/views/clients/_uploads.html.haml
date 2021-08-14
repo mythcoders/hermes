@@ -1,16 +1,16 @@
-.card
-  .card-header
-    .row.align-items-center
+.card.p-0
+  .px-card.py-10.bg-very-dark-dm
+    .row
       .col
-        %h3.card-header-title
-          %i.fas.fa-file-import.fa-lg
+        %h2.card-title.font-size-18.m-0
+          %i.fas.fa-file-import
           Uploads
       .col-auto
-        %a.btn.btn-sm.btn-white{href: new_client_upload_path(@client)}
+        %a.btn.btn-sm{href: new_client_upload_path(@client)}
           New
   - if @client.uploads.any?
     .table-responsive
-      %table.table.card-table.table-sm
+      %table.table
         %thead
           %tr
             %th Type
@@ -21,8 +21,9 @@
             %tr
               %td= ClientUpload.human_enum_name :file_types, t.file_type
               %td= l t.created_at
-              %td= t.status
+              %td
+                %span.badge.text-uppercase= t.status
   - else
-    .card-body.text-center.bg-transparent
-      %h3 No Uploads
+    .text-center
+      %h3.content-title.mt-10 No Uploads
       %p.text-muted This client does not have any files uploaded yet.

@@ -16,7 +16,7 @@ def create_and_login_user
 end
 
 def login_user(user)
-  @request.env['devise.mapping'] = Devise.mappings[:user]
+  @request.env["devise.mapping"] = Devise.mappings[:user]
   sign_in user
 end
 
@@ -26,7 +26,7 @@ end
 
 def api_basic_auth(client)
   {
-    'HTTP_AUTHORIZATION':
+    HTTP_AUTHORIZATION:
       ActionController::HttpAuthentication::Basic.encode_credentials(client.api_key, client.api_secret)
   }
 end

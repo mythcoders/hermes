@@ -4,17 +4,17 @@
 class NotificationProcessor
   UnknownNotificationError = Class.new(StandardError)
   HANDLER_MAPPINGS = {
-    'SubscriptionConfirmation' => 'SubscribeHandler',
-    'SubscriptionCancellation' => 'IgnoredHandler',
-    'SubscriptionValidation' => 'IgnoredHandler',
-    'Send' => 'SendHandler',
-    'Bounce' => 'BounceHandler',
-    'Delivery' => 'DeliveredHandler',
-    'Click' => 'ClickHandler',
-    'Open' => 'OpenedHandler',
-    'Complaint' => 'ComplaintHandler',
-    'Reject' => 'RejectHandler',
-    'RenderingFailure' => 'RenderingFailureHandler'
+    "SubscriptionConfirmation" => "SubscribeHandler",
+    "SubscriptionCancellation" => "IgnoredHandler",
+    "SubscriptionValidation" => "IgnoredHandler",
+    "Send" => "SendHandler",
+    "Bounce" => "BounceHandler",
+    "Delivery" => "DeliveredHandler",
+    "Click" => "ClickHandler",
+    "Open" => "OpenedHandler",
+    "Complaint" => "ComplaintHandler",
+    "Reject" => "RejectHandler",
+    "RenderingFailure" => "RenderingFailureHandler"
   }.freeze
 
   def initialize(raw_data)

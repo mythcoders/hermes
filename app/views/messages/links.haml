@@ -1,0 +1,19 @@
+- page_title 'View Message', 'Mail Log'
+
+= render partial: 'header', locals: { action: :links }
+.card
+  %table.table
+    %thead
+      %tr
+        %th URL
+        %th Timestamp
+        %th.float-right IP Address
+    %tbody
+      - @links.each do |r|
+        %tr{style: "border-bottom: none"}
+          %td= r.link_url
+          %td= r.notification_timestamp
+          %td.float-right= r.ip_address
+        %tr
+          %td{colspan: 3}
+            .text-monospace= r.user_agent

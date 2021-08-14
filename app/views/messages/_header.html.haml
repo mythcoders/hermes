@@ -1,0 +1,22 @@
+.content.mb-0
+  .row
+    .col
+      %h1.content-title.font-size-22
+        %i.fas.fa-stream
+        Message
+        %span.badge.text-monospace=@message.tracking_id
+      %a.btn{href: message_path(@message.tracking_id), class: ('alt-dm' if action != :summary)}
+        Overview
+      %a.btn{href: message_recipients_path(@message.tracking_id), class: ('alt-dm' if action != :recipients)}
+        %i.fas.fa-users
+        Recipients
+        %span.badge.badge-primary= @message.recipients.count
+      %a.btn{href: message_logs_path(@message.tracking_id), class: ('alt-dm' if action != :logs)}
+        %i.fas.fa-paperclip
+        Activity
+        %span.badge.badge-primary= @message.user_activity.count
+    .col-auto
+      .btn-group
+        = link_to 'All Messages', messages_path, class: 'btn alt-dm'
+        = link_to "#{@message.client.name} Messages", client_messages_path(@message.client_id), class: 'btn alt-dm'
+        = link_to 'Preview', message_preview_path(@message.tracking_id), class: 'btn btn-primary', target: '_blank'

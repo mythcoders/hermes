@@ -5,7 +5,7 @@ class Subscriber < ApplicationRecord
   has_many :subscriptions
 
   validates_presence_of :client
-  validates :address, presence: true, uniqueness: { scope: %i[client] }
+  validates :address, presence: true, uniqueness: {scope: %i[client]}
 
   def formatted_address
     "#{name} <#{address}>"

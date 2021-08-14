@@ -46,6 +46,8 @@ en:
           active: Active
           inactive: Inactive
           paused: Paused
+      client_environment:
+        status: Delivery Policy
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"
@@ -65,7 +67,7 @@ en:
     am: am
     pm: pm
     formats:
-      default: "%m/%d/%Y %I:%M %p"
+      default: "%m/%d/%Y %H:%M:%S"
       long: "%a, %d %b %Y %I:%M:%S %p %Z"
       short: "%m/%d/%y %I:%M %p"
   errors:

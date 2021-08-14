@@ -2,8 +2,8 @@
 
 class Message < ApplicationRecord
   belongs_to :client
-  has_many :recipients, class_name: 'MessageRecipient'
-  has_many :activities, class_name: 'MessageActivity'
+  has_many :recipients, class_name: "MessageRecipient"
+  has_many :activities, class_name: "MessageActivity"
   validates_presence_of :sender, :subject, :client, :environment, :tracking_id
   validates_presence_of :recipients, validates_associated: :recipients
 
@@ -39,19 +39,15 @@ class Message < ApplicationRecord
     end
   end
 
-  def basic_activity
-    activities.where.not(activity_type: %w[delivered clicked opened])
+  def system_activity
+    activities.where(activity_type: %w[received held ignored rerouted processed])
   end
 
-  def delivery_activity
-    activities.where(activity_type: %w[delivered opened])
-  end
-
-  def link_activity
-    activities.where(activity_type: 'clicked')
+  def user_activity
+    activities.where(activity_type: %w[clicked opened])
   end
 
   def client_environment
-    @client_environment ||= ClientEnvironment.find_or_create_by_env!(client, environment)
+    @client_environment ||= ClientEnvironment.find_or_create_by_env!(client_id, environment)
   end
 end

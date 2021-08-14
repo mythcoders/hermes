@@ -1,24 +1,20 @@
 - page_title 'View', 'Subscribers'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Subscribers
-        %h1.header-title
-          = fa_solid 'users'
-          = @subscriber.name
-      .col-auto
-        = link_to 'Go Back', client_subscribers_path(@subscriber.client_id), class: 'btn btn-white'
-        = link_to 'Edit', edit_client_subscriber_path(@subscriber.client_id, @subscriber), class: 'btn btn-primary'
-.card
-  .card-header
-    .row.align-items-center
-      .col
-        %h3.card-header-title
-          %i.fas.fa-clipboard-list.fa-lg
-          Subscribed Mailing Topics
+.content.mb-0
+  .row
+    .col
+      %h1.content-title
+        %i.fas.fa-users
+        = @subscriber.name
+    .col-auto
+      = link_to 'Go Back', client_subscribers_path(@subscriber.client_id), class: 'btn alt-dm'
+      = link_to 'Edit', edit_client_subscriber_path(@subscriber.client_id, @subscriber), class: 'btn btn-primary'
+
+.card.p-0
+  .px-card.py-10.bg-very-dark-dm
+    %h2.card-title.font-size-18.m-0
+      %i.fas.fa-clipboard-list
+      Subscribed Mailing Topics
   - if @subscriber.subscriptions.any?
     .table-responsive
       %table.table.card-table
@@ -28,6 +24,6 @@
               %td= s.topic.name
 
   - else
-    .card-body.text-center.bg-transparent
-      %h3 No Subscriptions
+    .text-center
+      %h3.content-title.mt-10 No Subscriptions
       %p.text-muted This subscriber does not have subscriptions.

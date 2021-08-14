@@ -5,15 +5,15 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[edit update]
 
   def index
-    @subscriptions = Subscription.includes(:subscriber, :topic).page(params[:page]).per(15)
+    @subscriptions = Subscription.includes(:subscriber, :topic).order(created_at: :desc).page(params[:page])
   end
 
   def update
     if @subscription.update(subscription_params)
-      flash['success'] = t('updated')
+      flash["success"] = t("updated")
       redirect_to edit_subscription_path(@subscription.client_id)
     else
-      render 'edit'
+      render "edit", status: :unprocessable_entity
     end
   end
 

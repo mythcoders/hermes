@@ -1,16 +1,11 @@
 - page_title 'All Subscriptions'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Subscriptions
-        %h1.header-title
-          = fa_solid 'users'
-          All Subscriptions
+.content
+  %h1.content-title.font-size-22
+    %i.fas.fa-users
+    All Subscriptions
 
-.card
+.card.p-0
   %table-responsive
     %table.table.card-table
       %thead
@@ -19,13 +14,13 @@
           %th Client
           %th Topic
           %th Status
-      %tbody.list
+      %tbody
         - @subscriptions.each do |s|
-          %tr{data: { 'clickable-row': '', 'href': edit_subscription_path(s) }}
-            %td= s.subscriber.name
+          %tr
+            %td= link_to s.subscriber.name, edit_subscription_path(s)
             %td= s.topic.client.name
             %td= s.topic.name
             %td= l(s.created_at)
-  .card-footer
+  .p-10
     = paginate @subscriptions
     = page_entries_info @subscriptions

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  include IconHelpers
   include SidebarHelpers
 
   # Handles HTML title element
@@ -22,9 +21,9 @@ module ApplicationHelper
 
   # Renders a list of error messages
   def render_error_messages(errors)
-    html = ''
+    html = ""
     if errors.present?
-      html += "<div id='errorExplanation' class='text-danger'><ul>\n"
+      html += "<div id='errorExplanation' class='alert alert-danger'><ul>\n"
       errors.each do |error|
         html += "<li>#{h error}</li>\n"
       end

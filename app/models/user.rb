@@ -2,13 +2,13 @@
 
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :trackable, :validatable, :confirmable,
-         :lockable, :timeoutable
+    :rememberable, :trackable, :validatable, :confirmable,
+    :lockable, :timeoutable
 
   validate :email_domain_is_mythcoders
 
   def email_domain
-    email.split('@').last
+    email.split("@").last
   end
 
   def initials
@@ -18,9 +18,9 @@ class User < ApplicationRecord
   private
 
   def email_domain_is_mythcoders
-    return if email_domain == 'mythcoders.com'
+    return if email_domain.nil? || email_domain == "mythcoders.com"
 
-    Raven.capture_message('Signup for non-mythcoders account', level: 'warning')
-    errors.add(:email, 'Domain not valid')
+    Sentry.capture_message("Signup for non-mythcoders account", level: "warning")
+    errors.add(:email, "Registrations for this domain have not been approved")
   end
 end

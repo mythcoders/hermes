@@ -1,0 +1,16 @@
+<%= t('rerouted') %>
+
+CLIENT: <%= @message.client.name %> - <%= @message.environment %>
+SUBJECT: <%= @message.subject %>
+FROM: <%= @message.sender %>
+TO: <%= email_array_to_string @message.to %>
+
+<% if @message.cc.present? %>
+  CC: <%= email_array_to_string @message.cc %>
+<% end %>
+
+<% if @message.bcc.present? %>
+  BCC: <%= email_array_to_string @message.bcc %>
+<% end %>
+
+<%= raw @message.text_body %>

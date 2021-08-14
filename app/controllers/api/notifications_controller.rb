@@ -9,7 +9,7 @@ module Api
       NotificationProcessor.new(request_data).process
 
       head :ok
-    rescue StandardError => e
+    rescue => e
       head :internal_server_error
       raise e
     end
@@ -17,7 +17,7 @@ module Api
     private
 
     def request_data
-      if request.content_type == 'text/plain'
+      if request.content_type == "text/plain"
         JSON.parse request.raw_post
       else
         params

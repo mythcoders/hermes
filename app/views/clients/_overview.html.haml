@@ -1,47 +1,28 @@
-.card
-  .card-body
-    .row.align-items-center
-      .col
-        %h5.mb-0 Owner
-      .col-auto
-        %small.text-muted
-          = @client.owner
+.card.p-15
+  .row.align-items-center
+    .col
+      %strong Owner
+    .col-auto
+      .text-muted= @client.owner
+  %hr
+  .row.align-items-center
+    .col
+      %strong Reroute Email
+    .col-auto
+      .text-muted= mail_to @client.reroute_email
+  - if @client.reply_to_email
     %hr
-    .row.align-items-center
-      .col
-        %h5.mb-0 Reroute Email
-      .col-auto
-        %small.text-muted
-          = @client.reroute_email
-    - if @client.reply_to_email
-      %hr
-        .row.align-items-center
-          .col
-            %h5.mb-0 Default Reply Email
-          .col-auto
-            %small.text-muted
-              = @client.reply_to_email
-    %hr
-    .row.align-items-center
-      .col
-        %h5.mb-0 API Access
-      .col-auto
-        %small
-          - if @client.is_active
-            %span.badge.badge-soft-success.text-uppercase approved
-          - else
-            %span.badge.badge-soft-danger.text-uppercase blocked
-    %hr
-    .row.align-items-center
-      .col
-        %h5.mb-0 API Key
-      .col-auto
-        %small.text-muted
-          = @client.api_key
-    %hr
-    .row.align-items-center
-      .col
-        %h5.mb-0 API Secret
-      .col-auto
-        %small.text-muted
-          = @client.api_secret
+      .row.align-items-center
+        .col
+          %strong Default Reply Email
+        .col-auto
+          .text-muted= @client.reply_to_email
+  %hr
+  .row.align-items-center
+    .col
+      %strong API Access
+    .col-auto
+      - if @client.is_active
+        %span.badge.badge-success.text-uppercase approved
+      - else
+        %span.badge.badge-danger.text-uppercase blocked

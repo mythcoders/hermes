@@ -7,5 +7,5 @@ class MailingTopic < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   validates_presence_of :client
-  validates :name, presence: true, uniqueness: { scope: %i[client] }
+  validates :name, presence: true, uniqueness: {scope: %i[client]}
 end

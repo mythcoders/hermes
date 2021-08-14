@@ -1,44 +1,29 @@
-%nav#sidebar.navbar.navbar-vertical.fixed-left.navbar-expand-md.navbar-light
-  .container-fluid
-    %button.navbar-toggler{"aria-controls" => "navbarVertical", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarVertical", "data-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    = link_to home_path, class: 'navbar-brand' do
-      = fa_solid 'mail-bulk'
-      Hermes
-      - if Rails.env.development?
-        %strong.text-info DEV
-      - if Rails.env.test?
-        %strong.text-danger TEST
-    #navbarVertical.collapse.navbar-collapse
-      %ul.navbar-nav
-        %li.nav-item{class: ('active' if clients_controller?)}
-          = link_to clients_path, class: 'nav-link' do
-            = fa_solid 'code', 'fa-lg sidebar-icon'
-            Clients
-        %li.nav-item{class: ('active' if messages_controller?)}
-          = link_to messages_path, class: 'nav-link' do
-            = fa_solid 'history', 'fa-lg sidebar-icon'
-            Mail Log
-        %li.nav-item{class: ('active' if subscriptions_controller?)}
-          = link_to subscriptions_path, class: 'nav-link' do
-            = fa_solid 'users', 'fa-lg sidebar-icon'
-            Subscriptions
-      %h6.navbar-heading.mb-n1 IT Operations
-      %ul.navbar-nav.mb-md-3
-        %li.nav-item
-          = link_to sidekiq_web_path, class: 'nav-link', target: '_blank' do
-            = fa_solid 'server', 'fa-lg sidebar-icon'
-            Sidekiq
-      .mt-auto
-        #sidebarUser.navbar-user.d-none.d-md-flex
-          .dropup
-            %a#sidebarIconCopy.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-              .avatar.avatar-sm.avatar-online
-                %span.avatar-title.rounded-circle= current_user.initials
-            .dropdown-menu{"aria-labelledby" => "sidebarIconCopy"}
-              %a.dropdown-item{href: edit_user_registration_path}
-                = fa_duo 'user-circle'
-                Security
-              %a.dropdown-item{"data-target": "#logoutModal", "data-toggle": "modal", href: '#'}
-                = fa_duo 'sign-out-alt'
-                Logout
+.sidebar-overlay{'data-controller': 'sidebar', 'data-action': 'click->sidebar#toggle'}
+.sidebar
+  .sidebar-menu
+    %a.sidebar-link.sidebar-link-with-icon{:href => home_path, class: home_action?('index') ? 'active': ''}
+      %span.sidebar-icon
+        %i.fal.fa-code{"aria-hidden" => "true"}
+      Dashboard
+    %a.sidebar-link.sidebar-link-with-icon{:href => sidekiq_web_path, target: '_blank'}
+      %span.sidebar-icon
+        %i.fal.fa-server{"aria-hidden" => "true"}
+      Sidekiq
+    .sidebar-divider
+    %a.sidebar-link.sidebar-link-with-icon{:href => clients_path, class: clients_controller? ? 'active' : ''}
+      %span.sidebar-icon
+        %i.fal.fa-users{"aria-hidden" => "true"}
+      Clients
+    %a.sidebar-link.sidebar-link-with-icon{:href => messages_path, class: messages_controller? ? 'active' : ''}
+      %span.sidebar-icon
+        %i.fal.fa-stream{"aria-hidden" => "true"}
+      Logs
+    %a.sidebar-link.sidebar-link-with-icon{:href => subscriptions_path, class: subscriptions_controller? ? 'active' : ''}
+      %span.sidebar-icon
+        %i.fal.fa-users{"aria-hidden" => "true"}
+      Subscriptions
+    .sidebar-divider
+    %a.sidebar-link.sidebar-link-with-icon{href: "#logout-modal", role: "button"}
+      %span.sidebar-icon
+        %i.fal.fa-sign-out{"aria-hidden" => "true"}
+      Logout

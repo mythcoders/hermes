@@ -10,7 +10,7 @@ class ClientUpload < ApplicationRecord
   validates_presence_of :client, :file_type
 
   enum file_type: {
-    subscriber: 'subscriber'
+    subscriber: "subscriber"
   }
 
   aasm column: :status do
@@ -33,6 +33,6 @@ class ClientUpload < ApplicationRecord
   private
 
   def process_upload
-    ClientUploadWorker.perform_async id
+    ClientUploadJob.perform_later id
   end
 end

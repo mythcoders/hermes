@@ -1,0 +1,25 @@
+- page_title 'View Message', 'Mail Log'
+
+= render partial: 'header', locals: { action: :logs }
+
+.card.p-0
+  %table-responsive
+    %table.table
+      %thead
+        %tr
+          %th Event
+          %th Details
+          %th.float-right Timestamp
+      %tbody
+        - @logs.each do |r|
+          %tr
+            %td= activity_message(r.activity_type)
+            %td.text-monospace
+              - if r.activity_type == "clicked"
+                = r.link_url
+                %hr
+              = r.user_agent
+            %td.float-right= l r.notification_timestamp
+  .p-10
+    = paginate @logs
+    = page_entries_info @logs

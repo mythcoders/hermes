@@ -1,18 +1,10 @@
-%nav#topbar.navbar.navbar-expand-md.navbar-light.d-none.d-md-flex
-  .container-fluid
-    %form.form-inline.mr-4.d-none.d-md-flex
-      .input-group.input-group-flush.input-group-merge{"data-options" => "{\"valueNames\": [\"name\"]}", "data-toggle" => "lists"}
-        %input.form-control.form-control-prepended.dropdown-toggle.search{"aria-label" => "Search", "data-toggle" => "dropdown", :placeholder => "Search", :type => "search"}/
-        .input-group-prepend
-          .input-group-text
-            %i.fe.fe-search
-    .navbar-user
-      .dropdown
-        %a.avatar.avatar-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-          %span.avatar-title.rounded-circle= current_user.initials
-        .dropdown-menu.dropdown-menu-right
-          %a.dropdown-item{:href => edit_user_registration_path} Security
-          %hr.dropdown-divider
-          %a.dropdown-item{"data-target": "#logoutModal", "data-toggle": "modal", href: "#"}
-            %i.fe.fe-log-out
-            Logout
+%nav.navbar
+  - if user_signed_in?
+    .navbar-content
+      %button.btn.btn-action{:type => "button", 'data-controller': 'sidebar', 'data-action': 'click->sidebar#toggle'}
+        %i.fa.fa-bars{"aria-hidden" => "true"}
+        %span.sr-only Toggle sidebar
+  %a.navbar-brand.mx-auto{href: home_path}
+    %span.mr-5.mr-sm-10 Hermes
+    - unless Rails.env.production?
+      %span.badge.badge-secondary.font-size-12.text-monospace.ml-auto= HermesApp.env_name

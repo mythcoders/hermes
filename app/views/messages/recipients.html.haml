@@ -1,0 +1,32 @@
+- page_title 'View Message', 'Mail Log'
+
+= render partial: 'header', locals: { action: :recipients }
+.card.p-0
+  %table-responsive
+    %table.table
+      %thead
+        %tr
+          %th Recipient
+          %th Delivered At
+          %th Scheduled Send
+      %tbody
+        - @recipients.each do |r|
+          - has_activity = r.activities.any?
+
+          %tr{style: ("border-bottom: none" if has_activity)}
+            %td
+              = mail_to r.email
+              - unless r.recipient_type == "to"
+                %span.badge.badge-secondary.text-uppercase= r.recipient_type
+            %td= l(r.delivered_at) if r.delivered_at
+            %td= r.send_at || 'Deliver on receipt'
+          - if has_activity
+            - r.activities.each do |act|
+              %tr
+                %td{colspan: 3}
+                  .text-monospace
+                    = act.reporting_mta
+                    %br= act.smtp_response
+  .p-10
+    = paginate @recipients
+    = page_entries_info @recipients

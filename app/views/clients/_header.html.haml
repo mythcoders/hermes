@@ -1,0 +1,19 @@
+.content.mb-0
+  .row
+    .col
+      %h1.content-title.font-size-22
+        %i.fas.fa-code
+        = @client.name
+      %a.btn{href: client_path(@client), class: ('alt-dm' if action != :summary)} Summary
+      %a.btn{href: client_messages_path(@client), class: ('alt-dm' if action != :messages)}
+        %i.fas.fa-stream
+        Messages
+      %a.btn{href: client_subscribers_path(@client), class: ('alt-dm' if action != :subscribers)}
+        %i.fas.fa-users
+        Subscribers
+    .col-auto
+      .btn-group
+        = link_to 'All Clients', clients_path, class: 'btn alt-dm'
+        - if @client.environments.any?
+          = link_to 'Send Email', client_new_email_path(@client), class: 'btn alt-dm'
+        = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'

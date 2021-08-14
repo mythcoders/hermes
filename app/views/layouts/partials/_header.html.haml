@@ -1,12 +1,13 @@
-%title= page_title('Hermes')
 %meta{charset: 'utf-8'}
-%meta{'http-equiv': 'X-UA-Compatible', content: 'IE=edge'}
+%title= page_title('Hermes')
 %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
 %meta{name: 'author', content: 'MythCoders, LLC'}
-%meta{name: 'description', content: 'Hermes API'}
+%meta{name: 'description', content: 'Hermes'}
 %meta{name: 'keywords', content: 'hermes'}
+
 = csrf_meta_tags
-= stylesheet_link_tag 'application'
-= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+= stylesheet_link_tag 'application', 'data-turbo-track': 'reload', type: 'text/css'
+= javascript_pack_tag 'main', 'data-turbo-track': 'reload', type: 'text/javascript'
 %script{src: "https://kit.fontawesome.com/41aacffc34.js"}
-= yield :styles
+
+= yield :head

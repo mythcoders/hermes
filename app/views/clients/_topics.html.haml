@@ -1,16 +1,16 @@
-.card
-  .card-header
-    .row.align-items-center
+.card.p-0
+  .px-card.py-10.bg-very-dark-dm
+    .row
       .col
-        %h3.card-header-title
-          %i.fas.fa-clipboard-list.fa-lg
+        %h2.card-title.font-size-18.m-0
+          %i.fas.fa-clipboard-list
           Mailing Topics
       .col-auto
-        %a.btn.btn-sm.btn-white{href: new_client_topic_path(@client)}
+        %a.btn.btn-sm{href: new_client_topic_path(@client)}
           New
   - if @client.topics.any?
     .table-responsive
-      %table.table.card-table.table-sm
+      %table.table.card-table
         %thead
           %tr
             %th Name
@@ -23,10 +23,10 @@
               %td= t.subscriptions.count
               %td
                 - if t.active
-                  %span.badge.badge-soft-success.text-uppercase active
+                  %span.badge.badge-success.text-uppercase active
                 - else
-                  %span.badge.badge-soft-info.text-uppercase inactive
+                  %span.badge.badge-secondary.text-uppercase inactive
   - else
-    .card-body.text-center.bg-transparent
-      %h3 No Topics
+    .text-center
+      %h3.content-title.mt-10 No Topics
       %p.text-muted This client does not have any topics saved.

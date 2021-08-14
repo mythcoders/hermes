@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SidebarComponent < ViewComponent::Base
   def initialize(user:, current_action:)
     @user = user

@@ -1,18 +1,13 @@
 - page_title 'New', 'Client'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Clients
-        %h1.header-title
-          = fa_solid 'code'
-          Create a new client
+.content
+  %h1.content-title
+    %i.fas.fa-code
+    Create a new client
 
-= form_for @client, url: clients_path do |f|
-  = error_messages_for 'client'
-  = render partial: 'clients/form', locals: { f: f }
-  %hr.mt-5.mb-5
-  = f.submit 'Create client', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', clients_path, class: 'btn btn-block btn-link text-muted'
+  = form_for @client, url: clients_path do |f|
+    = error_messages_for 'client'
+    = render partial: 'clients/form', locals: { f: f }
+    %hr.mt-5.mb-5
+    = link_to 'Cancel', clients_path, class: 'btn alt-dm'
+    = f.submit 'Create', class: 'btn btn-success float-right'

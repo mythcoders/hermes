@@ -1,8 +1,8 @@
 - content_for :header do
   My Profile
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, "data-turbo": "false" }) do |f|
+  = render partial: 'devise/shared/error_messages'
 
   .form-horizontal
     .form-group
@@ -10,7 +10,7 @@
       .input-group
         .input-group-prepend
           %span.input-group-text
-            = fa_solid 'user'
+            %i.fas.fa-user
         = f.text_field :name, class: 'form-control', autofocus: true, autocomplete: 'off'
 
     .form-group

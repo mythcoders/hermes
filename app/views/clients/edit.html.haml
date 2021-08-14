@@ -1,18 +1,14 @@
 - page_title 'Edit', 'Client'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Clients
-        %h1.header-title
-          = fa_solid 'code'
-          = "Edit #{@client.name}"
+.content
+  %h1.content-title
+    %i.fas.fa-code
+    = "Edit #{@client.name}"
 
-= form_for @client, url: client_path(@client), method: :patch  do |f|
-  = error_messages_for 'client'
-  = render partial: 'clients/form', locals: { f: f }
-  %hr.mt-5.mb-5
-  = f.submit 'Save changes to client', class: 'btn btn-block btn-primary'
-  = link_to 'Cancel', client_path(@client), class: 'btn btn-block btn-link text-muted'
+  = form_for @client, url: client_path(@client), method: :patch  do |f|
+    = error_messages_for 'client'
+    = render partial: 'clients/form', locals: { f: f }
+    %hr.mt-5.mb-5
+    = link_to 'Cancel', client_path(@client), class: 'btn alt-dm'
+    = f.submit 'Save changes', class: 'btn btn-success float-right'
+

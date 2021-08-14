@@ -1,35 +1,32 @@
 - page_title 'Client Search'
 
-.header
-  .header-body
-    .row.align-items-center
-      .col
-        %h6.header-pretitle
-          Clients
-        %h1.header-title
-          = fa_solid 'code'
-          All Clients
-      .col-auto
-        = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
+.content
+  .row
+    .col
+      %h1.content-title.font-size-22
+        %i.fas.fa-code
+        Clients
+    .col-auto
+      = link_to 'New Client', new_client_path, class: 'btn btn-primary lift'
 
-.card
+.card.p-0
   %table-responsive
-    %table.table.table-sm.card-table
+    %table.table.card-table
       %thead
         %tr
           %th Name
           %th Owner
-          %th API Access
+          %th.float-right API Access
       %tbody
         - @clients.each do |c|
-          %tr{data: { 'clickable-row': '', 'href': client_path(c) }}
-            %td= c.name
+          %tr
+            %td= link_to c.name, client_path(c)
             %td= c.owner
-            %td
+            %td.float-right
               - if c.is_active
-                %span.badge.badge-soft-success.text-uppercase Approved
+                %span.badge.badge-success.text-uppercase Approved
               - else
-                %span.badge.badge-soft-danger.text-uppercase Blocked
-  .card-footer
+                %span.badge.badge-danger.text-uppercase Blocked
+  .p-10
     = paginate @clients
     = page_entries_info @clients

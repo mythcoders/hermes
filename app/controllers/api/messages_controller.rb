@@ -15,7 +15,7 @@ module Api
       return render(json: message.errors, status: :bad_request) unless message.valid?
       return head :error unless message.received!
 
-      MailSortWorker.perform_async message.tracking_id
+      MailSortJob.perform_later message.tracking_id
       head :created
     end
 
@@ -35,11 +35,11 @@ module Api
     def validate_api_environment
       return unless mail_params[:environment]
 
-      head :method_not_allowed if client_environment.status == 'rejected'
+      head :method_not_allowed if client_environment.status == "rejected"
     end
 
     def client_environment
-      @client_environment ||= ClientEnvironment.find_or_create_by_env!(@client, mail_params[:environment])
+      @client_environment ||= ClientEnvironment.find_or_create_by_env!(@client.id, mail_params[:environment])
     end
   end
 end

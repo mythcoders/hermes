@@ -1,8 +1,8 @@
 class CreateReadReceipts < ActiveRecord::Migration[5.2]
   def change
-    enable_extension 'pgcrypto' unless extension_enabled?('pgcrypto')
+    enable_extension "pgcrypto" unless extension_enabled?("pgcrypto")
 
-    add_column :mail_logs, :tracking_id, :string, null: false, default: ''
+    add_column :mail_logs, :tracking_id, :string, null: false, default: ""
 
     create_table :read_receipts do |t|
       t.belongs_to :mail_log, null: false
