@@ -9,5 +9,6 @@
     = error_messages_for 'subscriber'
     = render partial: 'subscribers/form', locals: { f: f }
     %hr.mt-5.mb-5
-    = f.submit 'Create subscriber', class: 'btn btn-block btn-primary'
-    = link_to 'Cancel', client_subscribers_path(@subscriber.client_id), class: 'btn alt-dm'
+    = link_to 'Cancel', client_subscribers_path(@subscriber.client_id), class: 'btn dm-alt'
+    = f.submit 'Create', class: 'btn btn-success float-right'
+

@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[edit update]
 
   def index
-    @subscriptions = Subscription.includes(:subscriber, :topic).page(params[:page]).per(15)
+    @subscriptions = Subscription.includes(:subscriber, :topic).order(created_at: :desc).page(params[:page])
   end
 
   def update

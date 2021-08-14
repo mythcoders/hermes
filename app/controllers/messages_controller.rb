@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   before_action :set_message, except: %i[index]
 
   def index
-    @messages = Message.order(created_at: :desc).page(params[:page]).per(15)
+    @messages = Message.order(created_at: :desc).page(params[:page])
   end
 
   def logs

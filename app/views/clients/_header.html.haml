@@ -1,7 +1,9 @@
 .content.mb-0
   .row
     .col
-      %h1.content-title.font-size-22= @client.name
+      %h1.content-title.font-size-22
+        %i.fas.fa-code
+        = @client.name
       %a.btn{href: client_path(@client), class: ('alt-dm' if action != :summary)} Summary
       %a.btn{href: client_messages_path(@client), class: ('alt-dm' if action != :messages)}
         %i.fas.fa-stream

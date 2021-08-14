@@ -2,7 +2,7 @@
 
 .content
   %h1.card-title
-    %i.fas.fa-clipboard-list
+    %i.fas.fa-key-skeleton
     = "Edit #{@environment.name}"
 
   = form_for @environment, url: client_environment_path(@environment), method: :patch  do |f|

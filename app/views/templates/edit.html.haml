@@ -2,7 +2,7 @@
 
 .content
   %h1.content-title
-    %i.fas.fa-clipboard-list
+    %i.fas.fa-object-group
     = "Edit #{@template.name}"
 
   = form_for @template, url: client_template_path(@template), method: :patch  do |f|

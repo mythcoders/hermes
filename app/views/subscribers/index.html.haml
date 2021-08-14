@@ -1,0 +1,39 @@
+- page_title @client.name, 'Client'
+
+= render partial: 'clients/header', locals: { action: :subscribers }
+
+.row
+  .col-12.col-md-4
+    = render partial: 'clients/overview'
+
+  .col-12.col-md-8
+    .card.p-0
+      .px-card.py-10.bg-very-dark-dm
+        .row
+          .col
+            %h2.card-title.font-size-18.m-0
+              %i.fas.fa-users
+              Subscribers
+          .col-auto
+            %a.btn.btn-sm{href: new_client_subscriber_path(@client)}
+              New
+      - if @subscribers.any?
+        .table-responsive
+          %table.table.card-table
+            %thead
+              %tr
+                %th Name
+                %th Email
+            %tbody
+              - @subscribers.each do |s|
+                %tr
+                  %td= link_to s.name, client_subscriber_path(@client, s)
+                  %td= s.address
+        .p-10
+          = paginate @subscribers
+          = page_entries_info @subscribers
+      - else
+        .text-center
+          %h3.content-title.mt-10 No Subscribers
+          %p.text-muted This client does not have anyone subscribed.
+

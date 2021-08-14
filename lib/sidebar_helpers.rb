@@ -11,7 +11,7 @@ module SidebarHelpers
   end
 
   def clients_controller?
-    controller.instance_of?(ClientsController)
+    controller.instance_of?(ClientsController) || controller.instance_of?(SubscribersController)
   end
 
   def messages_controller?

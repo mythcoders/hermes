@@ -9,5 +9,5 @@
     = error_messages_for 'subscriber'
     = render partial: 'subscribers/form', locals: { f: f }
     %hr.mt-5.mb-5
-    = f.submit 'Save changes to subscriber', class: 'btn btn-block btn-primary'
     = link_to 'Cancel', client_subscriber_path(@subscriber.client_id), class: 'btn alt-dm'
+    = f.submit 'Save changes', class: 'btn btn-success float-right'

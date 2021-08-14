@@ -3,6 +3,11 @@
 class SubscribersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_subscriber, only: %i[show edit update]
+  before_action :set_client, only: %i[index]
+
+  def index
+    @subscribers = @client.subscribers.order(created_at: :desc).page(params[:page])
+  end
 
   def new
     @subscriber = Subscriber.new(client_id: params[:client_id])
@@ -28,6 +33,10 @@ class SubscribersController < ApplicationController
   end
 
   private
+
+  def set_client
+    @client = Client.find(params[:client_id])
+  end
 
   def set_subscriber
     @subscriber = Subscriber.find params[:id]

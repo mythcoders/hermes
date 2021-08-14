@@ -6,15 +6,15 @@
     Logs
 
 .card.p-0
-  %table-responsive
-    %table.table.table-sm.card-table
+  .table-responsive
+    %table.table.card-table
       %thead
         %tr
           %th Date Sent
           %th API Client
           %th Subject
           %th Environment
-      %tbody.list
+      %tbody
         - @messages.each do |c|
           %tr
             %td= link_to l(c.created_at), message_path(c.tracking_id)

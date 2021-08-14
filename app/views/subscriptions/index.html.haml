@@ -14,7 +14,7 @@
           %th Client
           %th Topic
           %th Status
-      %tbody.list
+      %tbody
         - @subscriptions.each do |s|
           %tr
             %td= link_to s.subscriber.name, edit_subscription_path(s)
