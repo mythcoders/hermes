@@ -12,7 +12,7 @@ module NotificationHandlers
     private
 
     def reject_reason
-      @reject_reason ||= aws_callback.message["reject"]["reason"]
+      @reject_reason ||= @notification.message["reject"]["reason"]
     end
   end
 end

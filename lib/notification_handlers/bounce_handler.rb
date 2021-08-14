@@ -33,27 +33,27 @@ module NotificationHandlers
     end
 
     def timestamp
-      @timestamp ||= DateTime.parse aws_callback.message["bounce"]["timestamp"]
+      @timestamp ||= DateTime.parse @notification.message["bounce"]["timestamp"]
     end
 
     def bounce_type
-      @bounce_type ||= aws_callback.message["bounce"]["bounceType"]
+      @bounce_type ||= @notification.message["bounce"]["bounceType"]
     end
 
     def bounce_subtype
-      @bounce_subtype ||= aws_callback.message["bounce"]["bounceSubType"]
+      @bounce_subtype ||= @notification.message["bounce"]["bounceSubType"]
     end
 
     def reporting_mta
-      @reporting_mta ||= aws_callback.message["bounce"]["reportingMTA"]
+      @reporting_mta ||= @notification.message["bounce"]["reportingMTA"]
     end
 
     def bounced_recipients
-      @bounced_recipients ||= aws_callback.message["bounce"]["bouncedRecipients"]
+      @bounced_recipients ||= @notification.message["bounce"]["bouncedRecipients"]
     end
 
     def feedback_id
-      @feedback_id ||= aws_callback.message["bounce"]["feedbackId"]
+      @feedback_id ||= @notification.message["bounce"]["feedbackId"]
     end
   end
 end

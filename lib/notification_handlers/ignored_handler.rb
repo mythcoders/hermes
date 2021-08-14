@@ -3,7 +3,7 @@
 module NotificationHandlers
   class IgnoredHandler < BaseNotificationHandler
     def handle
-      Sentry.capture_exception("Ignored EmailCallback of type #{aws_callback.type}", level: :info)
+      Sentry.capture_exception("Ignored EmailCallback of type #{@notification.type}", level: :info)
 
       true
     end

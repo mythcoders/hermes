@@ -30,27 +30,27 @@ module NotificationHandlers
     end
 
     def timestamp
-      @timestamp ||= DateTime.parse aws_callback.message["complaint"]["timestamp"]
+      @timestamp ||= DateTime.parse @notification.message["complaint"]["timestamp"]
     end
 
     def arrival_date
-      @arrival_date ||= DateTime.parse aws_callback.message["complaint"]["arrivalDate"]
+      @arrival_date ||= DateTime.parse @notification.message["complaint"]["arrivalDate"]
     end
 
     def user_agent
-      @user_agent ||= aws_callback.message["complaint"]["userAgent"]
+      @user_agent ||= @notification.message["complaint"]["userAgent"]
     end
 
     def complaint_type
-      @complaint_type ||= aws_callback.message["complaint"]["complaintFeedbackType"]
+      @complaint_type ||= @notification.message["complaint"]["complaintFeedbackType"]
     end
 
     def feedback_id
-      @feedback_id ||= aws_callback.message["complaint"]["feedbackId"]
+      @feedback_id ||= @notification.message["complaint"]["feedbackId"]
     end
 
     def complaint_recipients
-      @complaint_recipients ||= aws_callback.message["complaint"]["complainedRecipients"]
+      @complaint_recipients ||= @notification.message["complaint"]["complainedRecipients"]
     end
   end
 end
