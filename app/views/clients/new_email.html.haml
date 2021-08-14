@@ -30,7 +30,7 @@
         .form-group
           = f.label :environment_id, class: 'col-form-label'
           = f.select :environment_id,
-                      options_from_collection_for_select(@client.environments, 'id', 'fancy_name', @message.environment_id),
+                      options_from_collection_for_select(@client.environments.where(regex: false), 'id', 'fancy_name', @message.environment_id),
                       { include_blank: '- Select -' },
                       { class: 'form-control', 'data-toggle': 'select' }
 

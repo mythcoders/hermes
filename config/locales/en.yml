@@ -46,6 +46,8 @@ en:
           active: Active
           inactive: Inactive
           paused: Paused
+      client_environment:
+        status: Delivery Policy
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"

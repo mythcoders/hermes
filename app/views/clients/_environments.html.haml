@@ -14,7 +14,7 @@
         %thead
           %tr
             %th Name
-            %th{style: 'width: 40%'} Permission Level
+            %th{style: 'width: 40%'} Delivery Policy
         %tbody
           - @client.environments.order(:name).each do |e|
             %tr
