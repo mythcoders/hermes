@@ -18,14 +18,14 @@ livenessProbe:
   probeType: 'exec'
   command:
     - cat
-    - /app/tmp/health_checks/app
+    - /opt/hermes/tmp/health_checks/app
   initialDelaySeconds: 20
   timeoutSeconds: 15
 readinessProbe:
   probeType: 'exec'
   command:
     - cat
-    - /app/tmp/health_checks/app
+    - /opt/hermes/tmp/health_checks/app
   initialDelaySeconds: 20
   timeoutSeconds: 15
 resources:
@@ -45,12 +45,6 @@ workerResources:
 podDisruptionBudget:
   enabled: true
 #   minAvailable: 2
-# postgres is ONLY used in review and staging envs.
-postgresql:
-  postgresqlDatabase: 'hermes'
-  postgresqlUsername: 'postgres'
-  postgresqlPassword: 'hermes'
-  postgresqlPostgresPassword: 'hermes'
 workers:
   sidekiq:
     replicaCount: 1
@@ -61,13 +55,13 @@ workers:
       probeType: 'exec'
       command:
         - cat
-        - /app/tmp/health_checks/worker
+        - /opt/hermes/tmp/health_checks/worker
       initialDelaySeconds: 25
       timeoutSeconds: 5
     readinessProbe:
       probeType: 'exec'
       command:
         - cat
-        - /app/tmp/health_checks/worker
+        - /opt/hermes/tmp/health_checks/worker
       initialDelaySeconds: 25
       timeoutSeconds: 5
