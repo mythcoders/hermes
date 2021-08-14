@@ -45,6 +45,12 @@ workerResources:
 podDisruptionBudget:
   enabled: true
 #   minAvailable: 2
+# postgres is ONLY used in review and staging envs.
+postgresql:
+  postgresqlDatabase: 'hermes'
+  postgresqlUsername: 'postgres'
+  postgresqlPassword: 'hermes'
+  postgresqlPostgresPassword: 'hermes'
 workers:
   sidekiq:
     replicaCount: 1
