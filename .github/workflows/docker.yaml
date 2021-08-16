@@ -46,6 +46,8 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
+            type=ref,event=tag
+            type=raw,enable=${{ github.ref == 'refs/heads/master' }},value=latest
 
       - name: write build info
         run: |
