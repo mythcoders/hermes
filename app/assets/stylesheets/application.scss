@@ -1,5 +1,5 @@
 
-@import "halfmoon/css/halfmoon";
+@import "halfmoon/css/halfmoon-variables";
 @import "actiontext";
 
 .padded-body {
@@ -10,3 +10,7 @@
   width: 10%;
 }
 
+.px-card {
+  padding-left: var(--content-and-card-spacing-half);
+  padding-right: var(--content-and-card-spacing-half);
+}

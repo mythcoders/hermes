@@ -3,7 +3,7 @@
 = render partial: 'header', locals: { action: :logs }
 
 .card.p-0
-  %table-responsive
+  .table-responsive
     %table.table
       %thead
         %tr
@@ -13,8 +13,10 @@
       %tbody
         - @logs.each do |r|
           %tr
-            %td= activity_message(r.activity_type)
-            %td.text-monospace
+            %td{style: "width: 8%"}
+              %i.fal{class: "fa-#{activity_icon(r.activity_type)}"}
+              = activity_message(r.activity_type)
+            %td
               - if r.activity_type == "clicked"
                 = r.link_url
                 %hr

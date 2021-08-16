@@ -1,9 +1,9 @@
-- page_title 'Mail Log'
+- page_title 'Messages'
 
 .content
   %h1.content-title.font-size-22
     %i.fas.fa-stream
-    Logs
+    Messages
 
 .card.p-0
   .table-responsive
@@ -12,16 +12,16 @@
         %tr
           %th Date Sent
           %th API Client
-          %th Subject
           %th Environment
+          %th Subject
       %tbody
         - @messages.each do |c|
           %tr
             %td= link_to l(c.created_at), message_path(c.tracking_id)
             %td= link_to c.client.name, client_path(c.client_id)
-            %td= truncate c.subject, length: 50
             %td
               %code= truncate c.environment, length: 20
+            %td= truncate c.subject, length: 50
   .p-10
     = paginate @messages
     = page_entries_info @messages

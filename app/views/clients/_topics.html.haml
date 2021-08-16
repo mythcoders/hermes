@@ -15,13 +15,13 @@
           %tr
             %th Name
             %th Size
-            %th{style: 'width: 40%'}Status
+            %th.float-right Status
         %tbody
           - @client.topics.order(:name).each do |t|
             %tr
               %td= link_to t.name, edit_client_topic_path(@client, t)
               %td= t.subscriptions.count
-              %td
+              %td.float-right
                 - if t.active
                   %span.badge.badge-success.text-uppercase active
                 - else
