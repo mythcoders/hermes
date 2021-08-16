@@ -51,7 +51,7 @@ jobs:
         run: |
           echo $GITHUB_REF > BRANCH
           echo $GITHUB_ACTOR > AUTHOR
-          echo $GITHUB_SHA > REVISION
+          echo $GITHUB_SHA > COMMIT
 
       - name: build image and export
         uses: docker/build-push-action@v2

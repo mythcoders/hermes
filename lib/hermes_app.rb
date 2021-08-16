@@ -41,5 +41,6 @@ module HermesApp
     end
   end
 
-  REVISION = File.read(HermesApp.root.join("REVISION")).strip.freeze
+  COMMIT = File.read(HermesApp.root.join("COMMIT")).strip.freeze
+  VERSION = File.read(HermesApp.root.join("VERSION")).strip.freeze
 end
