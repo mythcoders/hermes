@@ -4,34 +4,11 @@ include:
 .auto-deploy:
   image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v2.12.0"
 
-variables:
-  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
-
 build:
   stage: build
   before_script:
     - echo $CI_BUILD_REF_NAME > BRANCH
     - echo $CI_COMMIT_SHA > COMMIT
-
-test:
-  stage: test
-  needs: ["build"]
-  image: $CONTAINER_IMAGE
-  services:
-    - postgres:latest
-  variables:
-    RAILS_ENV: test
-    DATABASE_URL: "postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/$POSTGRES_DB"
-  before_script:
-    - bundle exec rails db:setup
-  script:
-    - ASSETS_PRECOMPILE=1 SECRET_KEY_BASE=1 RAILS_ENV=test bundle exec rake assets:precompile
-    - bundle exec rspec --format documentation --format RspecJunitFormatter --out rspec.xml
-  artifacts:
-    paths:
-      - rspec.xml
-    reports:
-      junit: rspec.xml
 
 review:
   stage: review
