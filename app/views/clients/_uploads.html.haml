@@ -15,13 +15,13 @@
           %tr
             %th Type
             %th Date
-            %th{style: 'width: 40%'} Status
+            %th.float-right Status
         %tbody
           - @client.uploads.order(created_at: :desc).each do |t|
             %tr
               %td= ClientUpload.human_enum_name :file_types, t.file_type
               %td= l t.created_at
-              %td
+              %td.float-right
                 %span.badge.text-uppercase= t.status
   - else
     .text-center

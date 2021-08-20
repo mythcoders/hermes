@@ -19,6 +19,10 @@ module MessagesHelper
       "pause-circle"
     when "ignored"
       "ban"
+    when "opened"
+      "envelope-open"
+    when "clicked"
+      "link"
     else
       "info-circle"
     end
@@ -47,7 +51,7 @@ module MessagesHelper
 
   def activity_color(key)
     case key
-    when "rerouted", "complaint", "held"
+    when "rerouted", "complaint", "held", "ignored"
       "secondary"
     when "failed", "error"
       "danger"

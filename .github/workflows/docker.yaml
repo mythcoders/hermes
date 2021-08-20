@@ -46,12 +46,14 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
+            type=ref,event=tag
+            type=raw,enable=${{ github.ref == 'refs/heads/master' }},value=latest
 
       - name: write build info
         run: |
           echo $GITHUB_REF > BRANCH
           echo $GITHUB_ACTOR > AUTHOR
-          echo $GITHUB_SHA > REVISION
+          echo $GITHUB_SHA > COMMIT
 
       - name: build image and export
         uses: docker/build-push-action@v2

@@ -12,14 +12,14 @@
         %i.fas.fa-key-skeleton
         API Credentials
       .collapse-content.p-0
-        %table-responsive
+        .table-responsive
           %table.table.p-0
             %tbody
               %tr
-                %td Key/Username
+                %td{style: "width: 5%"} Key/Username
                 %td.text-monospace= @client.api_key
               %tr
-                %td Secret/Password
+                %td{style: "width: 5%"} Secret/Password
                 %td.text-monospace= @client.api_secret
     = render partial: 'environments'
     = render partial: 'topics'

@@ -1,9 +1,9 @@
 {
   "name": "hermes",
-  "version": "0.5",
+  "version": "0.5.1",
   "repository": "https://gitlab.com/mythcoders/hermes",
   "author": "Justin Adkins <justin.adkins@mythcoders.com>",
-  "license": "GNU AGPL",
+  "license": "GNU AGPLv3",
   "private": true,
   "dependencies": {
     "@hotwired/turbo-rails": "^7.0.0-rc.1",

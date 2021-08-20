@@ -19,6 +19,10 @@ Rails.application.config.middleware.use Pinglish, path: "/_ping" do |ping|
     Rails.root.join("BRANCH").read.chomp
   end
 
+  ping.check :commit do
+    Rails.root.join("COMMIT").read.chomp
+  end
+
   ping.check :version do
     Rails.root.join("VERSION").read.chomp
   end

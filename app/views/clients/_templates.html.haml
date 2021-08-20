@@ -14,12 +14,12 @@
         %thead
           %tr
             %th Name
-            %th{style: 'width: 40%'} Status
+            %th.float-right Status
         %tbody
           - @client.templates.order(:name).each do |t|
             %tr
               %td= link_to t.name, client_template_path(@client, t)
-              %td
+              %td.float-right
                 - if t.active
                   %span.badge.badge-success.text-uppercase active
                 - else

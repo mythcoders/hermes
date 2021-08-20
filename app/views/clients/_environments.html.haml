@@ -14,7 +14,7 @@
         %thead
           %tr
             %th Name
-            %th{style: 'width: 40%'} Delivery Policy
+            %th.float-right Delivery Policy
         %tbody
           - @client.environments.order(:name).each do |e|
             %tr
@@ -22,7 +22,7 @@
                 = link_to e.name, edit_client_environment_path(@client, e)
                 - if e.regex?
                   %span.badge.text-uppercase Regex
-              %td
+              %td.float-right
                 - if e.status == 'approved'
                   %span.badge.badge-success.text-uppercase= e.status
                 - elsif e.status == 'rejected'
