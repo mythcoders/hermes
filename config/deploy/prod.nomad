@@ -72,17 +72,17 @@ job "hermes" {
 
       template {
         data = <<EOH
-      RAILS_MASTER_KEY="{{ key "hermes/rails-master-key" }}"
       DATABASE_URL="{{ key "hermes/database-url" }}"
-      NODE_ENVIRONMENT="production"
       ENVIRONMENT_NAME="production"
       ENVIRONMENT_URL="hermes.mythcoders.net"
+      NODE_ENVIRONMENT="production"
       RAILS_ENV="production"
       RAILS_LOG_TO_STDOUT="1"
-      REDIS_WORKER_NAMESPACE="{{ env "NOMAD_JOB_NAME" }}"
+      RAILS_MASTER_KEY="{{ key "hermes/rails-master-key" }}"
       RAILS_SERVE_STATIC_FILES="1"
-      STORAGE_BUCKET="mcdig-pdstg-hermes"
+      REDIS_NAMESPACE="sign-junkie"
       REDIS_URL="{{ key "hermes/redis-url" }}"
+      STORAGE_BUCKET="mcdig-pdstg-hermes"
       EOH
 
         destination = "secrets/vault.env"
@@ -106,17 +106,17 @@ job "hermes" {
 
       template {
         data = <<EOH
-      RAILS_MASTER_KEY="{{ key "hermes/rails-master-key" }}"
       DATABASE_URL="{{ key "hermes/database-url" }}"
-      NODE_ENVIRONMENT="production"
       ENVIRONMENT_NAME="production"
       ENVIRONMENT_URL="hermes.mythcoders.net"
+      NODE_ENVIRONMENT="production"
       RAILS_ENV="production"
       RAILS_LOG_TO_STDOUT="1"
-      REDIS_WORKER_NAMESPACE="{{ env "NOMAD_JOB_NAME" }}"
+      RAILS_MASTER_KEY="{{ key "hermes/rails-master-key" }}"
       RAILS_SERVE_STATIC_FILES="1"
-      STORAGE_BUCKET="mcdig-pdstg-hermes"
+      REDIS_NAMESPACE="sign-junkie"
       REDIS_URL="{{ key "hermes/redis-url" }}"
+      STORAGE_BUCKET="mcdig-pdstg-hermes"
       EOH
 
         destination = "secrets/vault.env"
@@ -145,17 +145,17 @@ job "hermes" {
 
       template {
         data = <<EOH
-      RAILS_MASTER_KEY="{{ key "hermes/rails-master-key" }}"
       DATABASE_URL="{{ key "hermes/database-url" }}"
-      NODE_ENVIRONMENT="production"
       ENVIRONMENT_NAME="production"
       ENVIRONMENT_URL="hermes.mythcoders.net"
+      NODE_ENVIRONMENT="production"
       RAILS_ENV="production"
       RAILS_LOG_TO_STDOUT="1"
-      REDIS_WORKER_NAMESPACE="{{ env "NOMAD_JOB_NAME" }}"
+      RAILS_MASTER_KEY="{{ key "hermes/rails-master-key" }}"
       RAILS_SERVE_STATIC_FILES="1"
-      STORAGE_BUCKET="mcdig-pdstg-hermes"
+      REDIS_NAMESPACE="sign-junkie"
       REDIS_URL="{{ key "hermes/redis-url" }}"
+      STORAGE_BUCKET="mcdig-pdstg-hermes"
       EOH
 
         destination = "secrets/vault.env"
