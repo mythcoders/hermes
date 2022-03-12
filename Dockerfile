@@ -1,4 +1,4 @@
-FROM ruby:3-alpine AS base
+FROM ruby:3.0.1-alpine AS base
 
 ENV APP_HOME=/opt/hermes \
   GEM_HOME=/usr/local/bundle \
