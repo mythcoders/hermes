@@ -2,7 +2,7 @@ version: "3.7"
 
 x-shared-environment-variables: &shared-environment-variables
   GITLAB_ENVIRONMENT_NAME: development
-  GITLAB_ENVIRONMENT_URL: https://hermes.mythcoders.dev
+  ENVIRONMENT_URL: https://hermes.mythcoders.dev
   NODE_ENV: development
   RAILS_ENV: development
   REDIS_NAMESPACE: hermes-dev

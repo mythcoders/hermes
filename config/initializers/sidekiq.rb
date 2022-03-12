@@ -2,15 +2,16 @@
 
 require "sidekiq"
 require "sidekiq-scheduler"
+require "redis_config_builder"
 
-redis_config = {
-  url: ENV["REDIS_URL"],
-  namespace: ENV["REDIS_WORKER_NAMESPACE"],
-  network_timeout: 3
-}
+redis_conn = proc { Redis.new(RedisConfigBuilder.build("sidekiq")) }
+
+# This is the recommendation from sidekiq-scheduler:
+#   https://github.com/moove-it/sidekiq-scheduler#notes-about-connection-pooling
+redis_pool_size = Sidekiq.options[:concurrency] + 5
 
 Sidekiq.configure_server do |config|
-  config.redis = redis_config
+  config.redis = ConnectionPool.new(size: redis_pool_size, &redis_conn)
 
   # https://github.com/mperham/sidekiq/issues/4496#issuecomment-677838552
   config.death_handlers << ->(job, exception) do
@@ -20,7 +21,7 @@ Sidekiq.configure_server do |config|
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = redis_config
+  config.redis = ConnectionPool.new(size: redis_pool_size, &redis_conn)
 end
 
 Sidekiq.default_worker_options = {retry: 3}

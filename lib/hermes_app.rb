@@ -31,10 +31,10 @@ module HermesApp
     end
 
     def env_url(protocol: true)
-      if ENV["GITLAB_ENVIRONMENT_URL"].present? && protocol
-        ENV["GITLAB_ENVIRONMENT_URL"].gsub("HTTP", "HTTPS").gsub("http", "https")
-      elsif ENV["GITLAB_ENVIRONMENT_URL"].present?
-        ENV["GITLAB_ENVIRONMENT_URL"].split("//").last
+      if ENV["ENVIRONMENT_URL"].present? && protocol
+        ENV["ENVIRONMENT_URL"].gsub("HTTP", "HTTPS").gsub("http", "https")
+      elsif ENV["ENVIRONMENT_URL"].present?
+        ENV["ENVIRONMENT_URL"].split("//").last
       else
         "hermes.mythcoders.dev"
       end

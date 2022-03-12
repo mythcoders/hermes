@@ -9,7 +9,7 @@ Rails.application.configure do
     config.action_controller.asset_host = ENV["CDN_URL"]
     config.action_mailer.asset_host = ENV["CDN_URL"]
   else
-    config.action_mailer.asset_host = "https://#{ENV["GITLAB_ENVIRONMENT_URL"]}"
+    config.action_mailer.asset_host = "https://#{ENV["ENVIRONMENT_URL"]}"
   end
 
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
@@ -39,7 +39,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = {
-    host: ENV["GITLAB_ENVIRONMENT_URL"]
+    host: ENV["ENVIRONMENT_URL"]
   }
   config.action_mailer.smtp_settings = {
     user_name: Rails.application.credentials.dig(:email, :username),
