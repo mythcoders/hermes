@@ -24,7 +24,7 @@ gem "rails", "~> 6.0.0"
 gem "ransack" # Searching
 gem "sass-rails"
 gem "uglifier", ">= 1.3.0"
-gem "view_component", require: "view_component/engine"
+gem "view_component"
 gem "webpacker"
 
 # sentry exceptions
