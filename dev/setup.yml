@@ -1,0 +1,152 @@
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    network_name: hermes
+  handlers:
+    - name: restart dnsmasq
+      become: yes
+      command: brew services restart dnsmasq
+    - name: setup mkcert
+      become: yes
+      command: mkcert --install
+  pre_tasks:
+    - name: install dnsmasq
+      homebrew: name=dnsmasq
+
+    - name: install mkcert
+      homebrew: name=mkcert
+
+    - name: install nss
+      homebrew: name=nss
+  tasks:
+    - name: net tier - certificate
+      copy:
+        dest: "~/Library/Application Support/mkcert/rootCA.pem"
+        content: |
+          -----BEGIN CERTIFICATE-----
+          MIIE9zCCA1+gAwIBAgIQH5gt+MfkJUMRNsUSBjZmhjANBgkqhkiG9w0BAQsFADCB
+          kzEeMBwGA1UEChMVbWtjZXJ0IGRldmVsb3BtZW50IENBMTQwMgYDVQQLDCtqbWFk
+          a2luc0BKdXN0aW5zLWlNYWMubG9jYWwgKEp1c3RpbiBBZGtpbnMpMTswOQYDVQQD
+          DDJta2NlcnQgam1hZGtpbnNASnVzdGlucy1pTWFjLmxvY2FsIChKdXN0aW4gQWRr
+          aW5zKTAeFw0yMDAzMzAwNjQ2MjNaFw0zMDAzMzAwNjQ2MjNaMIGTMR4wHAYDVQQK
+          ExVta2NlcnQgZGV2ZWxvcG1lbnQgQ0ExNDAyBgNVBAsMK2ptYWRraW5zQEp1c3Rp
+          bnMtaU1hYy5sb2NhbCAoSnVzdGluIEFka2lucykxOzA5BgNVBAMMMm1rY2VydCBq
+          bWFka2luc0BKdXN0aW5zLWlNYWMubG9jYWwgKEp1c3RpbiBBZGtpbnMpMIIBojAN
+          BgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA3dzDC+S254Q32Hh+zbVIsWi4RDxN
+          ELOeypZFjRNbsRMhNo8UBxyV9IfQVHQdYzZxdvCeSDj9afRlzEEUwHHuqEEvy4Ap
+          P1N7qynpmorkazwaCQq1lAqnq6HK2ofXCCwTJyHDh4ggNST8Dp+YnamI7M089Fy6
+          YWMSbywC7SRUc9bSeKbECB8mDCMBanyWopqecXYLUdLsPOn3tXTpiYhmYuVYxpj/
+          AsAwIousmjarJ7+FxdouqwkYD/hLwdODzae8XTFeT7i/0is44dam7YKidMgFp1tc
+          g/XidyXnbCBIxfjacks2T7iRlCnn4xTX7ETfVaHKVcNXhHmxkP7tR8vQ/uchIiRa
+          /2rGJjpxIqGcOYiequ6G1dkQ81KvZSjgYdO2gaPBAITPSVCSfV7hmsXseLaVuFmO
+          kjPctqpi56XOjbs25WHToid3cDZXvWH9cW2WYHrJHg+0AS9ZAYzPGQD4cedJw+ld
+          iOXzSe/SMnSl0KQbGXmoXmkbxLGqDgF7l+FvAgMBAAGjRTBDMA4GA1UdDwEB/wQE
+          AwICBDASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBQZmomUUBGVb3pwnNz/
+          LCYDK5dEQTANBgkqhkiG9w0BAQsFAAOCAYEAMuMTWabDrwnidFWCnjWedTMuqwa3
+          qxWJwkUJILD4862eDjmmXzz8SBeEJTiemhPheoApJXy/BYlBnmIdnnQoC2Wjg5KC
+          2Z4ZlnXAmJr99EjpddYXr1jU0iDTx7OdVHMp53K6675iEqseoccPk1RAhcFav7fV
+          3NvWBK/obB1KQWAHaf2e2OLcLqY43zpI8974GOgBRoO2z8Kgyc23Egjzp4ZTFE0U
+          r8Dp8NlLU8W1NtW+RQeCX8hOjNAT34bkR+25QQHAiSqsyfXMkK05/Z3H4e2KViHL
+          pCXtScmkueVBAURFJMUBkBZK+25b0oJLqIy2NDVTg7HnEqQGc7n/VuOIqiCX4oOe
+          3OFt/pOFtJn05W4vu6SfeFsk9KNlQLNgQGm8ktBj7XUTksCtd1b8wXOzt7DefQC/
+          SFhknVIs9pnnygkfq9cwvArL4n1LcTj830gt0/KEdW4CtSpzOT2KW1zXFB100h+Q
+          uRwm/oeyO6GCrU7t1rklKkKC7yzICO1pnhmK
+          -----END CERTIFICATE-----
+      notify: setup mkcert
+
+    - name: net tier - private key
+      copy:
+        dest: "~/Library/Application Support/mkcert/rootCA-key.pem"
+        content: |
+          -----BEGIN PRIVATE KEY-----
+          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
+          KP3tqmSdf2gxW2lX2BSDaFAFcW0=
+          -----END PRIVATE KEY-----
+      notify: setup mkcert
+
+    - name: net tier - network resovler
+      become: yes
+      lineinfile:
+        state: present
+        line: nameserver 127.0.0.1
+        create: yes
+        dest: /etc/resolver/mythcoders.test
+
+    - name: net tier - configure dns
+      become: yes
+      lineinfile:
+        state: present
+        line: address=/mythcoders.test/127.0.0.1
+        create: yes
+        dest: /usr/local/etc/dnsmasq.conf
+      notify: restart dnsmasq
+
+    - name: net tier - configure dns
+      become: yes
+      lineinfile:
+        state: present
+        line: no-resolv
+        create: yes
+        dest: /usr/local/etc/dnsmasq.conf
+      notify: restart dnsmasq
+
+    - name: net tier - configure dns
+      become: yes
+      lineinfile:
+        state: present
+        line: bogus-priv
+        create: yes
+        dest: /usr/local/etc/dnsmasq.conf
+      notify: restart dnsmasq
+
+    - name: net tier - configure dns
+      become: yes
+      lineinfile:
+        state: present
+        line: domain-needed
+        create: yes
+        dest: /usr/local/etc/dnsmasq.conf
+      notify: restart dnsmasq
+
+    - name: inf tier - docker network
+      docker_network:
+        name: "{{ network_name }}"
+        internal: no
