@@ -9,9 +9,11 @@ services:
     image: hermes
     build:
       context: .
-      target: build
+      dockerfile: ./Dockerfile.dev
     container_name: hermes-app
     command: ["./bin/rails", "server", "-b", "0.0.0.0"]
+    expose:
+      - "3000"
     volumes:
       - .:/rails
     environment:
@@ -19,27 +21,18 @@ services:
     stdin_open: true
     tty: true
 
-  # worker:
+  # css:
   #   image: hermes
-  #   container_name: hermes-worker
-  #   command: ["bundle", "exec", "rake", "solid_queue:start"]
+  #   container_name: hermes-css
+  #   command: ["sh", "./scripts/css"]
   #   volumes:
   #     - .:/rails
   #   environment:
   #     <<: *shared-environment-variables
-
-  css:
-    image: hermes
-    container_name: hermes-css
-    command: ["sh", "./scripts/css"]
-    volumes:
-      - .:/rails
-    environment:
-      <<: *shared-environment-variables
-    stdin_open: true
-    tty: true
-    depends_on:
-      - app
+  #   stdin_open: true
+  #   tty: true
+  #   depends_on:
+  #     - app
 
   web:
     image: nginx:latest
@@ -52,8 +45,3 @@ services:
     ports:
       - "80:80"
       - "443:443"
-
-networks:
-  default:
-    name: hermes_dev
-    external: true
