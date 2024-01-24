@@ -1,128 +1,31 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
 en:
-  attributes:
-    created_at: "Created at"
-    updated_at: "Updated at"
-  created: Record was created successfully
-  updated: Record was updated successfully
-  activity_types:
-    received: Received
-    rerouted: Rerouted to Owner
-    delivered: Delivered
-    opened: Opened
-    click: Clicked
-    bounced: Bounced
-    blocked: Blocked
-    scheduled: Scheduled
-    sent: Sent
-  recipient_types:
-    to: Recipient
-    cc: CC
-    bcc: BCC
-  rerouted:
-    Hermes intercepted the following email and prevented it from being delivered to its intended recipients.
-    If you believe this is an error, please contact your Hermes Administrator.
-  helpers:
-    select:
-      prompt: "- Please select -"
-    submit:
-      create: "Create"
-      submit: Save %{model}
-      update: "Save changes"
-    label:
-      client:
-        api_key: "API Key"
-        api_secret: "API Secret"
-        is_active: "Grant access to the Hermes API"
-        are_emails_sent: "Sent emails to requested recipients"
-      message:
-        to: "Recipient"
-  activerecord:
-    attributes:
-      client_upload:
-        file_types:
-          subscriber: Subscriber Bulk Import
-      subscription:
-        statuses:
-          active: Active
-          inactive: Inactive
-          paused: Paused
-      client_environment:
-        status: Delivery Policy
-    errors:
-      messages:
-        record_invalid: "Validation failed: %{errors}"
-        restrict_dependent_destroy:
-          has_one: "Cannot delete record because a dependent %{record} exists"
-          has_many: "Cannot delete record because dependent %{record} exist"
-  date:
-    formats:
-      default: "%m-%d-%Y"
-      long: "%B %d, %Y"
-      short: "%b %d"
-    order:
-      - :month
-      - :day
-      - :year
-  time:
-    am: am
-    pm: pm
-    formats:
-      default: "%m/%d/%Y %H:%M:%S"
-      long: "%a, %d %b %Y %I:%M:%S %p %Z"
-      short: "%m/%d/%y %I:%M %p"
-  errors:
-    messages:
-      something: ""
-  number:
-    currency:
-      format:
-        delimiter: ","
-        format: "%u%n"
-        precision: 2
-        separator: "."
-        significant: false
-        strip_insignificant_zeros: false
-        unit: "$"
-    format:
-      delimiter: ","
-      precision: 3
-      separator: "."
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: "%n %u"
-        units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
-          unit: ""
-      format:
-        delimiter: ""
-        precision: 3
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: "%n %u"
-        units:
-          byte:
-            one: Byte
-            other: Bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: ""
-        format: "%n%"
-    precision:
-      format:
-        delimiter: ""
-  support:
-    array:
-      last_word_connector: ", and "
-      two_words_connector: " and "
-      words_connector: ", "
+  hello: "Hello world"

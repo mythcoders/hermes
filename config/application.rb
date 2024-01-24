@@ -1,21 +1,18 @@
-# frozen_string_literal: true
-
 require_relative "boot"
 
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
 require "active_record/railtie"
 require "active_storage/engine"
 require "action_controller/railtie"
-require "action_view/railtie"
 require "action_mailer/railtie"
-require "active_job/railtie"
-require "action_cable/engine"
-# require 'action_mailbox/engine'
+# require "action_mailbox/engine"
 require "action_text/engine"
-# require 'rails/test_unit/railtie'
-require "sprockets/railtie"
-require "view_component/engine"
-
-require "pinglish"
+require "action_view/railtie"
+require "action_cable/engine"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -24,22 +21,19 @@ Bundler.require(*Rails.groups)
 module Hermes
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 7.1
 
-    config.encoding = "utf-8"
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
+
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
     config.time_zone = "Eastern Time (US & Canada)"
-    config.beginning_of_week = :sunday
-    config.public_file_server.enabled
-    config.autoload_paths += %W[#{config.root}/lib]
-    # config.require_master_key = true
-
-    config.active_job.queue_adapter = :sidekiq
-
-    # Storage
-    config.active_storage.variant_processor = :vips
-    config.active_storage.routes_prefix = "/storage"
-
-    # Logging
-    config.lograge.enabled = true
+    # config.eager_load_paths << Rails.root.join("extras")
   end
 end

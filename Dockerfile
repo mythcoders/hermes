@@ -1,55 +1,62 @@
-FROM ruby:3.0.2-alpine AS base
+# syntax = docker/dockerfile:1
 
-ENV APP_HOME=/opt/hermes \
-  GEM_HOME=/usr/local/bundle \
-  BUNDLE_JOBS=4 \
-  BUNDLE_RETRY=3 \
-  LANG=en_US.UTF-8 \
-  PATH=$GEM_HOME/bin:$GEM_HOME/gems/bin:$PATH \
-  PATH=/root/.yarn/bin:$PATH
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.2.2
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
-ADD Gemfile* $APP_HOME/
-COPY package.json yarn.lock $APP_HOME/
+# Rails app lives here
+WORKDIR /rails
 
-# Install packages
-RUN apk update && \
-  apk --no-cache add \
-  alpine-sdk \
-  build-base \
-  coreutils \
-  libcurl \
-  nodejs \
-  postgresql-dev \
-  tzdata \
-  less \
-  git \
-  vips
+# Set production environment
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development"
 
-# Set local timezone
-RUN cp /usr/share/zoneinfo/US/Eastern /etc/localtime && \
-  echo "US/Eastern" > /etc/timezone
 
-# Install yarn
-RUN apk add --virtual build-yarn curl gnupg && \
-  touch ~/.bashrc && \
-  curl -o- -L https://yarnpkg.com/install.sh | sh -s -- --version 1.22.10 && \
-  apk del build-yarn gnupg
+# Throw-away build stage to reduce size of final image
+FROM base as build
 
-# Upgrade RubyGems and install required Bundler version
-RUN gem update --system && gem install bundler -v 2.2.24
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libvips pkg-config
 
-RUN bundle install
-RUN yarn install --frozen-lockfile
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    bundle exec bootsnap precompile --gemfile
 
-EXPOSE 5000
+# Copy application code
+COPY . .
 
-FROM base AS build
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
 
-ADD . $APP_HOME/
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE=1 ./bin/rails assets:precompile
 
-RUN ASSETS_PRECOMPILE=1 SECRET_KEY_BASE=1 NODE_ENV=production RAILS_ENV=production \
-  bundle exec rake assets:precompile
+# Final stage for app image
+FROM base
 
-CMD ["sh", "./scripts/app", "start"]
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Copy built artifacts: gems, application
+COPY --from=build /usr/local/bundle /usr/local/bundle
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER 1000:1000
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
+EXPOSE 3000
+CMD ["./bin/rails", "server"]

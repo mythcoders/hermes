@@ -1,15 +1,3 @@
-import { Application } from "stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
-
-const application = Application.start()
-const context = require.context("controllers", true, /.js$/)
-const context_components = require.context("../components", true, /_controller.js$/)
-application.load(
-  definitionsFromContext(context).concat(
-    definitionsFromContext(context_components)
-  )
-)
-
-document.addEventListener('turbo:load', () => {
-  require("halfmoon").onDOMContentLoaded()
-})
+// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+import "@hotwired/turbo-rails"
+import "controllers"

@@ -1,24 +1,20 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: clients
+#
+#  id         :integer          not null, primary key
+#  name       :string           not null
+#  password   :string           not null
+#  state      :integer          default(0), not null
+#  username   :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_clients_on_name      (name) UNIQUE
+#  index_clients_on_password  (password)
+#  index_clients_on_username  (username)
+#
 class Client < ApplicationRecord
-  has_many :environments, class_name: "ClientEnvironment", dependent: :destroy
-  has_many :messages
-  has_many :subscribers
-  has_many :templates, dependent: :destroy
-  has_many :topics, class_name: "MailingTopic", dependent: :destroy
-  has_many :uploads, class_name: "ClientUpload", dependent: :destroy
-
-  validates_length_of :name, :owner, maximum: 50
-  validates_length_of :reroute_email, :reply_to_email, maximum: 60
-  validates_length_of :api_secret, :api_key, maximum: 128
-  validates_uniqueness_of :name, :api_secret, :api_key
-  validates_presence_of :name, :owner, :reroute_email, :api_secret, :api_key
-
-  def self.authenticate(key, secret)
-    where(api_key: key, api_secret: secret).limit(1).first
-  end
-
-  def reroute_recipient
-    MessageRecipient.new(email: "#{owner} <#{reroute_email}>", recipient_type: :to)
-  end
 end

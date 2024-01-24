@@ -1,16 +1,9 @@
-# frozen_string_literal: true
-
-unless User.where(email: Rails.application.credentials[:support][:key]).any?
-  User.create!(name: "Justin Adkins",
-    email: Rails.application.credentials[:support][:key],
-    password: Rails.application.credentials[:support][:secret],
-    confirmed_at: DateTime.now)
-end
-
-Client.create(name: "Demo Application",
-  owner: "Justin Adkins",
-  reroute_email: "justin.adkins@mythcoders.com",
-  is_active: true,
-  are_emails_sent: false,
-  api_key: "speak",
-  api_secret: "friend")
+# This file should ensure the existence of records required to run the application in every environment (production,
+# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+#
+# Example:
+#
+#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
+#     MovieGenre.find_or_create_by!(name: genre_name)
+#   end
