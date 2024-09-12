@@ -1,27 +1,29 @@
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby file: ".ruby-version"
 
-gem "rails", "~> 7.1"
+gem "rails", "~> 7.2"
 
+gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
 gem "bcrypt"
 gem "bootsnap", require: false
+gem "geared_pagination"
 gem "importmap-rails"
+gem "mission_control-jobs"
 gem "propshaft"
-gem "litestack"
-gem "puma", ">= 5.0"
-gem "sqlite3", "~> 1.4"
+gem "puma"
+gem "solid_cache"
+gem "solid_queue"
+gem "sqlite3"
 gem "stimulus-rails"
 gem "turbo-rails"
-gem "tzinfo-data", platforms: %i[windows jruby]
 gem "view_component"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "annotate"
-  gem "debug", platforms: %i[mri windows]
+  gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "dotenv-rails"
   gem "standard"
 end

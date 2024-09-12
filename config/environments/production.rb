@@ -59,11 +59,12 @@ Rails.application.configure do
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Use a different cache store in production.
-  config.cache_store = :litecache
+  config.cache_store = :solid_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  config.active_job.queue_adapter = :litejob
-  config.active_job.queue_name_prefix = "hermes_production"
+  config.active_job.queue_adapter = :solid_queue
+  config.active_job.queue_name_prefix = Rails.env
+  config.solid_queue.connects_to = {database: {writing: :queue}}
 
   config.action_mailer.perform_caching = false
 

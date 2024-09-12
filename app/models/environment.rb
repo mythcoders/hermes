@@ -1,25 +1,13 @@
-# == Schema Information
-#
-# Table name: environments
-#
-#  id               :integer          not null, primary key
-#  name             :string           not null
-#  regex            :boolean          default(FALSE), not null
-#  reoute_address   :string
-#  reply_to_address :string
-#  status           :integer          not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  client_id        :integer          not null
-#
-# Indexes
-#
-#  index_environments_on_client_id           (client_id)
-#  index_environments_on_client_id_and_name  (client_id,name) UNIQUE
-#
-# Foreign Keys
-#
-#  client_id  (client_id => clients.id)
-#
 class Environment < ApplicationRecord
+  belongs_to :client
+
+  validates :name, presence: true, uniqueness: {scope: %i[client]}
+
+  # approved: Messages are delivered without any filtering
+  # hold: Messages are saved but not delivered
+  # ignored: Messages are not saved but no error is returned
+  # rejected: Messages are not saved and an error is returned
+  # rerouted: Messages are sent to the Client owner
+  # whitelisted: Messages are only delivered to recipeints whitelisted for the Client
+  enum :state, %w[approved hold ignored rejected rerouted whitelisted].index_by(&:itself), default: :hold
 end
