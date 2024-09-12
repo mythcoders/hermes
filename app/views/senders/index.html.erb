@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Senders" %>
+
+<h1>Senders</h1>
+
+<div id="senders">
+  <% @senders.each do |sender| %>
+    <%= render sender %>
+    <p>
+      <%= link_to "Show this sender", sender %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New sender", new_sender_path %>

@@ -3,3 +3,4 @@ one:
   state: active
   key: myapp
   secret: Internet88
+  address: app@example.net

@@ -17,7 +17,7 @@ class BansControllerTest < ActionDispatch::IntegrationTest
 
   test "should create ban" do
     assert_difference("Ban.count") do
-      post bans_url, params: {ban: {address: @ban.address, reason: @ban.reason}}
+      post bans_url, params: {ban: {address: "mee@you.com", reason: @ban.reason}}
     end
 
     assert_redirected_to ban_url(Ban.last)
