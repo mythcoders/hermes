@@ -1,0 +1,27 @@
+<%= form_with(model: ban) do |form| %>
+  <% if ban.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(ban.errors.count, "error") %> prohibited this ban from being saved:</h2>
+
+      <ul>
+        <% ban.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :reason, style: "display: block" %>
+    <%= form.text_field :reason %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

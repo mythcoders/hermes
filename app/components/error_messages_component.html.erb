@@ -1,0 +1,6 @@
+<strong class="text-red">There were some errors with your submission</strong>
+<ul class="text-red">
+  <% @errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>

@@ -11,12 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2024_01_15_065341) do
-  create_table "blacklisted_emails", force: :cascade do |t|
+  create_table "bans", force: :cascade do |t|
     t.string "address", null: false
     t.string "reason", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address"], name: "index_blacklisted_emails_on_address", unique: true
+    t.index ["address"], name: "index_bans_on_address", unique: true
   end
 
   create_table "callbacks", force: :cascade do |t|
@@ -54,13 +54,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_01_15_065341) do
   create_table "messages", force: :cascade do |t|
     t.integer "client_id", null: false
     t.string "uuid", null: false
-    t.string "sender"
+    t.string "environment"
+    t.string "from"
     t.string "subject"
     t.string "html_body"
     t.string "text_body"
     t.string "content_type"
     t.string "priority"
-    t.string "environment"
     t.datetime "scheduled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_01_15_065341) do
     t.integer "message_id", null: false
     t.string "uuid", null: false
     t.string "recipient_type"
-    t.string "email_address", null: false
+    t.string "address", null: false
     t.datetime "sent_at"
     t.datetime "delivered_at"
     t.datetime "opened_at"

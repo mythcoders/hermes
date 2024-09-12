@@ -1,3 +1,3 @@
 class Recipient < ApplicationRecord
-  encrypts :email_address, deterministic: true
+  encrypts :address, deterministic: true
 end

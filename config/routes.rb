@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  root "home#index"
   get "up" => "rails/health#show", :as => :rails_health_check
-
-  root "public#index"
-
   mount MissionControl::Jobs::Engine, at: "/jobs"
+
+  resources :clients
+  resources :bans
 end
