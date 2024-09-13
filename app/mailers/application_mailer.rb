@@ -1,4 +1,9 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  DEFAULT_FROM = "Hermes <hermes@mythcoders.com>"
+  DEFAULT_REPLY = "MythCoders Support <support@mythcoders.com>"
+
+  default from: DEFAULT_FROM
   layout "mailer"
+
+  # headers 'X-SES-CONFIGURATION-SET': 'Hermes'
 end

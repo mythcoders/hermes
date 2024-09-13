@@ -1,4 +1,4 @@
-<strong class="text-red">There were some errors with your submission</strong>
+<strong class="text-red"><%= pluralize(@errors.count, "error") %> prohibited your submission from being saved:</strong>
 <ul class="text-red">
   <% @errors.each do |error| %>
     <li><%= error %></li>

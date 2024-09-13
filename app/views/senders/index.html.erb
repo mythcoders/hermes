@@ -4,13 +4,14 @@
 
 <h1>Senders</h1>
 
-<div id="senders">
+<table id="senders" class="table table-striped table-hover">
   <% @senders.each do |sender| %>
-    <%= render sender %>
-    <p>
-      <%= link_to "Show this sender", sender %>
-    </p>
+    <tr>
+        <td><%= link_to sender.name, sender %></td>
+        <td><%= sender.address %></td>
+        <td><%= sender.state %></td>
+    </tr>
   <% end %>
-</div>
+</table>
 
 <%= link_to "New sender", new_sender_path %>

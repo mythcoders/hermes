@@ -1,15 +1,5 @@
 <%= form_with(model: sender) do |form| %>
-  <% if sender.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(sender.errors.count, "error") %> prohibited this sender from being saved:</h2>
-
-      <ul>
-        <% sender.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render ErrorMessagesComponent.new(sender) %>
 
   <div>
     <%= form.label :name, style: "display: block" %>
@@ -19,6 +9,11 @@
   <div>
     <%= form.label :state, style: "display: block" %>
     <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.email_field :address %>
   </div>
 
   <div>

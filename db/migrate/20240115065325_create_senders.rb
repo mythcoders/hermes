@@ -14,7 +14,7 @@ class CreateSenders < ActiveRecord::Migration[7.2]
       t.string :name, null: false
       t.string :state, null: false
       t.boolean :regex, default: false, null: false
-      t.string :reoute_address
+      t.string :reroute_address
       t.string :reply_to_address
       t.index [:sender_id, :name], unique: true
       t.timestamps

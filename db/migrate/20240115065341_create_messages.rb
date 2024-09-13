@@ -2,7 +2,6 @@ class CreateMessages < ActiveRecord::Migration[7.2]
   def change
     create_table :messages do |t|
       t.references :sender, null: false, foreign_key: true
-      t.references :profile, null: false, foreign_key: true
       t.string :uuid, null: false, index: {unique: true}
       t.string :from
       t.string :subject
@@ -10,6 +9,7 @@ class CreateMessages < ActiveRecord::Migration[7.2]
       t.string :text_body
       t.string :content_type
       t.string :priority
+      t.string :raw_profile
       t.datetime :scheduled_at
       t.timestamps
     end

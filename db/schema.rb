@@ -36,7 +36,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_030545) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "sender_id", null: false
-    t.integer "profile_id", null: false
     t.string "uuid", null: false
     t.string "from"
     t.string "subject"
@@ -44,10 +43,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_030545) do
     t.string "text_body"
     t.string "content_type"
     t.string "priority"
+    t.string "raw_profile"
     t.datetime "scheduled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["profile_id"], name: "index_messages_on_profile_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
     t.index ["uuid"], name: "index_messages_on_uuid", unique: true
   end
@@ -57,7 +56,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_030545) do
     t.string "name", null: false
     t.string "state", null: false
     t.boolean "regex", default: false, null: false
-    t.string "reoute_address"
+    t.string "reroute_address"
     t.string "reply_to_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,7 +78,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_030545) do
   end
 
   add_foreign_key "destinations", "messages"
-  add_foreign_key "messages", "profiles"
   add_foreign_key "messages", "senders"
   add_foreign_key "profiles", "senders"
 end
