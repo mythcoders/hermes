@@ -1,24 +1,21 @@
-# README
+# Hermes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application (and API) for logging emails and sending them to [Amazon Web Services Simple Email Service (SES)](https://aws.amazon.com/ses/) for delivery.
 
-Things you may want to cover:
+MythCoders uses SES as a cost effective way to sent emails but the services unfortunately does not provide the ability to see a log of sent emails. Hermes fills that gap.
 
-* Ruby version
+## Features
 
-* System dependencies
+- Track email sending from multiple sources before sending to SES for delivery
+- Use environments to apply rules when a client sends an email
+- Easily see SMTP delivery results
+- View when emails are opened and when links are clicked
 
-* Configuration
+## Software
 
-* Database creation
+Hermes is a Ruby on Rails application. The UI is built with [Halfmoon](https://www.gethalfmoon.com/)
 
-* Database initialization
+## Licensing
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+See the [LICENSE](LICENSE) file for licensing information as it pertains to
+files in this repository.

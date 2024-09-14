@@ -1,18 +1,6 @@
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
-#
-# This file is the source Rails uses to define your schema when running `bin/rails
-# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
-# be faster and is potentially less error prone than running all of your
-# migrations from scratch. Old migrations may fail to apply correctly if those
-# migrations use external dependencies or application code.
-#
-# It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema[7.2].define(version: 2024_09_12_011312) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_04_193154) do
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.string "queue_name", null: false
     t.integer "priority", default: 0, null: false
     t.string "concurrency_key", null: false
@@ -24,7 +12,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_011312) do
   end
 
   create_table "solid_queue_claimed_executions", force: :cascade do |t|
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.bigint "process_id"
     t.datetime "created_at", null: false
     t.index ["job_id"], name: "index_solid_queue_claimed_executions_on_job_id", unique: true
@@ -32,7 +20,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_011312) do
   end
 
   create_table "solid_queue_failed_executions", force: :cascade do |t|
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.text "error"
     t.datetime "created_at", null: false
     t.index ["job_id"], name: "index_solid_queue_failed_executions_on_job_id", unique: true
@@ -77,7 +65,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_011312) do
   end
 
   create_table "solid_queue_ready_executions", force: :cascade do |t|
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.string "queue_name", null: false
     t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
@@ -87,7 +75,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_011312) do
   end
 
   create_table "solid_queue_recurring_executions", force: :cascade do |t|
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.string "task_key", null: false
     t.datetime "run_at", null: false
     t.datetime "created_at", null: false
@@ -112,7 +100,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_011312) do
   end
 
   create_table "solid_queue_scheduled_executions", force: :cascade do |t|
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.string "queue_name", null: false
     t.integer "priority", default: 0, null: false
     t.datetime "scheduled_at", null: false
