@@ -1,0 +1,31 @@
+class Webhook::SES::Processors::Click < Webhook::SES::Processors::Base
+  def process
+    destination.clicked_at = timestamp if destination.clicked_at.blank?
+    destination.callbacks.create!(
+      callback_type: :clicked,
+      callback_timestamp: timestamp,
+      ip_address: ip_address,
+      user_agent: user_agent,
+      link_url: link
+    )
+    destination.save!
+  end
+
+  private
+
+  def timestamp
+    @timestamp ||= Time.iso8601 notification.message["click"]["timestamp"]
+  end
+
+  def user_agent
+    @user_agent ||= notification.message["click"]["userAgent"]
+  end
+
+  def ip_address
+    @ip_address ||= notification.message["click"]["ipAddress"]
+  end
+
+  def link
+    @link ||= notification.message["click"]["link"]
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_14_004927) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_14_192405) do
   create_table "bans", force: :cascade do |t|
     t.string "address", null: false
     t.string "reason", null: false
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_004927) do
     t.datetime "clicked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "bounced_at"
+    t.datetime "complained_at"
     t.index ["message_id"], name: "index_destinations_on_message_id"
     t.index ["uuid"], name: "index_destinations_on_uuid", unique: true
   end
@@ -76,6 +78,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_004927) do
     t.index ["key"], name: "index_senders_on_key"
     t.index ["name"], name: "index_senders_on_name", unique: true
     t.index ["secret"], name: "index_senders_on_secret"
+  end
+
+  create_table "webhooks", force: :cascade do |t|
+    t.string "state", null: false
+    t.string "subject", null: false
+    t.string "raw_data", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "destinations", "messages"
