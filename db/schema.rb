@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_12_030545) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_14_004927) do
   create_table "bans", force: :cascade do |t|
     t.string "address", null: false
     t.string "reason", null: false
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_12_030545) do
     t.datetime "scheduled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "halted_at"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
     t.index ["uuid"], name: "index_messages_on_uuid", unique: true
   end

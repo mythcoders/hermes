@@ -1,10 +1,29 @@
-<% page_title @sender.name, 'Client' %>
+<% page_title @sender.name, 'Sender' %>
+<% action = :summary %>
+
+<div class="row">
+  <div class="col">
+    <h1 class="content-title font-size-22">
+      <i class="fas fa-code"></i>
+      <%= @sender.name %>
+    </h1>
+    <a class="btn btn-seconday <%= 'alt-dm' if action != :summary %>" href="<%= sender_path(@sender) %>">Summary</a>
+    <a class="btn btn-seconday <%= 'alt-dm' if action != :messages %>" href="<%= sender_path(@sender) %>">
+      <i class="fas fa-stream"></i>
+      Messages
+    </a>
+    <a class="btn btn-seconday <%= 'alt-dm' if action != :subscribers %>" href="<%= sender_path(@sender) %>">
+      <i class="fas fa-users"></i>
+      Subscribers
+    </a>
+  </div>
+  <div class="col-auto">
+    <div class="btn-group">
+      <%= link_to 'All senders', senders_path, class: 'btn alt-dm' %>
+      <%= link_to 'Edit', edit_sender_path(@sender), class: 'btn btn-primary' %>
+      <%= button_to "Destroy", @sender, method: :delete %>
+    </div>
+  </div>
+</div>
 
 <%= render @sender %>
-
-<div>
-  <%= link_to "Edit this sender", edit_sender_path(@sender) %> |
-  <%= link_to "Back to senders", senders_path %>
-
-  <%= button_to "Destroy this sender", @sender, method: :delete %>
-</div>
