@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
   include WithUuid
+  include DeliveryStats
 
   belongs_to :sender
   has_many :destinations, dependent: :destroy

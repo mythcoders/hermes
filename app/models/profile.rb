@@ -9,7 +9,7 @@ class Profile < ApplicationRecord
   # rejected: Messages are not saved and an error is returned
   # rerouted: Messages are sent to the Sender owner
   # whitelisted: Messages are only delivered to recipeints whitelisted for the Sender
-  enum :state, %w[approved hold ignored rejected rerouted whitelisted].index_by(&:itself), default: :hold
+  enum :state, %w[approved hold ignored rejected rerouted whitelisted].index_by(&:itself), default: :rerouted
 
   def display_name
     "#{name} (#{status})"
@@ -19,11 +19,11 @@ class Profile < ApplicationRecord
     match = find_or_initialize_by(sender: sender, name: profile_name, regex: false)
     return match if match.persisted?
 
-    where(sender: sender, regex: true).each do |env|
-      return env if profile_name.match(env.name)
+    where(sender: sender, regex: true).each do |profile|
+      return profile if profile_name.match(profile.name)
     end
 
-    match.update!(status: :rerouted)
+    match.save
     match
   end
 end

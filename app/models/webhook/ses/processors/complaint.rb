@@ -1,6 +1,7 @@
 class Webhook::SES::Processors::Complaint < Webhook::SES::Processors::Base
   def process
     complaint_destinations.each do |complaint_destination|
+      destination.complained_at = timestamp
       destination.activities.build(
         actioned_at: timestamp,
         actionable: Complaint.new(
@@ -10,6 +11,7 @@ class Webhook::SES::Processors::Complaint < Webhook::SES::Processors::Base
           feedback_id: feedback_id
         )
       )
+      destination.save!
     end
   end
 
