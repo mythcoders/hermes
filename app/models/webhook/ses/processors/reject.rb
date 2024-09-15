@@ -1,10 +1,10 @@
 class Webhook::SES::Processors::Reject < Webhook::SES::Processors::Base
   def process
-    destination.callbacks.create!(
-      callback_type: :rejected,
-      callback_timestamp: Time.current,
-      reject_reason: reject_reason
+    destination.activities.build(
+      actioned_at: timestamp,
+      actionable: Rejection.new(reason: reject_reason)
     )
+    destination.save!
   end
 
   private

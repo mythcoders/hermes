@@ -39,6 +39,6 @@ class SendersController < ApplicationController
   end
 
   def sender_params
-    params.require(:sender).permit(:name, :state, :key, :secret, :address)
+    params.require(:sender).permit(:name, :state, :address)
   end
 end

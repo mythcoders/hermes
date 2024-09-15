@@ -10,13 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_14_192405) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_14_202100) do
+  create_table "activities", force: :cascade do |t|
+    t.integer "destination_id", null: false
+    t.string "actionable_type"
+    t.integer "actionable_id"
+    t.datetime "actioned_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actionable_type", "actionable_id"], name: "index_activities_on_actionable_type_and_actionable_id"
+    t.index ["destination_id"], name: "index_activities_on_destination_id"
+  end
+
   create_table "bans", force: :cascade do |t|
     t.string "address", null: false
     t.string "reason", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_bans_on_address", unique: true
+  end
+
+  create_table "bounces", force: :cascade do |t|
+    t.string "category"
+    t.string "sub_category"
+    t.string "feedback_id"
+    t.string "reporting_mta"
+    t.string "status"
+    t.string "action"
+    t.string "diagnostic_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clicks", force: :cascade do |t|
+    t.string "url"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "complaints", force: :cascade do |t|
+    t.string "category"
+    t.string "feedback_id"
+    t.string "user_agent"
+    t.datetime "arrived_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "delays", force: :cascade do |t|
+    t.string "category"
+    t.string "status"
+    t.string "diagnotic_code"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.string "smtp_response"
+    t.string "reporting_mta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "destinations", force: :cascade do |t|
@@ -54,6 +110,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_192405) do
     t.index ["uuid"], name: "index_messages_on_uuid", unique: true
   end
 
+  create_table "opens", force: :cascade do |t|
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.string "name", null: false
@@ -65,6 +128,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_192405) do
     t.datetime "updated_at", null: false
     t.index ["sender_id", "name"], name: "index_profiles_on_sender_id_and_name", unique: true
     t.index ["sender_id"], name: "index_profiles_on_sender_id"
+  end
+
+  create_table "rejections", force: :cascade do |t|
+    t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "senders", force: :cascade do |t|
@@ -88,6 +157,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_192405) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "activities", "destinations"
   add_foreign_key "destinations", "messages"
   add_foreign_key "messages", "senders"
   add_foreign_key "profiles", "senders"

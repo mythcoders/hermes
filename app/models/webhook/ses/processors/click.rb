@@ -1,12 +1,13 @@
 class Webhook::SES::Processors::Click < Webhook::SES::Processors::Base
   def process
     destination.clicked_at = timestamp if destination.clicked_at.blank?
-    destination.callbacks.create!(
-      callback_type: :clicked,
-      callback_timestamp: timestamp,
-      ip_address: ip_address,
-      user_agent: user_agent,
-      link_url: link
+    destination.activities.build(
+      actioned_at: timestamp,
+      actionable: Click.new(
+        url: link,
+        ip_address: ip_address,
+        user_agent: user_agent
+      )
     )
     destination.save!
   end

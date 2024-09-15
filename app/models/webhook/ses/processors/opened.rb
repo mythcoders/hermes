@@ -2,11 +2,12 @@ class Webhook::SES::Processors::Opened < Webhook::SES::Processors::Base
   def process
     ActiveRecord::Base.transaction do
       destination.opened_at = timestamp unless destination.opened?
-      destination.callbacks << EmailCallback.new(
-        callback_type: :opened,
-        callback_timestamp: timestamp,
-        ip_address: ip_address,
-        user_agent: user_agent
+      destination.activities.build(
+        actioned_at: timestamp,
+        actionable: Open.new(
+          ip_address: ip_address,
+          user_agent: user_agent
+        )
       )
       destination.save!
     end

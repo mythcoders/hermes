@@ -15,15 +15,15 @@ class Profile < ApplicationRecord
     "#{name} (#{status})"
   end
 
-  # def self.find_or_create_by_env!(client_id, env_name)
-  #   direct_match = find_or_initialize_by(client_id: client_id, name: env_name, regex: false)
-  #   return direct_match if direct_match.persisted?
+  def self.find_or_create_from_api(sender, profile_name)
+    match = find_or_initialize_by(sender: sender, name: profile_name, regex: false)
+    return match if match.persisted?
 
-  #   where(client_id: client_id, regex: true).each do |env|
-  #     return env if env_name.match(env.name)
-  #   end
+    where(sender: sender, regex: true).each do |env|
+      return env if profile_name.match(env.name)
+    end
 
-  #   direct_match.update!(status: :rerouted)
-  #   direct_match
-  # end
+    match.update!(status: :rerouted)
+    match
+  end
 end

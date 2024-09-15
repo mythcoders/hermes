@@ -1,13 +1,14 @@
 class Webhook::SES::Processors::DeliveryDelay < Webhook::SES::Processors::Base
   def process
     delayed_destinations.each do |delayed_destination|
-      destination.callbacks.create!(
-        callback_type: :delivery_delayed,
-        callback_timestamp: timestamp,
-        delay_type: delay_type,
-        expiration_time: expiration_time,
-        status: delayed_destination["status"],
-        diagnostic_code: delayed_destination["diagnosticCode"]
+      destination.activities.build(
+        actioned_at: timestamp,
+        actionable: Delay.new(
+          category: delay_type,
+          expiration_time: expiration_time,
+          status: delayed_destination["status"],
+          diagnostic_code: delayed_destination["diagnosticCode"]
+        )
       )
     end
   end

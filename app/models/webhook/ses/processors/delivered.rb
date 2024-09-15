@@ -2,11 +2,12 @@ class Webhook::SES::Processors::Delivered < Webhook::SES::Processors::Base
   def process
     destination.delivered_at = timestamp unless destination.delivered?
     delivery_destinations.each do |delivery_destination|
-      destination.callbacks << EmailCallback.new(
-        callback_type: :delivered,
-        callback_timestamp: timestamp,
-        smtp_response: smtp_response,
-        reporting_mta: reporting_mta
+      destination.activities.build(
+        actioned_at: timestamp,
+        actionable: Delivery.new(
+          smtp_response: smtp_response,
+          reporting_mta: reporting_mta
+        )
       )
     end
     destination.save!

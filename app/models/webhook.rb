@@ -5,6 +5,8 @@ class Webhook < ApplicationRecord
   validates :subject, presence: true
   validates :raw_data, presence: true
 
+  after_create_commit :process_later
+
   def process_now
     return if finished? || errored?
 

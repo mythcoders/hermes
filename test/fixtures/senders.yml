@@ -2,5 +2,5 @@ one:
   name: MyApp
   state: active
   key: myapp
-  secret: Internet88
+  secret: myappsecret
   address: app@example.net

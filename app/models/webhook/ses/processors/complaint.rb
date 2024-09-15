@@ -1,13 +1,14 @@
 class Webhook::SES::Processors::Complaint < Webhook::SES::Processors::Base
   def process
     complaint_destinations.each do |complaint_destination|
-      destination.callbacks.create!(
-        callback_type: :complaint,
-        callback_timestamp: timestamp,
-        complaint_type: complaint_type,
-        user_agent: user_agent,
-        complaint_arrival_date: arrival_date,
-        feedback_id: feedback_id
+      destination.activities.build(
+        actioned_at: timestamp,
+        actionable: Complaint.new(
+          category: complaint_type,
+          user_agent: user_agent,
+          arrived_at: arrival_date,
+          feedback_id: feedback_id
+        )
       )
     end
   end
