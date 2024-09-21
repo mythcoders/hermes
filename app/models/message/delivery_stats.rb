@@ -2,27 +2,27 @@ module Message::DeliveryStats
   extend ActiveSupport::Concern
 
   def total_delivered_emails
-    destinations.delivered.size
+    recipients.delivered.size
   end
 
   def total_opened_emails
-    destinations.opened.size
+    recipients.opened.size
   end
 
   def total_sent_emails
-    destinations.sent.size
+    recipients.sent.size
   end
 
   def total_clicked_emails
-    destinations.clicked.size
+    recipients.clicked.size
   end
 
   def total_bounced_emails
-    destinations.bounced.size
+    recipients.bounced.size
   end
 
   def total_complaint_emails
-    destinations.complained.size
+    recipients.complained.size
   end
 
   def delivery_rate

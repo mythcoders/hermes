@@ -1,4 +1,4 @@
 class Activity < ApplicationRecord
-  belongs_to :destination
-  delegated_type :actionable, types: %w[Click Bounce Complaint Delivery Open Rejection Delay], dependent: :destroy
+  belongs_to :actor, class_name: "Recipient"
+  delegated_type :actionable, types: %w[Bounce Click Complaint Delay Delivery Open Rejection], dependent: :destroy
 end

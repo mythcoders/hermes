@@ -1,7 +1,7 @@
 class Webhook::SES::Processors::Click < Webhook::SES::Processors::Base
   def process
-    destination.clicked_at = timestamp if destination.clicked_at.blank?
-    destination.activities.build(
+    recipient.clicked_at = timestamp if recipient.clicked_at.blank?
+    recipient.activities.build(
       actioned_at: timestamp,
       actionable: Click.new(
         url: link,
@@ -9,7 +9,7 @@ class Webhook::SES::Processors::Click < Webhook::SES::Processors::Base
         user_agent: user_agent
       )
     )
-    destination.save!
+    recipient.save!
   end
 
   private

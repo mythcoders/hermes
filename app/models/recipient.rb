@@ -1,9 +1,9 @@
-class Destination < ApplicationRecord
+class Recipient < ApplicationRecord
   include WithUuid
   include Bannable
   include Sendable
 
-  has_many :activities, dependent: :destroy
+  has_many :activities, dependent: :destroy, inverse_of: :actor
 
   encrypts :address, deterministic: true
   enum :address_type, %w[to cc bcc].index_by(&:itself), default: :to

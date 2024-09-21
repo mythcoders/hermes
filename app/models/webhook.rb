@@ -2,7 +2,7 @@ class Webhook < ApplicationRecord
   enum :status, %w[pending errored finished].index_by(&:itself), default: :pending
 
   validates :status, presence: true
-  validates :subject, presence: true
+  validates :subject, presence: true, inclusion: {in: %w[aws-ses]}
   validates :raw_data, presence: true
 
   after_create_commit :process_later

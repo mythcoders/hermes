@@ -1,7 +1,7 @@
 class Webhook::SES::Processors::DeliveryDelay < Webhook::SES::Processors::Base
   def process
     delayed_destinations.each do |delayed_destination|
-      destination.activities.build(
+      recipient.activities.create!(
         actioned_at: timestamp,
         actionable: Delay.new(
           category: delay_type,

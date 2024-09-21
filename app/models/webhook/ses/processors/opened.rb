@@ -1,15 +1,15 @@
 class Webhook::SES::Processors::Opened < Webhook::SES::Processors::Base
   def process
     ActiveRecord::Base.transaction do
-      destination.opened_at = timestamp unless destination.opened?
-      destination.activities.build(
+      recipient.opened_at = timestamp unless recipient.opened?
+      recipient.activities.build(
         actioned_at: timestamp,
         actionable: Open.new(
           ip_address: ip_address,
           user_agent: user_agent
         )
       )
-      destination.save!
+      recipient.save!
     end
 
     true

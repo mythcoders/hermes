@@ -1,11 +1,11 @@
 class CreateActivities < ActiveRecord::Migration[7.2]
   def change
     create_table :activities do |t|
-      t.references :destination, null: false, foreign_key: true
+      t.references :recipient, null: false, foreign_key: true
       t.string :actionable_type
       t.integer :actionable_id
-      t.index [:actionable_type, :actionable_id]
       t.datetime :actioned_at
+      t.index [:actionable_type, :actionable_id]
       t.timestamps
     end
 

@@ -1,10 +1,10 @@
 class Webhook::SES::Processors::Reject < Webhook::SES::Processors::Base
   def process
-    destination.activities.build(
+    recipient.activities.build(
       actioned_at: timestamp,
       actionable: Rejection.new(reason: reject_reason)
     )
-    destination.save!
+    recipient.save!
   end
 
   private

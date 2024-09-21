@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DestinationMailer < ApplicationMailer
+class RecipientMailer < ApplicationMailer
   def send_message
     @message = params[:message]
     append_hermes_headers

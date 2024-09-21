@@ -61,6 +61,6 @@ class Webhook::SES::Notification
   end
 
   def tracking_header
-    @tracking_header ||= headers.find { |h| h["name"] == "X-Hermes-DestinationId" }
+    @tracking_header ||= headers.find { |h| h["name"] == "X-Hermes-RecipientId" }
   end
 end

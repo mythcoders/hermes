@@ -1,4 +1,4 @@
-module Destination::Bannable
+module Recipient::Bannable
   extend ActiveSupport::Concern
 
   included do

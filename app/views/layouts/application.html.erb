@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
   <head>
-    <title>Hermes</title>
+    <title><%= t("app") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,8 +15,8 @@
       <nav class="navbar navbar-expand-sm" style="background-color: var(--bs-content-bg); border-bottom: var(--bs-border-width) solid var(--bs-content-border-color);">
         <div class="container-fluid">
           <a class="navbar-brand" href="<%= root_path %>">
-            <img src="<%= asset_path('logo.png') %>" alt="Hermes logo" class="d-inline-block align-text-top">
-            Hermes
+            <img src="<%= asset_path('logo.png') %>" alt="<%= t("app") %> logo" class="d-inline-block align-text-top">
+            <%= t("app") %>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

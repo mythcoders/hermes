@@ -3,7 +3,7 @@ class Message < ApplicationRecord
   include DeliveryStats
 
   belongs_to :sender
-  has_many :destinations, dependent: :destroy
+  has_many :recipients, dependent: :destroy
 
   encrypts :html_body
   encrypts :text_body

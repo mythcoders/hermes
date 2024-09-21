@@ -1,4 +1,4 @@
-module Destination::Sendable
+module Recipient::Sendable
   extend ActiveSupport::Concern
 
   def send_now
@@ -15,6 +15,6 @@ module Destination::Sendable
   end
 
   def send_later(deliver_at = Time.current)
-    Destination::SendJob.perform_at(time, id)
+    Recipient::SendJob.perform_at(time, id)
   end
 end

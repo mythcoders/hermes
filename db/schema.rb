@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema[7.2].define(version: 2024_09_14_202100) do
   create_table "activities", force: :cascade do |t|
-    t.integer "destination_id", null: false
+    t.integer "recipient_id", null: false
     t.string "actionable_type"
     t.integer "actionable_id"
     t.datetime "actioned_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["actionable_type", "actionable_id"], name: "index_activities_on_actionable_type_and_actionable_id"
-    t.index ["destination_id"], name: "index_activities_on_destination_id"
+    t.index ["recipient_id"], name: "index_activities_on_recipient_id"
   end
 
   create_table "bans", force: :cascade do |t|
@@ -75,23 +75,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_202100) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "destinations", force: :cascade do |t|
-    t.integer "message_id", null: false
-    t.string "uuid", null: false
-    t.string "address_type", null: false
-    t.string "address", null: false
-    t.datetime "sent_at"
-    t.datetime "delivered_at"
-    t.datetime "opened_at"
-    t.datetime "clicked_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "bounced_at"
-    t.datetime "complained_at"
-    t.index ["message_id"], name: "index_destinations_on_message_id"
-    t.index ["uuid"], name: "index_destinations_on_uuid", unique: true
-  end
-
   create_table "messages", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.string "uuid", null: false
@@ -103,9 +86,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_202100) do
     t.string "priority"
     t.string "raw_profile"
     t.datetime "scheduled_at"
+    t.datetime "halted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "halted_at"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
     t.index ["uuid"], name: "index_messages_on_uuid", unique: true
   end
@@ -128,6 +111,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_202100) do
     t.datetime "updated_at", null: false
     t.index ["sender_id", "name"], name: "index_profiles_on_sender_id_and_name", unique: true
     t.index ["sender_id"], name: "index_profiles_on_sender_id"
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.integer "message_id", null: false
+    t.string "uuid", null: false
+    t.string "address_type", null: false
+    t.string "address", null: false
+    t.datetime "sent_at"
+    t.datetime "delivered_at"
+    t.datetime "opened_at"
+    t.datetime "clicked_at"
+    t.datetime "bounced_at"
+    t.datetime "complained_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_recipients_on_message_id"
+    t.index ["uuid"], name: "index_recipients_on_uuid", unique: true
   end
 
   create_table "rejections", force: :cascade do |t|
@@ -157,8 +157,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_202100) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "activities", "destinations"
-  add_foreign_key "destinations", "messages"
+  add_foreign_key "activities", "recipients"
   add_foreign_key "messages", "senders"
   add_foreign_key "profiles", "senders"
+  add_foreign_key "recipients", "messages"
 end

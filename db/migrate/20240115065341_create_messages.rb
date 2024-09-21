@@ -11,10 +11,11 @@ class CreateMessages < ActiveRecord::Migration[7.2]
       t.string :priority
       t.string :raw_profile
       t.datetime :scheduled_at
+      t.datetime :halted_at
       t.timestamps
     end
 
-    create_table :destinations do |t|
+    create_table :recipients do |t|
       t.references :message, null: false, foreign_key: true
       t.string :uuid, null: false, index: {unique: true}
       t.string :address_type, null: false
@@ -23,6 +24,8 @@ class CreateMessages < ActiveRecord::Migration[7.2]
       t.datetime :delivered_at
       t.datetime :opened_at
       t.datetime :clicked_at
+      t.datetime :bounced_at
+      t.datetime :complained_at
       t.timestamps
     end
   end

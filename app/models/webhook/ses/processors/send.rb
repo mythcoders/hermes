@@ -1,8 +1,8 @@
 class Webhook::SES::Processors::Send < Webhook::SES::Processors::Base
   def process
-    return true if destination.sent?
+    return true if recipient.sent?
 
-    destination.update(sent_at: timestamp)
+    recipient.update(sent_at: timestamp)
   end
 
   private

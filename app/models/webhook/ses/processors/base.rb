@@ -11,13 +11,13 @@ class Webhook::SES::Processors::Base
 
   attr_reader :notification
 
-  def destination
-    @destination ||= Destination.find_by_tracking_id! notification.tracking_id
+  def recipient
+    @recipient ||= Recipient.find_by_uuid! notification.tracking_id
   rescue ActiveRecord::RecordNotFound
     raise Webhook::SES::EmailNotFoundError, notification.tracking_id
   end
 
-  def ban_destination(reason:)
-    Ban.log_later destination.address, reason
+  def ban_recipient(reason:)
+    Ban.log_later recipient.address, reason
   end
 end

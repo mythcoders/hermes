@@ -1,11 +1,11 @@
 class Webhook::SES::Processors::Bounce < Webhook::SES::Processors::Base
   def process
-    ban_destination reason: "Bounced"
+    ban_recipient reason: "Bounced"
 
     # the notification could contain multiple destinations
-    # but Hermes only sends emails to a single destination at a time
+    # but Hermes only sends emails to a single recipient at a time
     bounced_destinations.each do |bounced_destination|
-      destination.activities.build(
+      recipient.activities.build(
         actioned_at: timestamp,
         actionable: Bounce.new(
           category: category,
@@ -17,7 +17,7 @@ class Webhook::SES::Processors::Bounce < Webhook::SES::Processors::Base
           diagnostic_code: bounced_destination["diagnosticCode"]
         )
       )
-      destination.save!
+      recipient.save!
     end
   end
 

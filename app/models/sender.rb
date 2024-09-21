@@ -3,7 +3,7 @@ class Sender < ApplicationRecord
 
   has_many :profiles
   has_many :messages
-  has_many :destinations, through: :messages
+  has_many :recipients, through: :messages
 
   validates :name, presence: true, uniqueness: true
   validates :state, presence: true

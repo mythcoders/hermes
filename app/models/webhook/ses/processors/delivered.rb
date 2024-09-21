@@ -1,8 +1,8 @@
 class Webhook::SES::Processors::Delivered < Webhook::SES::Processors::Base
   def process
-    destination.delivered_at = timestamp unless destination.delivered?
+    recipient.delivered_at = timestamp unless recipient.delivered?
     delivery_destinations.each do |delivery_destination|
-      destination.activities.build(
+      recipient.activities.build(
         actioned_at: timestamp,
         actionable: Delivery.new(
           smtp_response: smtp_response,
@@ -10,7 +10,7 @@ class Webhook::SES::Processors::Delivered < Webhook::SES::Processors::Base
         )
       )
     end
-    destination.save!
+    recipient.save!
   end
 
   private
