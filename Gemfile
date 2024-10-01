@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby file: ".ruby-version"
 
-gem "rails", "~> 7.2"
+gem "rails", "~> 8.0.0.beta"
 
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
 gem "bcrypt"

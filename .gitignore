@@ -37,3 +37,5 @@
 # Ignore default Litestack SQLite databases.
 /db/**/*.sqlite3
 /db/**/*.sqlite3-*
+
+.kamal/secrets
