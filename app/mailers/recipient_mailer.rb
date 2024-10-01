@@ -14,9 +14,9 @@ class RecipientMailer < ApplicationMailer
   private
 
   def append_hermes_headers
-    headers 'X-Hermes-ID': @message.tracking_id
-    headers 'X-Priority': "1", Importance: "high" if @message.priority.present?
-    headers 'X-SES-CONFIGURATION-SET': ENV["SES_CONFIGSET"] || "Hermes"
+    headers "X-Hermes-ID": @message.tracking_id
+    headers "X-Priority": "1", Importance: "high" if @message.priority.present?
+    headers "X-SES-CONFIGURATION-SET": ENV["SES_CONFIGSET"] || "Hermes"
   end
 
   def mail_headers
