@@ -1,4 +1,4 @@
-class API::WebhooksController < API::ApplicationController
+class API::AwsController < API::ApplicationController
   before_action :verify_webhook
 
   def new

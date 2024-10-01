@@ -1,5 +1,5 @@
 class API::MessagesController < API::ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   before_action :validate_api_credentials
   before_action :validate_sender_profile
 
