@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <title><%= t("app") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@2.0.2/css/halfmoon.min.css" rel="stylesheet" integrity="sha256-RjeFzczeuZHCyS+Gvz+kleETzBF/o84ZRHukze/yv6o=" crossorigin="anonymous">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+      <nav class="navbar navbar-expand-sm" style="background-color: var(--bs-content-bg); border-bottom: var(--bs-border-width) solid var(--bs-content-border-color);">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="<%= root_path %>">
+            <img src="<%= asset_path('logo.png') %>" alt="<%= t("app") %> logo" class="d-inline-block align-text-top">
+            <%= t("app") %>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <% if authenticated? %>
+                <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="<%= bans_path %>">Bans</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="<%= senders_path %>">Senders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= mission_control_jobs_path %>" target="_blank">Jobs</a>
+                </li>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Product
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end mt-md-2 rounded-top-0">
+                    <li><a class="dropdown-item" href="#">Page builder</a></li>
+                    <li><a class="dropdown-item" href="#">Form builder</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Plan and pricing</a></li>
+                    </ul>
+                </li> -->
+                </ul>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container">
+        <%= yield %>
+    </div>
+  </body>
+</html>

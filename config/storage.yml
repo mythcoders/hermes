@@ -4,12 +4,4 @@ test:
 
 local:
   service: Disk
-  root: <%= Rails.root.join("storage") %>
-
-amazon:
-  service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:storage, :key) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:storage, :secret) %>
-  region: nyc3
-  bucket: <%= ENV.fetch('STORAGE_BUCKET') %>
-  endpoint: "https://nyc3.digitaloceanspaces.com"
+  root: <%= Rails.root.join("storage/uploads") %>

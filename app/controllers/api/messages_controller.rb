@@ -1,45 +1,41 @@
-# frozen_string_literal: true
+class API::MessagesController < API::ApplicationController
+  # skip_before_action :verify_authenticity_token
+  before_action :validate_api_credentials
+  before_action :validate_sender_profile
 
-module Api
-  class MessagesController < ActionController::Base
-    skip_before_action :verify_authenticity_token
-    before_action :validate_api_credentials
-    before_action :validate_api_environment
+  rescue_from ActionController::ParameterMissing do
+    head :bad_request
+  end
 
-    rescue_from ActionController::ParameterMissing do
-      head :bad_request
-    end
+  def new
+    message = Message.build(mail_params, @sender)
+    return render(json: message.errors, status: :bad_request) unless message.valid?
+    return head :error unless message.received!
 
-    def new
-      message = Message.build(mail_params, @client)
-      return render(json: message.errors, status: :bad_request) unless message.valid?
-      return head :error unless message.received!
+    MailSortJob.perform_later message.tracking_id
+    head :created
+  end
 
-      MailSortJob.perform_later message.tracking_id
-      head :created
-    end
+  private
 
-    private
+  def mail_params
+    params.require(:message).permit(:from, :subject, :html_body, :text_body, :profile, to: [], cc: [], bcc: [])
+  end
 
-    def mail_params
-      params.require(:message).permit(:environment, :subject, :html_body, :text_body, :sender, to: [], cc: [], bcc: [])
-    end
+  def validate_api_credentials
+    @sender = authenticate_with_http_basic { |u, p| Sender.authenticate(u, p) }
+    return head :unauthorized unless @sender
 
-    def validate_api_credentials
-      @client = authenticate_with_http_basic { |u, p| Client.authenticate(u, p) }
-      return head :unauthorized unless @client
+    head :forbidden unless @sender.is_active
+  end
 
-      head :forbidden unless @client.is_active
-    end
+  def validate_sender_profile
+    return unless mail_params[:profile]
 
-    def validate_api_environment
-      return unless mail_params[:environment]
+    head :method_not_allowed if profile.rejected?
+  end
 
-      head :method_not_allowed if client_environment.status == "rejected"
-    end
-
-    def client_environment
-      @client_environment ||= ClientEnvironment.find_or_create_by_env!(@client.id, mail_params[:environment])
-    end
+  def profile
+    @profile ||= Profile.find_or_create_from_api(@sender, mail_params[:profile])
   end
 end

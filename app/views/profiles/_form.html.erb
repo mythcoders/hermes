@@ -1,0 +1,37 @@
+<%= form_with(model: profile) do |form| %>
+  <%= render ErrorMessagesComponent.new(profile) %>
+
+  <div>
+    <%= form.label :sender_id, style: "display: block" %>
+    <%= form.text_field :sender_id %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :regex, style: "display: block" %>
+    <%= form.check_box :regex %>
+  </div>
+
+  <div>
+    <%= form.label :reroute_address, style: "display: block" %>
+    <%= form.text_field :reroute_address %>
+  </div>
+
+  <div>
+    <%= form.label :reply_to_address, style: "display: block" %>
+    <%= form.text_field :reply_to_address %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

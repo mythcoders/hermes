@@ -1,0 +1,6 @@
+one:
+  name: MyApp
+  state: active
+  key: myapp
+  secret: myappsecret
+  address: app@example.net

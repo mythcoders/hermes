@@ -1,0 +1,22 @@
+<%= form_with(model: sender) do |form| %>
+  <%= render ErrorMessagesComponent.new(sender) %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.email_field :address %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

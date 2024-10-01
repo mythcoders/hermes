@@ -1,0 +1,47 @@
+service: hermes
+image: mythcoders/hermes
+
+servers:
+  web:
+    - 178.156.131.247
+  job:
+    hosts:
+      - 178.156.131.247
+    cmd: bin/jobs
+
+proxy:
+  app_port: 3000
+  ssl: true
+  host: hermes.mythcoders.net
+  healthcheck:
+    path: /up
+    interval: 2
+    timeout: 2
+
+registry:
+  server: ghcr.io
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+
+env:
+  clear:
+    RAILS_LOG_TO_STDOUT: 1
+    RAILS_SERVE_STATIC_FILES: 1
+    RAILS_LOG_LEVEL: info
+    HERMES_HOST: hermes.mythcoders.net
+  secret:
+    - RAILS_MASTER_KEY
+
+volumes:
+  - "/mnt/pdapp/hermes/rails:/rails/storage:z"
+
+asset_path: /rails/public/assets
+
+boot:
+  limit: 10
+  wait: 2

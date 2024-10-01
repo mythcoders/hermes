@@ -1,0 +1,27 @@
+DEFAULTS: &DEFAULTS
+  name: $LABEL
+  state: $LABEL
+
+approved:
+  <<: *DEFAULTS
+  sender: one
+
+hold:
+  <<: *DEFAULTS
+  sender: one
+
+ignored:
+  <<: *DEFAULTS
+  sender: one
+
+rejected:
+  <<: *DEFAULTS
+  sender: one
+
+rerouted:
+  <<: *DEFAULTS
+  sender: one
+
+whitelisted:
+  <<: *DEFAULTS
+  sender: one

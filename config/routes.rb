@@ -1,38 +1,20 @@
-# frozen_string_literal: true
-
-require "sidekiq/web"
-
 Rails.application.routes.draw do
-  root to: "home#index", as: "home"
+  root "home#index"
+  get "up" => "rails/health#show", :as => :rails_health_check
+  resource :session
+  resources :passwords, param: :token
 
   namespace :api do
+    post "aws/*other", to: "aws#new"
     post "messages", to: "messages#new"
-    post "notifications", to: "notifications#new"
+    # post "unsubscribe/:destination_id", to: "subscriptions#unsubscribe", as: "unsubscribe"
   end
 
-  devise_for :users, path: "security"
-  concern :paginatable do
-    get "(page/:page)", action: :index, on: :collection, as: ""
-  end
+  mount MissionControl::Jobs::Engine, at: "/jobs"
 
-  authenticate :user do
-    mount Sidekiq::Web => "/sidekiq"
-
-    resources :clients, except: %i[delete] do
-      get "messages", to: "clients#messages", as: "messages"
-      get "new_email", to: "clients#new_email", as: "new_email"
-      post "send_email", to: "clients#send_email", as: "send_email"
-      resources :client_environments, path: :permissions, as: :environments, except: %i[delete]
-      resources :client_uploads, path: :uploads, as: :uploads, except: %i[delete]
-      resources :mailing_topics, path: :topics, as: :topics, except: %i[delete]
-      resources :subscribers, except: %i[delete]
-      resources :templates, except: %i[delete]
-    end
-    resources :messages, param: :tracking_id, only: %i[index show] do
-      get "preview", action: :preview, as: "preview"
-      get "logs", action: :logs, as: "logs"
-      get "recipients", action: :recipients, as: "recipients"
-    end
-    resources :subscriptions, only: %i[index edit update]
+  resources :bans
+  resources :senders do
+    resources :profiles
+    resources :messages
   end
 end

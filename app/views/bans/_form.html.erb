@@ -1,0 +1,17 @@
+<%= form_with(model: ban) do |form| %>
+  <%= render ErrorMessagesComponent.new(ban) %>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :reason, style: "display: block" %>
+    <%= form.text_field :reason %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

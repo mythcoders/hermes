@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Senders" %>
+
+<h1>Senders</h1>
+
+<table id="senders" class="table table-striped table-hover">
+  <% @senders.each do |sender| %>
+    <tr>
+        <td><%= link_to sender.name, sender %></td>
+        <td><%= sender.address %></td>
+        <td><%= sender.state %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New sender", new_sender_path %>

@@ -1,0 +1,11 @@
+<% content_for :title, "New sender" %>
+
+<h1>New sender</h1>
+
+<%= render "form", sender: @sender %>
+
+<br>
+
+<div>
+  <%= link_to "Back to senders", senders_path %>
+</div>
