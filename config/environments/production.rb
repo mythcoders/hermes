@@ -46,12 +46,10 @@ Rails.application.configure do
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
-  # Replace the default in-process memory cache store with a durable alternative.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :solid_cache_store
+  config.session_store :cache_store, key: "_hermes_session"
 
-  # Replace the default in-process and non-durable queuing backend for Active Job.
   config.active_job.queue_adapter = :solid_queue
-  config.active_job.queue_name_prefix = Rails.env
   config.solid_queue.connects_to = {database: {writing: :queue}}
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -59,7 +57,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = {host: "example.com"}
+  config.action_mailer.default_url_options = {host: ENV["HERMES_HOST"]}
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
@@ -85,7 +83,7 @@ Rails.application.configure do
   #   "example.com",     # Allow requests from example.com
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   # ]
-  #
+
   # Skip DNS rebinding protection for the default health check endpoint.
   config.host_authorization = {exclude: ->(request) { request.path == "/up" }}
 end
