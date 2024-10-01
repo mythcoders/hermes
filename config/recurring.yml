@@ -1,4 +1,0 @@
-# system_maintenance:
-#   class: SystemMaintenanceJob
-#   queue: critical
-#   schedule: at 12:30am every day
