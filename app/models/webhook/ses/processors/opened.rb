@@ -3,8 +3,8 @@ class Webhook::SES::Processors::Opened < Webhook::SES::Processors::Base
     ActiveRecord::Base.transaction do
       recipient.opened_at = timestamp unless recipient.opened?
       recipient.activities.build(
-        actioned_at: timestamp,
-        actionable: Open.new(
+        performed_at: timestamp,
+        action: Open.new(
           ip_address: ip_address,
           user_agent: user_agent
         )

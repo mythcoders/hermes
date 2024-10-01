@@ -12,7 +12,7 @@ module Recipient::Bannable
   end
 
   def ban_later(reason)
-    ban_now(reason)
+    Ban.log_later(address, reason)
   end
 
   def banned?
@@ -24,6 +24,6 @@ module Recipient::Bannable
   def address_isnt_banned
     return unless address.present? && banned?
 
-    errors.add(:address, :blacklisted)
+    errors.add(:address, :banned)
   end
 end

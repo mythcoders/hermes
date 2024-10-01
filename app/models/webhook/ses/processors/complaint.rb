@@ -3,8 +3,8 @@ class Webhook::SES::Processors::Complaint < Webhook::SES::Processors::Base
     complaint_destinations.each do |complaint_destination|
       recipient.complained_at = timestamp
       recipient.activities.build(
-        actioned_at: timestamp,
-        actionable: Complaint.new(
+        performed_at: timestamp,
+        action: Complaint.new(
           category: complaint_type,
           user_agent: user_agent,
           arrived_at: arrival_date,

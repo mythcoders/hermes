@@ -1,4 +1,4 @@
-module Message::DeliveryStats
+module DeliveryStats
   extend ActiveSupport::Concern
 
   def total_delivered_emails
@@ -27,26 +27,31 @@ module Message::DeliveryStats
 
   def delivery_rate
     return if total_sent_emails.zero?
+
     total_delivered_emails.to_f / total_sent_emails.to_f * 100
   end
 
   def open_rate
     return if total_delivered_emails.zero?
+
     total_opened_emails.to_f / total_delivered_emails.to_f * 100
   end
 
   def click_rate
     return if total_opened_emails.zero?
+
     total_clicked_emails.to_f / total_opened_emails.to_f * 100
   end
 
   def bounce_rate
     return if total_sent_emails.zero?
+
     total_bounced_emails.to_f / total_sent_emails.to_f * 100
   end
 
   def complaint_rate
     return if total_opened_emails.zero?
+
     total_complaint_emails.to_f / total_opened_emails.to_f * 100
   end
 end

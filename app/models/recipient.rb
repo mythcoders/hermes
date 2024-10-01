@@ -3,6 +3,7 @@ class Recipient < ApplicationRecord
   include Bannable
   include Sendable
 
+  belongs_to :message
   has_many :activities, dependent: :destroy, inverse_of: :actor
 
   encrypts :address, deterministic: true
@@ -16,4 +17,28 @@ class Recipient < ApplicationRecord
   scope :unopened, -> { where(opened_at: nil) }
   scope :bounced, -> { where.not(bounced_at: nil) }
   scope :complained, -> { where.not(complained_at: nil) }
+
+  def sent?
+    sent_at.present?
+  end
+
+  def delivered?
+    delivered_at.present?
+  end
+
+  def opened?
+    opened_at.present?
+  end
+
+  def clicked?
+    clicked_at.present?
+  end
+
+  def bounced?
+    bounced_at.present?
+  end
+
+  def complained?
+    complained_at.present?
+  end
 end

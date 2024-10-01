@@ -1,9 +1,9 @@
 class Webhook::SES::Processors::Click < Webhook::SES::Processors::Base
   def process
-    recipient.clicked_at = timestamp if recipient.clicked_at.blank?
+    recipient.clicked_at = timestamp unless recipient.clicked?
     recipient.activities.build(
-      actioned_at: timestamp,
-      actionable: Click.new(
+      performed_at: timestamp,
+      action: Click.new(
         url: link,
         ip_address: ip_address,
         user_agent: user_agent

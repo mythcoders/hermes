@@ -1,0 +1,10 @@
+one:
+  sender: one
+  uuid: <%= SecureRandom.uuid %>
+  from: John Smith <jsmith@example.net>
+  subject: Test message
+  html_body: <p>Test</p>
+  text_body: Test
+  content_type: html
+  priority: normal
+  raw_profile: hold

@@ -1,0 +1,5 @@
+one:
+  message: one
+  uuid: <%= SecureRandom.uuid %>
+  address: Jane Smith <jane@example.net>
+  address_type: to

@@ -1,8 +1,8 @@
 class Webhook::SES::Processors::Reject < Webhook::SES::Processors::Base
   def process
     recipient.activities.build(
-      actioned_at: timestamp,
-      actionable: Rejection.new(reason: reject_reason)
+      performed_at: timestamp,
+      action: Rejection.new(reason: reject_reason)
     )
     recipient.save!
   end

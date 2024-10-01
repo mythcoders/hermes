@@ -13,12 +13,12 @@
 ActiveRecord::Schema[7.2].define(version: 2024_09_14_202100) do
   create_table "activities", force: :cascade do |t|
     t.integer "recipient_id", null: false
-    t.string "actionable_type"
-    t.integer "actionable_id"
-    t.datetime "actioned_at"
+    t.string "action_type"
+    t.integer "action_id"
+    t.datetime "performed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["actionable_type", "actionable_id"], name: "index_activities_on_actionable_type_and_actionable_id"
+    t.index ["action_type", "action_id"], name: "index_activities_on_action_type_and_action_id"
     t.index ["recipient_id"], name: "index_activities_on_recipient_id"
   end
 

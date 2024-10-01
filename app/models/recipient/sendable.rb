@@ -2,10 +2,8 @@ module Recipient::Sendable
   extend ActiveSupport::Concern
 
   def send_now
-    return unless sending_enabled?
-    return unless sender_approved?
-    return if email_banned?
-    return if sent_at.present? || message.halted?
+    return unless sending_enabled? && sender_approved?
+    return if banned? || sent? || message.halted?
 
     # Mailer
 

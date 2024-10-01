@@ -1,5 +1,6 @@
 class Sender < ApplicationRecord
   include Authenticatable
+  include DeliveryStats
 
   has_many :profiles
   has_many :messages
